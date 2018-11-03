@@ -17,10 +17,12 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="250" />
-            <ColumnDefinition MinWidth="250" />
+            <ColumnDefinition MinWidth="200" />
+            <ColumnDefinition MinWidth="200" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -28,21 +30,35 @@
         <StackPanel Grid.Column="0" Grid.Row="2">  
          <Label Content= "Username : "      HorizontalAlignment = "Right"   Grid.Row="1" Grid.Column="0" MinWidth="200" MinHeight="26"/>
          <Label Content= "Password : "      HorizontalAlignment = "Right"   Grid.Row="2" Grid.Column="0" MinWidth="200" MinHeight="26"/>
-         <Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
-         <Label Content= "Riding Club : "   HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
+         <Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+         <Label Content= "Riding Club : "   HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+         <Label Content= "Phone : "      HorizontalAlignment = "Right"   Grid.Row="5" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+         <Label Content= "Email : "   HorizontalAlignment = "Right"   Grid.Row="6" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" >  
+        <Label Content= "DR Grade : "  HorizontalContentAlignment="Right"   HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+            <Label Content= "SJ Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+            <Label Content= "XC Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
+            <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+            <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+            <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
         </StackPanel>
         <!-- StackPanel for text and password box -->
         <StackPanel Grid.Column="1" Grid.Row="2">
             <TextBox   Name="tbxUsername"   HorizontalAlignment = "Left"   Grid.Row="1" Grid.Column="1" MinWidth="200" MinHeight="26"/>
             <PasswordBox Name="tbxPassword" HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
-            <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed" />
-            <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed"/>
+            <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible"/>
+            <TextBox Name="tbxPhone"      HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <TextBox Name="tbxEmail"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible"/>            
         </StackPanel>
 
         <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
       
-        <Button Name="btnSubmit"        HorizontalAlignment = "Right"   Grid.Row="6" Grid.Column="1" Width="100"  Height="26" Content="Submit" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnSubmit_Click" />
-        <Button Name="btnExit"          HorizontalAlignment = "Left"    Grid.Row="6" Grid.Column="2" Width="100"  Height="26" Content="Exit"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnExit_Click" />
+        <Button Name="btnSubmit"        HorizontalAlignment = "Right"   Grid.Row="6" Grid.Column="0" Width="100"  Height="26" Content="Submit" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnSubmit_Click" />
+        <Button Name="btnExit"          HorizontalAlignment = "Left"    Grid.Row="6" Grid.Column="1" Width="100"  Height="26" Content="Exit"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnExit_Click" />
 
         <TabControl>
         <TabItem>

@@ -29,10 +29,9 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+ 
+
+
 
         private void btnModifyMyDetails_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +42,9 @@ namespace CA2_due4NOV2018
         {
 
         }
+
+
+
         private void btnViewLeaderboard_Click(object sender, RoutedEventArgs e)
         {
 
@@ -59,6 +61,10 @@ namespace CA2_due4NOV2018
 
         }
 
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void btnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
         {
 

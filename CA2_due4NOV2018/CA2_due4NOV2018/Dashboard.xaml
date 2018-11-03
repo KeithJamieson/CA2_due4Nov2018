@@ -32,12 +32,12 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="0" >
             <Button Name="btnChangeMyPassword"          HorizontalAlignment = "Center"  Grid.Row="1" Grid.Column="0" Width="200"  Height="26" Content="Change My Password" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnChangeMyPassword_Click" />
-            <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMyDetails_Click" Visibility="Collapsed" />
+            <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMyDetails_Click" Visibility="Visible" />
             <Button Name="btnViewLeaderboard"           HorizontalAlignment = "Center"  Grid.Row="3" Grid.Column="0" Width="200"  Height="26" Content="View Leaderboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewLeaderboard_Click" />
-            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewScheduledCompetitions_Click" Visibility="Collapsed" />
+            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewScheduledCompetitions_Click" Visibility="Visible" />
             <Button Name="btnViewReports"               HorizontalAlignment = "Center"  Grid.Row="5" Grid.Column="0" Width="200"  Height="26" Content="View Reports" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewReports_Click" />
-            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAddClub_Click" />
-            <Button Name="btnListNewMembers"   HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List new Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnListNewMembers_Click" Visibility="Collapsed" />
+            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAddClub_Click" Visibility="Collapsed" />
+            <Button Name="btnListNewMembers"   HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List new Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnListNewMembers_Click" Visibility="Visible" />
             <Button Name="btnModifyMemberDetails"   HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMemberDetails_Click" />
         </StackPanel>
 
