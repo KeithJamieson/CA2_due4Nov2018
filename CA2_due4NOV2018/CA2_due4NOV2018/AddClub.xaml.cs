@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace CA2_due4NOV2018
 {
     /// <summary>
-    /// Interaction logic for SchdeuleCompetition.xaml
+    /// Interaction logic for AddClub.xaml
     /// </summary>
-    public partial class SchdeuleCompetition : Window
+    public partial class AddClub : Window
     {
-        public SchdeuleCompetition()
+        public AddClub()
         {
             InitializeComponent();
         }
@@ -33,11 +33,5 @@ namespace CA2_due4NOV2018
         {
             this.Close();
         }
-
-        private void btnOpenCompetition_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-        
     }
 }

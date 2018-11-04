@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CA2_due4NOV2018"
 
-            StartupUri="Reports.xaml">
+            StartupUri="ViewScheduledCompetitions.xaml">
     <!--StartupUri="LoginRegister.xaml">-->
     <!--StartupUri="ChangePassword.xaml">
     StartupUri="Competition.xaml">

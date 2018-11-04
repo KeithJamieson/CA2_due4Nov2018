@@ -33,5 +33,15 @@ namespace CA2_due4NOV2018
         {
             
         }
+
+        private void btnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
+        {
+          
+
+        }
     }
 }

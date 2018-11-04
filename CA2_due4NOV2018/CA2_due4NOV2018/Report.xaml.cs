@@ -10,18 +10,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CA2_due4NOV2018
 {
     /// <summary>
-    /// Interaction logic for Window5.xaml
+    /// Interaction logic for Report.xaml
     /// </summary>
-    public partial class Window5 : Window
+    public partial class Report : Page
     {
-        public Window5()
+        public Report()
         {
             InitializeComponent();
+        }
+
+        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+     ;
         }
     }
 }

@@ -33,13 +33,13 @@
         <TextBox Name="tbxFirstName"      Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" Text="Keith" />
 
         <Label Content= "Last Name : "    HorizontalAlignment = "Right"   Grid.Row="2" Grid.Column="0" MinWidth="100" MinHeight="26"/>
-        <TextBox Name="tbxLastname" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center"  Text="Jamieson"/>
+        <TextBox Name="tbxLastName" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center"  Text="Jamieson"/>
 
         <Label Content= "Phone : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="100" MinHeight="26"/>
         <TextBox Name="tbxPhone" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  />
 
         <Label Content= "Email : "    HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="100" MinHeight="26"/>
-        <TextBox Name="tbxEmail" Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Center"  Text="Jconnolloy@lyit.ie"/>
+        <TextBox Name="tbxEmail" Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Center"  Text="JoeBloggs@email.server.com"/>
 
 
         <Label Content= "AIRC ID : "    HorizontalAlignment = "Right"   MinWidth="100" MinHeight="26" Grid.Row="6" Grid.Column="0"  />

@@ -70,7 +70,6 @@
         <DataGrid ItemsSource="{Binding ListPersons}" AutoGenerateColumns="False" Grid.Row ="3" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="44,0,46,0" Width="752">
             <DataGrid.Columns>
                 <DataGridTextColumn Header = "Rider"                Width="200"/>
-                <DataGridTextColumn Header = "Grade"                Width="50"/>
                 <DataGridTextColumn Header = "AIRC ID"              Width="50" />
                 <DataGridTextColumn Header = "Horse"                Width="200" />
                 <DataGridTextColumn Header = "Club"                 Width="200"  />
