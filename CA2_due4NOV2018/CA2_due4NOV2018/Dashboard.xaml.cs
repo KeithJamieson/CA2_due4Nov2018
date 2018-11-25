@@ -17,14 +17,31 @@ namespace CA2_due4NOV2018
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class MainDashboard : Window
     {
-        public Window1()
+        
+        //RELICEntities db = new RELICEntities();
+        //Member member = new Member();
+
+
+        public MainDashboard()
         {
             InitializeComponent();
+            //tbxusername = RELICEntities.Member;
+
+
+
+            //  foreach (var user in db.users.Where(t => t.username == currentUser && t.userpassword == currentPassword))
+ 
+
+               // MessageBox.Show($"activeTab");
+                
+              
+            
         }
 
-        private void btnChangeMyPassword_Click(object sender, RoutedEventArgs e)
+      
+        private void BtnChangeMyPassword_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -33,51 +50,59 @@ namespace CA2_due4NOV2018
 
 
 
-        private void btnModifyMyDetails_Click(object sender, RoutedEventArgs e)
+        private void BtnModifyMyDetails_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnModifyMemberDetails_Click(object sender, RoutedEventArgs e)
+        private void BtnModifyMemberDetails_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
 
 
-        private void btnViewLeaderboard_Click(object sender, RoutedEventArgs e)
+        private void BtnViewLeaderboard_Click(object sender, RoutedEventArgs e)
         {
 
         }
     
 
-    private void btnViewReports_Click(object sender, RoutedEventArgs e)
+    private void BtnViewReports_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnListNewMembers_Click(object sender, RoutedEventArgs e)
+        private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void btnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
+        private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnAddClub_Click(object sender, RoutedEventArgs e)
+        private void BtnAddClub_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnOpenCompetition_Click(object sender, RoutedEventArgs e)
+             
+        private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        //private void CheckUserAccess(Db.User user)
+        //{
+        //    if (user.)
+        //    {
+
+        //    }
+        //}
     }
 }

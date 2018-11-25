@@ -22,42 +22,42 @@
             <ColumnDefinition MinWidth = "100" Width="*" />
         </Grid.ColumnDefinitions>
         <TabControl Grid.ColumnSpan="3">
-            <TabItem>
+            <TabItem Name="tabP" Selector.Selected="TabP_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Primary" Foreground="Black" />
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem>
+            <TabItem  Name="tabAP" Selector.Selected="TabAP_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Adv. Primary" Foreground="Black" TextWrapping="Wrap" />
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem>
+            <TabItem Name="tabI" Selector.Selected ="TabI_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Intermediate" Foreground="Black" TextWrapping="Wrap" />
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem>
+            <TabItem Name="tabAI" Selector.Selected="TabAI_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Adv. Intermediate" Foreground="Black"  TextWrapping="Wrap" />
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem>
+            <TabItem Name="tabO" Selector.Selected="TabO_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Open" Foreground="Black" TextWrapping="Wrap" />
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem>
+            <TabItem Name="tabAO" Selector.Selected="TabAO_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Adv. Open" Foreground="Black" TextWrapping="Wrap"/>
@@ -76,11 +76,11 @@
                 <DataGridTextColumn Header = "Place"                Width="50" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnDashboard_Click" />
-        <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAddRiderEntry_Click" />
-        <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAssignFinishingPositions_Click"  Visibility="Visible" />
-        <Button Name="btnCloseCompetition"          HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="3" Width="auto" Content="Close Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnCloseCompetition_Click"  Visibility="Visible" />
-        <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnUpdateLeaderBoard_Click"  Visibility="Visible" />
+        <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
+        <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddRiderEntry_Click" />
+        <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAssignFinishingPositions_Click"  Visibility="Visible" />
+        <Button Name="btnCloseCompetition"          HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="3" Width="auto" Content="Close Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnCloseCompetition_Click"  Visibility="Visible" />
+        <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnUpdateLeaderBoard_Click"  Visibility="Visible" />
 
     </Grid>
 </Window>

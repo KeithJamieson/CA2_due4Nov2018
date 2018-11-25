@@ -1,4 +1,4 @@
-﻿<Window x:Class="CA2_due4NOV2018.Window1"
+﻿<Window x:Class="CA2_due4NOV2018.MainDashboard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,14 +31,14 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="0" >
-            <Button Name="btnChangeMyPassword"          HorizontalAlignment = "Center"  Grid.Row="1" Grid.Column="0" Width="200"  Height="26" Content="Change My Password" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnChangeMyPassword_Click" />
-            <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMyDetails_Click" Visibility="Visible" />
-            <Button Name="btnViewLeaderboard"           HorizontalAlignment = "Center"  Grid.Row="3" Grid.Column="0" Width="200"  Height="26" Content="View Leaderboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewLeaderboard_Click" />
-            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewScheduledCompetitions_Click" Visibility="Visible" />
-            <Button Name="btnViewReports"               HorizontalAlignment = "Center"  Grid.Row="5" Grid.Column="0" Width="200"  Height="26" Content="View Reports" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnViewReports_Click" />
-            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAddClub_Click" Visibility="Collapsed" />
-            <Button Name="btnListNewMembers"            HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List New Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnListNewMembers_Click" Visibility="Visible" />
-            <Button Name="btnModifyMemberDetails"       HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMemberDetails_Click" Visibility="Visible" />
+            <Button Name="btnChangeMyPassword"          HorizontalAlignment = "Center"  Grid.Row="1" Grid.Column="0" Width="200"  Height="26" Content="Change My Password" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnChangeMyPassword_Click" />
+            <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnModifyMyDetails_Click" Visibility="Visible" />
+            <Button Name="btnViewLeaderboard"           HorizontalAlignment = "Center"  Grid.Row="3" Grid.Column="0" Width="200"  Height="26" Content="View Leaderboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewLeaderboard_Click" />
+            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewScheduledCompetitions_Click" Visibility="Visible" />
+            <Button Name="btnViewReports"               HorizontalAlignment = "Center"  Grid.Row="5" Grid.Column="0" Width="200"  Height="26" Content="View Reports" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewReports_Click" />
+            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddClub_Click" Visibility="Collapsed" />
+            <Button Name="btnListNewMembers"            HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List New Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnListNewMembers_Click" Visibility="Visible" />
+            <Button Name="btnModifyMemberDetails"       HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnModifyMemberDetails_Click" Visibility="Visible" />
         </StackPanel>
 
         <TextBox Name = "tbxDate" Text="                            04-Nov-2018"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26"/>
@@ -78,8 +78,8 @@
         <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
 
         </StackPanel>
-        <Button Name="btnExit"        HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="1" Width="100"  Height="26" Content="Exit" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnExit_Click" />
-        <Button Name="btnOpenCompetition"          HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="2" Width="150"  Height="26" Content="Open Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnOpenCompetition_Click"  Visibility="Visible" />
+        <Button Name="btnExit"        HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="1" Width="100"  Height="26" Content="Exit" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnExit_Click" />
+        <Button Name="btnOpenCompetition"          HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="2" Width="150"  Height="26" Content="Open Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnOpenCompetition_Click"  Visibility="Visible" />
        
     </Grid>
 </Window>

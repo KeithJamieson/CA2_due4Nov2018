@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+
 
 namespace CA2_due4NOV2018
 {
@@ -19,6 +8,8 @@ namespace CA2_due4NOV2018
     /// </summary>
     public partial class AddClub : Window
     {
+
+        RELICEntities db = new RELICEntities();
         public AddClub()
         {
             InitializeComponent();
@@ -26,6 +17,8 @@ namespace CA2_due4NOV2018
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            string clubname = tbxClubName.Text;
+            Club(clubname);
             //this.Close();
         }
 
@@ -33,5 +26,18 @@ namespace CA2_due4NOV2018
         {
             this.Close();
         }
+
+        private void Club(string clubname)
+        {
+            Club newclub = new Club();           
+            //club.clubname = clubname;
+        }
+
+        //private void SaveClub(Club)
+        //{
+        //    db.Entry(Club).State = System.Data.Entity.EntityState.Added;
+        //    //            db.Entry(Member).State = System.Data.Entity.EntityState.Added;
+        //    db.SaveChanges();
+        //}
     }
 }
