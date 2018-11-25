@@ -16,8 +16,8 @@ namespace CA2_due4NOV2018
         //List<user> userlist = new List<user>();
 
         //List<Grade> gradelist = new List<Grade>();
-       
-        
+
+        Boolean close = false;
         public string activeTab;
 
         //User user = new User();
@@ -31,12 +31,15 @@ namespace CA2_due4NOV2018
         
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
+            close = true;
             this.Close();
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             //tbxUsername.Text=$"Active tab is {activeTab}";
+            int airc_id  = Convert.ToInt32(tbxAIRC_ID.Text);
+            
             string currentUser = tbxUsername.Text;
             string currentPassword = tbxPassword.Password;
 
@@ -48,11 +51,16 @@ namespace CA2_due4NOV2018
 
                     MainDashboard maindashboard = new MainDashboard();
                     this.Hide();
+                    close = true;
                     maindashboard.ShowDialog();
 
                 }
                 // By Default if we reach here that means we have an invalid username and/or password entered
-                MessageBox.Show($"Incorrect username or Password");
+                if   (close == false)
+                {
+                    MessageBox.Show($"Incorrect username or Password");
+
+                }
             }
             else if (activeTab == "Register")
             {
@@ -60,10 +68,9 @@ namespace CA2_due4NOV2018
                 int club_id = 0;
                 string role = "M";  //Role is Member 
                 string memberStatus = "N"; //Member status is "N" for new Member
-                int airc_id = Convert.ToInt16(tbxAIRC_ID.Text);
-                              
 
 
+               
                 RegisterUser(
                     airc_id,
                    currentUser,
@@ -86,7 +93,7 @@ namespace CA2_due4NOV2018
 
                 SaveRegistration();
 
-                MessageBox.Show($"User {currentUser} has been saved. Please login again with your username and password");
+                MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
                 this.Close();
             }
 
