@@ -1,0 +1,17 @@
+﻿<Application x:Class="CA2_due4NOV2018.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CA2_due4NOV2018"
+
+            StartupUri="LoginRegister.xaml">
+    <!--StartupUri="LoginRegister.xaml">-->
+    <!--StartupUri="ChangePassword.xaml">
+    StartupUri="Competition.xaml">
+              StartupUri="ViewScheduledCompetitions.xaml">
+    StartupUri="AmendMemberDetails.xaml">
+    StartupUri="AddRiderEntry.xaml">-->
+
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

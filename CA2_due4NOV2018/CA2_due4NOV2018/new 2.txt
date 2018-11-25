@@ -1,0 +1,170 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using RELICLibraryClass;
+namespace Dashboard.xaml;
+
+namespace CA2_due4NOV2018
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        RELICEntities db = new RELICEntities();
+
+    
+
+        public MainWindow()
+        {
+             
+
+            InitializeComponent();
+
+           
+            //ArrayList gradeArrayList = new ArrayList();
+
+            //() is  new arrayList("P", "AP","I","AI","O","AO");
+            //ArrayList[6] grades[];
+            //= new ArrayList("P", "AP", "I", "AI", "O", "AO"); 
+            //ArrayList[6] cboSJ;
+            //= new ArrayList("P", "AP", "I", "AI", "O", "AO");
+            //ArrayList[6] cboXC = new ArrayList("P", "AP", "I", "AI", "O", "AO");
+        }
+
+       //private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+       // {
+               
+       //     if  ( tbiLogon.IsSelected == true)
+       //     {
+       //         MessageBox.Show($"Tab Logon selected");
+       //     }            
+
+       // }
+                
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbiLogon.IsSelected == true)
+            {
+
+
+                MessageBox.Show($"Tab Logon selected");
+                //collapse fields and boilerplate
+                dplRegister.Visibility = System.Windows.Visibility.Collapsed;
+                dplGrades.Visibility = System.Windows.Visibility.Collapsed;
+
+             
+
+            }
+
+            string currentuser = tbxUsername.Text;
+            string currentpassword = tbxPassword.Password;
+            foreach (var userRecord in db.users )
+            {
+                if ( userRecord.username == currentuser && userRecord.userpassword == currentpassword )
+                {
+                    MessageBox.Show($"Username and Password match");
+
+                    ow p = Newwindow();
+                    p.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show($"Incorrect Username and/or Password ");
+
+                }
+            }
+
+            if (tbiRegister.IsSelected == true)
+            {
+                MessageBox.Show($"Tab Register selected");
+                dplRegister.Visibility = System.Windows.Visibility.Visible;
+                dplGrades.Visibility = System.Windows.Visibility.Visible;
+            
+
+                //stpGrades.Visibility;
+            }
+            //string strDR = cboDR.Text;
+            //string strDR = cboDR.SelectedValue.ToString();
+
+            //MessageBox.Show($"Dressage Grade is  {strDR}");
+            if (myTabControl.SelectedContent == "REGISTER")
+            {
+                MessageBox.Show("Tab Title is REGISTER");
+            }
+ 
+            //MessageBox.Show("Submit was Clicked");
+            //if (Window.TitleProperty.Equals "Register")
+
+            //   MessageBox.Show("Register was Clicked");
+            //    else
+            //MessageBox.Show("Submit was Clicked");
+            //this.Close();
+            //if (score == 100 )
+            //{
+            //    TabItem.VisibilityProperty = FALSE;
+
+            //}
+        }
+
+        //private void TabItem_Selected(object sender, TabItem e)
+        //{
+        //    // ... Get TabControl reference.
+        //    var item = sender as TabControl;
+        //    // ... Set Title to selected tab header.
+        //    var selected = item.SelectedItem as TabItem;
+        //    this.Title = selected.Header.ToString();
+        //    MessageBox.Show($"selected.Header.ToString()");
+        //}
+
+        struct Login
+        {
+            public string username;
+            public string password;           
+        }
+
+        struct Register
+        {
+            public int AIRC_ID;
+            public string firstName;
+            public string lastName;
+            public string phone;
+            public string email;
+            public string Ridingclub;
+            public string sj;
+            public string dr;
+            public string xc;
+        }
+
+        private void cboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private class Dashboard
+        {
+        }
+    }
+
+    //internal class RELICEntities
+    //{
+    //}
+}

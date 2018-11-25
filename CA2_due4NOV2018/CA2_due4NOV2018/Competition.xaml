@@ -1,0 +1,86 @@
+﻿<Window x:Class="CA2_due4NOV2018.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CA2_due4NOV2018"
+        mc:Ignorable="d"
+        Title="Competition" Height="450" Width="850">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth = "100"  Width="auto" />
+            <ColumnDefinition MinWidth = "100" Width="auto" />
+            <ColumnDefinition MinWidth = "100" Width="auto" />
+            <ColumnDefinition MinWidth = "100" Width="auto" />
+            <ColumnDefinition MinWidth = "100" Width="*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="3">
+            <TabItem Name="tabP" Selector.Selected="TabP_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Primary" Foreground="Black" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem  Name="tabAP" Selector.Selected="TabAP_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Primary" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="tabI" Selector.Selected ="TabI_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Intermediate" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="tabAI" Selector.Selected="TabAI_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Intermediate" Foreground="Black"  TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="tabO" Selector.Selected="TabO_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Open" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="tabAO" Selector.Selected="TabAO_Selected">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Open" Foreground="Black" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+        <TextBox Name="tbxCompetitionName" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" Text="GreenBrooke Christmas ShowJumping league Week 1" TextWrapping="WrapWithOverflow" />
+        <TextBox Name="tbxCompetitionDate" Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Center" Text="23-Dec-2018" />
+        <DataGrid ItemsSource="{Binding ListPersons}" AutoGenerateColumns="False" Grid.Row ="3" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="44,0,46,0" Width="752">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header = "Rider"                Width="200"/>
+                <DataGridTextColumn Header = "AIRC ID"              Width="50" />
+                <DataGridTextColumn Header = "Horse"                Width="200" />
+                <DataGridTextColumn Header = "Club"                 Width="200"  />
+                <DataGridTextColumn Header = "Place"                Width="50" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
+        <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddRiderEntry_Click" />
+        <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAssignFinishingPositions_Click"  Visibility="Visible" />
+        <Button Name="btnCloseCompetition"          HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="3" Width="auto" Content="Close Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnCloseCompetition_Click"  Visibility="Visible" />
+        <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnUpdateLeaderBoard_Click"  Visibility="Visible" />
+
+    </Grid>
+</Window>

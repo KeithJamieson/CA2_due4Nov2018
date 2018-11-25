@@ -1,0 +1,114 @@
+﻿<Window x:Class="CA2_due4NOV2018.Leaderboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CA2_due4NOV2018"
+        mc:Ignorable="d"
+        Title="Leaderboard" Height="450" Width="950">
+    <Grid Margin="0,0,-45,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth = "50"  Width="auto" />
+            <ColumnDefinition MinWidth = "50" Width="auto" />
+            <ColumnDefinition MinWidth = "50" Width="auto" />
+            <ColumnDefinition MinWidth = "50" Width="auto" />
+            <!--<ColumnDefinition MinWidth = "50" Width="auto" />-->
+            <ColumnDefinition MinWidth = "50" Width="*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="3">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Primary" Foreground="Black" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Primary" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Intermediate" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Intermediate" Foreground="Black"  TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Open" Foreground="Black" TextWrapping="Wrap" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adv. Open" Foreground="Black" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+
+        <Label Content= "Filter By : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="100" MinHeight="26"   />
+        <Label Content= "Competition Type"  HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="1" MinWidth="100" MinHeight="26"/>
+        <Label Content= "Riding Club "      HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26"/>
+        <Label Content= "Competition "      HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="3" MinWidth="100" MinHeight="26"/>
+        <StackPanel Grid.Row="2" Grid.Column="4" Grid.RowSpan="5" HorizontalAlignment="Center">
+            <Label Content= "Sort Order"        HorizontalAlignment = "Left"     MinWidth="100" MinHeight="26"/>
+            <CheckBox Name="cbxTotalPoints"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Total" />
+            <CheckBox Name="cbxPoints"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Points" />
+            <CheckBox Name="cbxClub"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Riding Club" />
+            <CheckBox Name="cbxDate"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Competition" />
+        </StackPanel>
+        
+        <ComboBox Name="cboCompetitionType"   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" MinWidth="100" MaxWidth="250" />
+        <ComboBox Name="cboGrade"   Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" MinWidth="100" MaxWidth="250" />
+        <ComboBox Name="cboRidingClub"   Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" MinWidth="100" Width="auto" />
+        <!--<CheckBox Name="cbxTotalPoints"   Grid.Row="3" Grid.Column="4" HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Total Points desc" />-->
+
+        <Button Name="btnGo"            Grid.Row="1" Grid.Column="1" HorizontalAlignment = "center"  Width="auto" Content="Search"                  BorderBrush="DarkOrange" BorderThickness="3" Click="btnGo_Click" />
+        <Button Name="btnReset"         Grid.Row="1" Grid.Column="2" HorizontalAlignment = "center"  Width="auto" Content="Reset Screen"            BorderBrush="DarkOrange" BorderThickness="3" Click="btnReset_Click" />
+        <Button Name="btnDashboard"     Grid.Row="1" Grid.Column="0" HorizontalAlignment = "center"  Width="auto" Content="Return to Dashboard"     BorderBrush="DarkOrange" BorderThickness="3" Click="btnDashboard_Click" />
+        <Button Name="btnFindMyResults" Grid.Row="1" Grid.Column="3" HorizontalAlignment = "center"  Width="auto" Content="Find My Results"         BorderBrush="DarkOrange" BorderThickness="3" Click="btnFindMyResults_Click" />
+        <Button Name="btnDowmnload"     Grid.Row="1" Grid.Column="4" HorizontalAlignment = "center"  Width="auto" Content="Download Leaderboard"    BorderBrush="DarkOrange" BorderThickness="3" Click="btnDownload_Click" Visibility="Visible"
+                
+                
+                />
+        
+        <DataGrid ItemsSource="{Binding ListPersons}" AutoGenerateColumns="False" Grid.Row ="4" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header = "Rider"                MinWidth="100"/>                
+                <DataGridTextColumn Header = "Riding Club"          MinWidth="100"  />                
+                <DataGridTextColumn Header = "Horse"                MinWidth="100" />
+                <DataGridTextColumn Header = "Date"                 MinWidth="100"  />
+                <DataGridTextColumn Header = "Competition"          MinWidth="100" />
+                <DataGridTextColumn Header = "Points"           MinWidth="100"  />
+
+                <DataGridTextColumn Header = "Total"         MinWidth="100" />
+                <!--<DataGridTextColumn Header = "Sort order"           MinWidth="100" />-->
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
