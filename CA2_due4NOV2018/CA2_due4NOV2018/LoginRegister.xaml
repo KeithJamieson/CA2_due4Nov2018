@@ -49,7 +49,7 @@
         <Label Name="lblAIRC_ID" Content= "AIRC ID : "      HorizontalAlignment = "Right"  HorizontalContentAlignment="Right"  Grid.Row="5" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left" HorizontalContentAlignment="Right" Grid.Row="5" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
                 <Label Name="lblRidingClub" Content= "Riding Club : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
-                <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+                <ComboBox Name="cboRidingClub"   HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"/>
                 <Label Name="lblPhone" Content= "Phone : "      HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <Label Name="lblEmail" Content= "Email : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="8" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxPhone"      HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
@@ -57,9 +57,44 @@
          <Label Name="lblDR" Content= "DR Grade : "   HorizontalContentAlignment  ="Center"   HorizontalAlignment="Right" Grid.Row="4" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
         <Label Name="lblSJ" Content= "SJ Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="5" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
         <Label Name="lblXC" Content= "XC Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
-        <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="3" MinWidth="100"  MinHeight="26"    Visibility="Visible" />
-        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
-        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+        <ComboBox x:Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="3" MinWidth="100"  MinHeight="26"    Visibility="Visible" SelectionChanged="cboDR_SelectionChanged"  >
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+
+        <!--ItemsSource="{Binding grade}" >-->
+            <!--<ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+
+            <ComboBoxItem Content= "AO"   />-->
+        <!--</ComboBox>-->
+        <ComboBox x:Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboSJ_SelectionChanged" ItemsSource="{Binding BindsDirectlyToSource=True, Mode=OneWay}" >
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+        <ComboBox x:Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboXC_SelectionChanged" ItemsSource="{Binding SelectedItem, ElementName=cboXC}">
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+
+
+        
 
         <!--</DockPanel>-->
         <!--StackPanel for text and password box--> 

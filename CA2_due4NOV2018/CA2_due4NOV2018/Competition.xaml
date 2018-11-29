@@ -67,15 +67,20 @@
         </TabControl>
         <TextBox Name="tbxCompetitionName" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" Text="GreenBrooke Christmas ShowJumping league Week 1" TextWrapping="WrapWithOverflow" />
         <TextBox Name="tbxCompetitionDate" Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Center" Text="23-Dec-2018" />
-        <DataGrid ItemsSource="{Binding ListPersons}" AutoGenerateColumns="False" Grid.Row ="3" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="44,0,46,0" Width="752">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header = "Rider"                Width="200"/>
-                <DataGridTextColumn Header = "AIRC ID"              Width="50" />
-                <DataGridTextColumn Header = "Horse"                Width="200" />
-                <DataGridTextColumn Header = "Club"                 Width="200"  />
-                <DataGridTextColumn Header = "Place"                Width="50" />
-            </DataGrid.Columns>
-        </DataGrid>
+  
+        <!--<ListView Name="lstCompetitors" Grid.Row="3" Grid.Column="0" >
+            <GridView>
+                <GridViewColumn Header="Rider" Width="150">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding BindsDirectlyToSource=True}" FontWeight="Bold" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+
+        </ListView>-->
+
         <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
         <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddRiderEntry_Click" />
         <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAssignFinishingPositions_Click"  Visibility="Visible" />

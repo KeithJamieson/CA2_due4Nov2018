@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace CA2_due4NOV2018
 {
     /// <summary>
     /// Interaction logic for LoginRegister.xaml
     /// </summary>
+
     public partial class LoginRegister : Window
     {
-
+        string DRgrade;
+        string SJgrade;
+        string XCgrade;
         //string conneectionString = "metadata=res://*/RelicModel.csdl|res://*/RelicModel.ssdl|res://*/RelicModel.msl;provider=System.Data.SqlClient;provider connection string='data source=localhost;initial catalog=RELIC;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
         RELICEntities db = new RELICEntities();
         //List<user> userlist = new List<user>();
@@ -21,6 +26,11 @@ namespace CA2_due4NOV2018
         public string activeTab;
 
         //User user = new User();
+
+        List<Grade> gradelist       = new List<Grade>();
+        List<Club> ridingclub   = new List<Club>();
+                 
+            
         public LoginRegister()
         {
 
@@ -39,7 +49,7 @@ namespace CA2_due4NOV2018
         {
             //tbxUsername.Text=$"Active tab is {activeTab}";
             int airc_id  = Convert.ToInt32(tbxAIRC_ID.Text);
-            
+            //int airc_id = 1234;
             string currentUser = tbxUsername.Text;
             string currentPassword = tbxPassword.Password;
 
@@ -65,12 +75,13 @@ namespace CA2_due4NOV2018
             else if (activeTab == "Register")
             {
                 // call Register user Class
-                int club_id = 0;
+                int club_id = 1;
                 string role = "M";  //Role is Member 
-                string memberStatus = "N"; //Member status is "N" for new Member
+                string memberStatus = "N"; //Member status is "N" for new Membe
 
 
                
+
                 RegisterUser(
                     airc_id,
                    currentUser,
@@ -83,11 +94,11 @@ namespace CA2_due4NOV2018
                  club_id,
                  memberStatus,
                  role,
-                 tbxFirstname.Text,
-                 tbxLastName.Text,
-                 "AP", //cboDR.Text,
-                 "AP", //cboSJ.Text,
-                 "AP", //cboXC.Text,
+                 tbxFirstname.Text.Trim(),
+                 tbxLastName.Text.Trim(),
+                 DRgrade.Trim(),
+                 SJgrade.Trim(),
+                 XCgrade.Trim(),
                  tbxPhone.Text,
                  tbxEmail.Text);
 
@@ -203,6 +214,50 @@ namespace CA2_due4NOV2018
             db.SaveChanges();
         }
 
+        private void cboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            var comboBoxItem = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)cboDR.SelectedItem;
+            DRgrade = item.Content.ToString();
+
+        }
+
+        private void cboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+            var comboBoxItem = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)cboSJ.SelectedItem;
+            SJgrade = item.Content.ToString();
+        }
+
+
+
+        private void cboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBoxItem = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)cboXC.SelectedItem;           
+            XCgrade = item.Content.ToString();
+        }
+
+        private void lstRidingClub()
+        {
+
+        }
+
+        //private void cboAccessLevel_selectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var theComboBox = (ComboBox)sender;
+        //    System.Windows.Controls.ComboBoxItem item = (System.Windows.Controls.ComboBoxItem)theComboBox.SelectedItem;
+        //    //string.value = item.Content.ToString();
+        //}
+
+        private void cboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBoxItem = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)cboSJ.SelectedItem;
+            XCgrade = item.Content.ToString();
+        }
     }
 
 }

@@ -18,21 +18,34 @@ namespace CA2_due4NOV2018
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string clubname = tbxClubName.Text;
-            Club(clubname);
-            //this.Close();
-        }
+            RegisterClub(clubname);
 
+            db.SaveChanges();
+            this.Close();
+        }
+        
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Club(string clubname)
+        private void RegisterClub(string clubname)
         {
-            Club newclub = new Club();           
-            //club.clubname = clubname;
+            Club newclub = new Club();
+            newclub.clubname = clubname;
+            db.Entry(newclub).State = System.Data.Entity.EntityState.Added;
         }
 
+        private void RegisterUser(int airc_id, string username, string password)
+        {
+
+
+            User user = new User();
+            user.airc_id = airc_id;
+            user.username = username;
+            user.userpassword = password;
+            db.Entry(user).State = System.Data.Entity.EntityState.Added;
+        }
         //private void SaveClub(Club)
         //{
         //    db.Entry(Club).State = System.Data.Entity.EntityState.Added;

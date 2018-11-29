@@ -29,10 +29,11 @@ namespace CA2_due4NOV2018
         public string competition_type { get; set; }
         public string competition_status { get; set; }
     
-        public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Entry> Entries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leaderboard> Leaderboards { get; set; }
+        public virtual Club Club { get; set; }
+        public virtual User User { get; set; }
     }
 }

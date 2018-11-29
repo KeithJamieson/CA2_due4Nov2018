@@ -20,6 +20,8 @@ namespace CA2_due4NOV2018
     public partial class Window2 : Window
     {
 
+        RELICEntities db = new RELICEntities();
+        List<Competition> lstCompetitors = new List<Competition>();
         string activeTab;
         public Window2()
         {
@@ -85,6 +87,13 @@ namespace CA2_due4NOV2018
             activeTab = "tabAO";
         }
 
-
+        //private void RefreshEntryList()
+        //    lstEntryList.ItemsSource = Entry;
+        //    entries.Clear();
+        //    foreach ( var  entry in db.Entry )
+        //    {
+        //        Entry.Add(Rider)
+        //    }
+            
     }
 }

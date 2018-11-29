@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5e72dde0b5144533ad3993394eea7d32" Name="Diagram1">
-        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="1.5" PointY="9.875" />
         <EntityTypeShape EntityType="RELICModel.Competition" Width="1.5" PointX="0.75" PointY="1.375" />
         <EntityTypeShape EntityType="RELICModel.Entry" Width="1.5" PointX="3" PointY="5.375" />
         <EntityTypeShape EntityType="RELICModel.Grade" Width="1.5" PointX="0.75" PointY="5.625" />
@@ -13,8 +12,6 @@
         <EntityTypeShape EntityType="RELICModel.Member" Width="1.5" PointX="6" PointY="4.75" />
         <EntityTypeShape EntityType="RELICModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="RELICModel.User" Width="1.5" PointX="3.75" PointY="9.875" />
-        <AssociationConnector Association="RELICModel.FK_competition_club_club_id" />
-        <AssociationConnector Association="RELICModel.FK_member_club_club_id" />
         <AssociationConnector Association="RELICModel.fk_entry_competition_competition_id" />
         <AssociationConnector Association="RELICModel.FK_Leaderboard_competition_competition_id" />
         <AssociationConnector Association="RELICModel.FK_entry_grade_grade" />
@@ -23,6 +20,10 @@
         <AssociationConnector Association="RELICModel.FK_member_grade_sj" />
         <AssociationConnector Association="RELICModel.FK_member_grade_xc" />
         <AssociationConnector Association="RELICModel.FK_member_user_airc_id" />
+        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="0.75" PointY="4.25" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Club_club_id" />
+        <AssociationConnector Association="RELICModel.FK_Member_Club_club_id" />
+        <AssociationConnector Association="RELICModel.FK_Competition_User_airc_id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

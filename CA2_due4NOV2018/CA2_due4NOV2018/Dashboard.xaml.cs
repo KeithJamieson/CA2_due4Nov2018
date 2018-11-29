@@ -89,7 +89,8 @@ namespace CA2_due4NOV2018
 
         private void BtnAddClub_Click(object sender, RoutedEventArgs e)
         {
-
+            AddClub addclub = new AddClub();                        
+            addclub.ShowDialog();
         }
 
              
