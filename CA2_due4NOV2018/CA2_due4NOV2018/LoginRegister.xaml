@@ -49,8 +49,12 @@
         <Label Name="lblAIRC_ID" Content= "AIRC ID : "      HorizontalAlignment = "Right"  HorizontalContentAlignment="Right"  Grid.Row="5" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left" HorizontalContentAlignment="Right" Grid.Row="5" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
                 <Label Name="lblRidingClub" Content= "Riding Club : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
-                <ComboBox Name="cboRidingClub"   HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"/>
-                <Label Name="lblPhone" Content= "Phone : "      HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
+           
+        <ComboBox Name="cboRidingClub"   HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"/>
+   <!--    TEST COMBO BOX -->
+        <ComboBox x:Name="TxtProductFamily" Text="{Binding testfield}" HorizontalAlignment="Left" Height="26" Margin="10,182,0,0" VerticalAlignment="Top" Width="319"/>
+    <!--    TEST COMBO BOX -->
+        <Label Name="lblPhone" Content= "Phone : "      HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <Label Name="lblEmail" Content= "Email : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="8" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxPhone"      HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
                 <TextBox Name="tbxEmail"  HorizontalAlignment = "Left"   Grid.Row="8" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
