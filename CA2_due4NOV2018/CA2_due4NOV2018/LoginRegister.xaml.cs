@@ -16,23 +16,55 @@ namespace CA2_due4NOV2018
         string DRgrade;
         string SJgrade;
         string XCgrade;
-        int airc_id;
+        int airc_id = 0;
+        int club_id = 0;
         //string conneectionString = "metadata=res://*/RelicModel.csdl|res://*/RelicModel.ssdl|res://*/RelicModel.msl;provider=System.Data.SqlClient;provider connection string='data source=localhost;initial catalog=RELIC;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
         RELICEntities db = new RELICEntities();
         //List<user> userlist = new List<user>();
+        List<Grade> GradeList = new List<Grade>();
+        List<Club> RidingClub = new List<Club>();
+        
+        //Using(Club gradelist = new Club())
+        //{
+        //    var ridingclub = (from c in gradelist.club_id, gradelist.clubname
+        //                    select new { c.club_id, c.club_name }).ToList();
 
-        //List<Grade> gradelist = new List<Grade>();
+        //    cboRidingClub.DataValueField = "club_id";
+        //    cboRidingClub.DataTextField = "club_name";
+        //    cboRidingClub.DataSource = ridingclub;
+        //    cboRidingClub.DataBind();
+        //}
+
+        
+
 
         Boolean close = false;
         public string activeTab;
 
-        //User user = new User();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (var club in db.Clubs)
+            {
+                RidingClub.Add(club);
+                   
+            }
+        cboRidingClub.ItemsSource = RidingClub;
+            //  cboRidingClub.Items.SourceCollection = RidingClub;
+            //cboRidingClub.DataContext = RidingClub;
 
-        List<Grade> gradelist = new List<Grade>();
-        List<Club> ridingclub = new List<Club>();
+            foreach (var grade in db.Grades)
+            {
+                GradeList.Add(grade);
+            }
+            cboXC.ItemsSource = GradeList;
+        }
 
-       
- 
+
+
+
+
+
+
         public LoginRegister()
         {
 
@@ -76,21 +108,19 @@ namespace CA2_due4NOV2018
             }
             else if (activeTab == "Register")
             {
-                // call Register user Class
-                            airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
+                // call Register user Class                
+                 airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
                 int club_id = 1;
                 string role = "M";  //Role is Member 
                 string memberStatus = "N"; //Member status is "N" for new Membe
 
-
-               
 
                 RegisterUser(
                     airc_id,
                    currentUser,
                    currentPassword);
 
-                //SaveRegistration();
+                SaveRegistration();
 
                 RegisterMember(
                  airc_id,
@@ -105,10 +135,10 @@ namespace CA2_due4NOV2018
                  tbxPhone.Text,
                  tbxEmail.Text);
 
-                SaveRegistration();
+           //     SaveRegistration();
 
                 MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
-                this.Close();
+                //this.Close();
             }
 
         }
@@ -243,17 +273,14 @@ namespace CA2_due4NOV2018
             XCgrade = item.Content.ToString();
         }
 
-        private void lstRidingClub()
-        {
-            cboRidingClub.ItemsSource = ridingclub;
-        }
+
 
 
         private void cboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboRidingClub.SelectedItem;
-            XCgrade = item.Content.ToString();
+            string clubname = item.Content.ToString();
         }
     }
 

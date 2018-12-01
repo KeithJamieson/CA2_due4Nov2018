@@ -44,8 +44,16 @@ namespace CA2_due4NOV2018
                 tbxPhone.Text.Trim(),
                 tbxEmail.Text.Trim()
                 );
-            db.SaveChanges();
-            MessageBox.Show($"Club  {clubname} has been added. Secretary is {tbxFirstName.Text.Trim()}  { tbxLastName.Text.Trim()} ");
+            int result = db.SaveChanges();
+            if (result == 1)
+            {
+                MessageBox.Show($"Club  {clubname} has been added. Secretary is {tbxFirstName.Text.Trim()}  { tbxLastName.Text.Trim()} ");
+            }
+            else
+            {
+               // db.Entry(newclub).State = System.Data.Entity.EntityState.Deleted;
+                MessageBox.Show($"There was an error in Saving the Data. Please Contact Support ");
+            }
             this.Close();
         }
         
@@ -64,6 +72,15 @@ namespace CA2_due4NOV2018
           
         }
 
+        private void DeleteClub(int club_id)
+        {
+            Club newclub = new Club();
+            newclub.club_id = club_id;
+            db.Entry(newclub).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+ 
+
+        }
         private void RegisterUser(int airc_id, string username, string password)
         {
 

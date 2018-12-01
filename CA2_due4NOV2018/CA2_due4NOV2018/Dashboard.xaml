@@ -69,13 +69,7 @@
         <TextBox Name="tbxHostingClub"                      HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="2" MinWidth="200" MinHeight="26"/>
         <TextBox Name="tbxCompetitionSecretary"             HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="2" MinWidth="200" MinHeight="26"/>
        
-        <!--<Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
-        <PasswordBox Name="tbxAIRC_ID" HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed" />-->
 
-        <!--<Label Content= "Riding Club : "   HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
-        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed"/>-->
-
-        <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
 
         </StackPanel>
         <Button Name="btnExit"        HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="1" Width="100"  Height="26" Content="Exit" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnExit_Click" />

@@ -88,12 +88,13 @@ namespace CA2_due4NOV2018
         }
 
         //private void RefreshEntryList()
-        //    lstEntryList.ItemsSource = Entry;
+        //{
+        //    lstEntryList.ItemsSource = Competition;
         //    entries.Clear();
-        //    foreach ( var  entry in db.Entry )
+        //    foreach (var entry in db.Entry)
         //    {
         //        Entry.Add(Rider)
         //    }
-            
+        //}   
     }
 }
