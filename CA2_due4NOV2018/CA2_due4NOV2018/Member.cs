@@ -31,5 +31,22 @@ namespace CA2_due4NOV2018
         public virtual Grade Grade2 { get; set; }
         public virtual User User { get; set; }
         public virtual Club Club { get; set; }
+
+        public string FullName
+        {
+
+            get
+            {
+                return $"{first_name}  {last_name }";
+            }
+        }
+        public string secretary
+        {
+            get
+            {
+                return $" {airc_id}  { first_name} { last_name}";
+            }
+        }
+
     }
 }

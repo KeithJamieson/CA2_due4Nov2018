@@ -28,5 +28,13 @@ namespace CA2_due4NOV2018
         public virtual ICollection<Competition> Competitions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }
+
+        public string  Club_id_and_Name
+        {
+            get
+            {
+                return $"{ club_id} , { clubname}";
+            }
+        }
     }
 }
