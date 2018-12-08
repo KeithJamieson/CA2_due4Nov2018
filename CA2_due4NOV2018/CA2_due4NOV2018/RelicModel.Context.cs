@@ -25,7 +25,6 @@ namespace CA2_due4NOV2018
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Competition> Competitions { get; set; }
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
@@ -33,5 +32,6 @@ namespace CA2_due4NOV2018
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Club> Clubs { get; set; }
     }
 }

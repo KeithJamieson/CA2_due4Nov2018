@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="DashBoard" Height="450" Width="800" >
     
     
@@ -34,14 +35,15 @@
             <Button Name="btnChangeMyPassword"          HorizontalAlignment = "Center"  Grid.Row="1" Grid.Column="0" Width="200"  Height="26" Content="Change My Password" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnChangeMyPassword_Click" />
             <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnModifyMyDetails_Click" Visibility="Visible" />
             <Button Name="btnViewLeaderboard"           HorizontalAlignment = "Center"  Grid.Row="3" Grid.Column="0" Width="200"  Height="26" Content="View Leaderboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewLeaderboard_Click" />
-            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewScheduledCompetitions_Click" Visibility="Visible" />
+            <Button Name="btnViewScheduledCompetitions" HorizontalAlignment = "Center"  Grid.Row="4" Grid.Column="0" Width="200"  Height="26" Content="View Scheduled Competitions" BorderBrush="DarkOrange" BorderThickness="3"   Visibility="Visible" Click="btnViewScheduledCompetitions_Click"/>
             <Button Name="btnViewReports"               HorizontalAlignment = "Center"  Grid.Row="5" Grid.Column="0" Width="200"  Height="26" Content="View Reports" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnViewReports_Click" />
-            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddClub_Click" Visibility="Collapsed" />
+            <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddClub_Click" Visibility="Visible" />
             <Button Name="btnListNewMembers"            HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List New Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnListNewMembers_Click" Visibility="Visible" />
             <Button Name="btnModifyMemberDetails"       HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnModifyMemberDetails_Click" Visibility="Visible" />
+            <Button Name="btnScheduleCompetition"       HorizontalAlignment = "Center"  Grid.Row="9" Grid.Column="0" Width="200"  Height="26" Content="Schedule Competition" BorderBrush="DarkOrange" BorderThickness="3"  Click="btnScheduleCompetition_Click"  Visibility="Visible" />
         </StackPanel>
 
-        <TextBox Name = "tbxDate" Text="                            04-Nov-2018"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26"/>
+        <TextBox Name = "tbxDate"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26"/>
         <Label Content= "Logged in as : "      HorizontalContentAlignment = "Right"   Grid.Row="0" Grid.Column="1" MinWidth="200" MinHeight="26"/>
         <TextBox   Name="tbxUsername"   HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="2" MinWidth="200" MinHeight="26"/>
         
@@ -69,13 +71,7 @@
         <TextBox Name="tbxHostingClub"                      HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="2" MinWidth="200" MinHeight="26"/>
         <TextBox Name="tbxCompetitionSecretary"             HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="2" MinWidth="200" MinHeight="26"/>
        
-        <!--<Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
-        <PasswordBox Name="tbxAIRC_ID" HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed" />-->
 
-        <!--<Label Content= "Riding Club : "   HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Collapsed" />
-        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Collapsed"/>-->
-
-        <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
 
         </StackPanel>
         <Button Name="btnExit"        HorizontalAlignment = "Center"   Grid.Row="8" Grid.Column="1" Width="100"  Height="26" Content="Exit" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnExit_Click" />

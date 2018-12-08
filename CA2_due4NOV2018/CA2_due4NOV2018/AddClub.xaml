@@ -41,24 +41,45 @@
             <Label Content= "Email : "   HorizontalAlignment = "Right"   Grid.Row="8" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" Grid.RowSpan="3" >
-            <Label Content= "DR Grade : "  HorizontalContentAlignment="Right"   HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+            <Label Content= "DR Grade : "  HorizontalContentAlignment="Right"   HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible"  />
             <Label Content= "SJ Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
             <Label Content= "XC Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" >
-            <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
-            <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
-            <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+            <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboDR_SelectionChanged" >
+                <ComboBoxItem Content= "P"   />
+                <ComboBoxItem Content= "AP"   />
+                <ComboBoxItem Content= "I"   />
+                <ComboBoxItem Content= "AI"   />
+                <ComboBoxItem Content= "O"   />
+                <ComboBoxItem Content= "AO"   />
+            </ComboBox>
+            <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboSJ_SelectionChanged">
+                <ComboBoxItem Content= "P"   />
+                <ComboBoxItem Content= "AP"   />
+                <ComboBoxItem Content= "I"   />
+                <ComboBoxItem Content= "AI"   />
+                <ComboBoxItem Content= "O"   />
+                <ComboBoxItem Content= "AO"   />
+            </ComboBox>
+            <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboXC_SelectionChanged">
+                <ComboBoxItem Content= "P"   />
+                <ComboBoxItem Content= "AP"   />
+                <ComboBoxItem Content= "I"   />
+                <ComboBoxItem Content= "AI"   />
+                <ComboBoxItem Content= "O"   />
+                <ComboBoxItem Content= "AO"   />
+            </ComboBox>
         </StackPanel>
         <TextBox   Name="tbxClubName"   HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="1" MinWidth="200" MinHeight="26"/>
         <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="7" >
-            <TextBox Text="Username" Name="tbxUsername" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <TextBox  Name="tbxUsername" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
             <PasswordBox  Name="tbxPassword" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
-            <TextBox Text="FirstName" Name="tbxFirstName" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
-            <TextBox Text="LastName" Name="tbxLastName" HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
-            <TextBox Name="tbxAIRC_ID"   Text="9999"   HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
-            <TextBox Name="tbxPhone"    Text="01 23456789"  HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
-            <TextBox Name="tbxEmail"  Text="Joe.Bloggs@email.server.com" HorizontalAlignment = "Left"   Grid.Row="8" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible"/>
+            <TextBox Name="tbxFirstName" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <TextBox Name="tbxLastName" HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <TextBox Name="tbxAIRC_ID"   HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <TextBox Name="tbxPhone"    HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <TextBox Name="tbxEmail"   HorizontalAlignment = "Left"   Grid.Row="8" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible"/>
         </StackPanel>
 
         <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->

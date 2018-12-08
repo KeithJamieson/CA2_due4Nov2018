@@ -101,6 +101,9 @@
     <Compile Include="Member.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Relic.xaml.cs">
+      <DependentUpon>Relic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelicModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddRiderEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Relic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
