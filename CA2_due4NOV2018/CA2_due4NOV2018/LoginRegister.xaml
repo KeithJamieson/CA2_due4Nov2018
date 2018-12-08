@@ -36,7 +36,7 @@
 
         <!--<StackPanel Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2">-->
         <Label          Content= "Username : " HorizontalAlignment="Right" HorizontalContentAlignment="Right"  Grid.Row="1" Grid.Column="0"   MinHeight="26"/>
-        <TextBox        Name="tbxUsername"    HorizontalAlignment="Left"  HorizontalContentAlignment="Center"   Grid.Row="1" Grid.Column="1" Width="100"  MinHeight="26"/>
+        <TextBox        Name="tbxUsername"    HorizontalAlignment="Left"  HorizontalContentAlignment="Center"   Grid.Row="1" Grid.Column="1" Width="100"  MinHeight="26" />
         <Label          Content= "Password : " HorizontalAlignment="Right"  HorizontalContentAlignment="Right" Grid.Row="2" Grid.Column="0"  MinHeight="26"/>
         <PasswordBox    Name="tbxPassword"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="2" Grid.Column="1"  Width="100"  MinHeight="26"/>
             <!--</StackPanel>-->
@@ -50,11 +50,15 @@
         <Label Name="lblAIRC_ID" Content= "AIRC ID : "      HorizontalAlignment = "Right"  HorizontalContentAlignment="Right"  Grid.Row="5" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left" HorizontalContentAlignment="Right" Grid.Row="5" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
                 <Label Name="lblRidingClub" Content= "Riding Club : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible"  />
-
-        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"/>
-   <!--    TEST COMBO BOX -->
-        <ComboBox x:Name="TxtProductFamily" Text="{Binding testfield}" HorizontalAlignment="Left" Height="26" Margin="10,182,0,0" VerticalAlignment="Top" Width="319"/>
-    <!--    TEST COMBO BOX -->
+<!-- Riding Club -->
+        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"  
+            SelectedValue="{Binding Club, Mode=TwoWay}" ItemsSource="{Binding Club,Mode=OneTime}" SelectedValuePath="club_id"  DisplayMemberPath="clubname" >
+            <!--<ComboBox.ItemTemplate  >
+            <DataTemplate>
+                    <TextBlock Text="{Binding Club_id_and_Name}"   />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>--> 
+        </ComboBox>
         <Label Name="lblPhone" Content= "Phone : "      HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <Label Name="lblEmail" Content= "Email : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="8" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
                 <TextBox Name="tbxPhone"      HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
@@ -78,14 +82,42 @@
             <ComboBoxItem Content= "O"   />
             <ComboBoxItem Content= "AO"   />
         </ComboBox>
-        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboXC_SelectionChanged" >
+        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"   SelectionChanged="cboXC_SelectionChanged">
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+        <!--<ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Grade1}"  >
+                        
+                    </TextBlock>  </DataTemplate>
+
+            </ComboBox.ItemTemplate>
+        </ComboBox>-->
+
+
+        <!--SelectedValue="{Binding Grade, Mode=TwoWay}"   
+                  ItemsSource="{Binding Grade, Mode=OneTime}"    
+                  SelectedValuePath="Grade1"    
+                  DisplayMemberPath="Grade_Description"                   
+
+                  >-->
+
+            <!--SelectedValue="{Binding FilterService.TripLengthFrom, Mode=TwoWay}"
+    ItemsSource="{Binding TripLengthList, Mode=OneTime}"
+    SelectedValuePath="Key"
+    DisplayMemberPath="Value" />-->
             <!--<ComboBoxItem Content= "P"   />
             <ComboBoxItem Content= "AP"   />
             <ComboBoxItem Content= "I"   />
             <ComboBoxItem Content= "AI"   />
             <ComboBoxItem Content= "O"   />
             <ComboBoxItem Content= "AO"   />-->
-        </ComboBox>
+        <!--</ComboBox>-->
 
 
         

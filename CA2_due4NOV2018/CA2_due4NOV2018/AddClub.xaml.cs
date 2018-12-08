@@ -45,7 +45,7 @@ namespace CA2_due4NOV2018
                 tbxEmail.Text.Trim()
                 );
             int result = db.SaveChanges();
-            if (result == 1)
+            if (result > 0)
             {
                 MessageBox.Show($"Club  {clubname} has been added. Secretary is {tbxFirstName.Text.Trim()}  { tbxLastName.Text.Trim()} ");
             }
@@ -86,7 +86,7 @@ namespace CA2_due4NOV2018
 
 
             User user = new User();
-            user.airc_id = airc_id;
+             user.airc_id = airc_id;
             user.username = username;
             user.userpassword = password;
             db.Entry(user).State = System.Data.Entity.EntityState.Added;

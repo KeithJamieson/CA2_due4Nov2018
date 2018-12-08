@@ -37,5 +37,13 @@ namespace CA2_due4NOV2018
         public virtual ICollection<Member> Members1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members2 { get; set; }
+
+        //public string GradeandDescription
+        //{
+        //    get
+        //    {
+        //        return $"{ Grade1} , { Grade_Description}";
+        //    }
+        //}
     }
 }
