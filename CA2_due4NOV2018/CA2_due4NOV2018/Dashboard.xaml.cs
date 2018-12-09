@@ -19,7 +19,7 @@ namespace CA2_due4NOV2018
     /// </summary>
     public partial class MainDashboard : Window
     {
-        private object ViewScheduledCompetitions;
+       
 
         RELICEntities db = new RELICEntities();
         //Member member = new Member();
@@ -39,41 +39,35 @@ namespace CA2_due4NOV2018
 
 
             User user = new User();
-           Competition competition = new Competition();
 
-            MainDashboard maindashboard = new MainDashboard();
-            //  maindashboard.tbxCompetitionVenue.Text = competition.venue.ToString();
-            //  maindashboard.tbxCompetitionDate.Text = competition.competition_date.ToString();
-            //  maindashboard.tbxCompetitionName.Text = competition.venue.ToString();
+                          var query = (from c in db.Competitions
+                                            join m in db.Members on c.airc_id equals m.airc_id
+                                            join rc in db.Clubs on c.club_id equals rc.club_id
+                                            where c.competition_status == "S" && c.competition_date >= currentDate
+                                            && c.competition_date.Year == currentyear
+                                            orderby c.competition_date ascending
+                                            select new
+                                            {
+                                                next_competition_date = c.competition_date,
+                                                c.competition_name,
+                                                competition_venue     = c.venue,
+                                                Secretary = c.Member.first_name + " " + c.Member.last_name,
+                                                hosting_club=c.Club.clubname
+                                            }).Take(1);
 
-         //   var query =  
-            //maindashboard.tbxHostingClub.Text = competitionSecretary;
-            //maindashboard.tbxCompetitionSecretary.Text = hostingClub;
-            //foreach (var User in db.Users.Where(t => t.username == currentUser && t.username == currentPassword))
-
-            //  skew.CalibrationDate.Date == db.Skew.Select(s => s.CalibrationDate.Date)
-            //                          .Where(s => s <= date.Date)
-            //                          .Max()
-
-            //competition.competition_date == db.Competitions.Select(t => t.competition_date)
-            //    .Where(t => t >= date.Date)
-            //foreach (var record in db.Competitions.Where(t => t.competition_date.Date.Year.ToString() = currentyear.ToString() && t.competition_status == "S" && t.competition_date.Year == currentyear))
-            //{
-            //    tbxCompetitionDate.Text = record.competition_date.ToString();
-            //    //tbxCompetitionName.Text = record.competition_name;
-            //    tbxCompetitionVenue.Text = record.venue;
-            //    //tbxHostingClub = record.club_id.ToString();
-            //    //tbxCompetitionSecretary = record.airc_id.ToString();
-            //};
-          
-                //Users.Where(t => t.Member == ;
+            foreach (var record in query  )
             {
-            //   // scheduledComps.Add(record);
+                tbxCompetitionDate.Text = record.next_competition_date.ToShortDateString();
+                tbxCompetitionName.Text = record.competition_name;
+                tbxCompetitionVenue.Text = record.competition_venue;
+                tbxCompetitionSecretary.Text = record.Secretary;
+                tbxHostingClub.Text = record.hosting_club;
+
+
+                
             }
-            //public int LoggedInUser;
-            //public string username;
-            //tbxUsername = LoginRegister.username;
-            //airc_id=LoginRegister.LoggedInUser;
+            MainDashboard maindashboard = new MainDashboard();
+
         }
 
  
@@ -130,31 +124,26 @@ namespace CA2_due4NOV2018
              
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
-
+            Competition competition = new Competition();
+            competition.ShowDialog();
         }
 
-        private void btnScheduleCompetition_Click(object sender, RoutedEventArgs e)
+        private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
-            ScheduleCompetition scheduledCompetition = new ScheduleCompetition();
-            scheduledCompetition.ShowDialog();
-           
+            AddCompetition addCompetition = new AddCompetition();
+            addCompetition.ShowDialog();
+
         }
 
-        private void btnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
+        private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
         {
-            ViewScheduledCompetition viewScheduledCompetitions = new ViewScheduledCompetition();
+            ViewScheduledCompetition viewCompetitions = new ViewScheduledCompetition();
 
-            viewScheduledCompetitions.ShowDialog();
+            viewCompetitions.ShowDialog();
         }
 
 
-        //private void CheckUserAccess(Db.User user)
-        //{
-        //    if (user.)
-        //    {
 
-        //    }
-        //}
     }
 
   

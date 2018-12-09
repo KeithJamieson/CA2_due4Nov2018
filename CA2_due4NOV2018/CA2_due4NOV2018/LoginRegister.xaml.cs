@@ -101,7 +101,7 @@ namespace CA2_due4NOV2018
                     close = true;
                     maindashboard.tbxUsername.Text = currentUser;
                     maindashboard.airc_id = User.airc_id;
-                    maindashboard.ShowDialog();
+                    maindashboard.ShowDialog();                    
 
                 }
                 // By Default if we reach here that means we have an invalid username and/or password entered
@@ -261,7 +261,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void cboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             var comboBoxItem = (ComboBox)sender;
@@ -284,7 +284,7 @@ namespace CA2_due4NOV2018
 
 
 
-        private void cboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBox)sender;         
             string club_id_str = cboRidingClub.SelectedValue.ToString();

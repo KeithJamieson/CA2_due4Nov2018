@@ -15,19 +15,16 @@ using System.Windows.Shapes;
 namespace CA2_due4NOV2018
 {
     /// <summary>
-    /// Interaction logic for Window2.xaml
+    /// Interaction logic for OpenCompetition.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class Competition : Window
     {
 
         RELICEntities db = new RELICEntities();
-        List<Competition> lstCompetitors = new List<Competition>();
+        //List<Competition> lstCompetitors = new List<Competition>();
+        List<Entry> lstEntries = new List<Entry>();
         string activeTab;
-        public Window2()
-        {
-            InitializeComponent();
 
-        }
 
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
         {

@@ -14,6 +14,12 @@ namespace CA2_due4NOV2018
     
     public partial class Member
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Member()
+        {
+            this.Competitions = new HashSet<Competition>();
+        }
+    
         public int airc_id { get; set; }
         public int club_id { get; set; }
         public string first_name { get; set; }
@@ -31,22 +37,16 @@ namespace CA2_due4NOV2018
         public virtual Grade Grade2 { get; set; }
         public virtual User User { get; set; }
         public virtual Club Club { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Competition> Competitions { get; set; }
 
-        public string FullName
-        {
-
-            get
-            {
-                return $"{first_name}  {last_name }";
-            }
-        }
-        public string secretary
+        public string Secretary
         {
             get
             {
-                return $" {airc_id}  { first_name} { last_name}";
+                return $"{airc_id} | {first_name} { last_name}";
             }
-        }
 
+        }
     }
 }

@@ -46,7 +46,7 @@
             <Label Content= "XC Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" >
-            <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboDR_SelectionChanged" >
+            <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboDR_SelectionChanged" >
                 <ComboBoxItem Content= "P"   />
                 <ComboBoxItem Content= "AP"   />
                 <ComboBoxItem Content= "I"   />
@@ -62,7 +62,7 @@
                 <ComboBoxItem Content= "O"   />
                 <ComboBoxItem Content= "AO"   />
             </ComboBox>
-            <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboXC_SelectionChanged">
+            <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboXC_SelectionChanged">
                 <ComboBoxItem Content= "P"   />
                 <ComboBoxItem Content= "AP"   />
                 <ComboBoxItem Content= "I"   />
@@ -84,7 +84,7 @@
 
         <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
 
-        <Button Name="btnSave"        HorizontalAlignment = "Right"   Grid.Row="9" Grid.Column="0" Width="100"  Height="26" Content="Save" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnSave_Click" />
+        <Button Name="btnSave"        HorizontalAlignment = "Right"   Grid.Row="9" Grid.Column="0" Width="100"  Height="26" Content="Save" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnSave_Click" />
         <Button Name="btnCancel"          HorizontalAlignment = "Left"    Grid.Row="9" Grid.Column="1" Width="100"  Height="26" Content="Cancel"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnCancel_Click" />
 
  

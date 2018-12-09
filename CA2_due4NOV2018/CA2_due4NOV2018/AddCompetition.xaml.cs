@@ -9,7 +9,7 @@ namespace CA2_due4NOV2018
     /// <summary>
     /// Interaction logic for SchdeuleCompetition.xaml
     /// </summary>
-    public partial class ScheduleCompetition : Window
+    public partial class AddCompetition : Window
     {
 
         RELICEntities db = new RELICEntities();
@@ -17,29 +17,34 @@ namespace CA2_due4NOV2018
         List<Member> memberslist = new List<Member>();
         int club_id=1004;
         int airc_id;
-  //      int competitionSecretary;
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+        //      int competitionSecretary;
 
-            memberslist.Clear();
-            foreach (var member in db.Members.Where(t => t.club_id > 0  ))
-            {                      
-                memberslist.Add(member);                
-            }
-            cboCompetitionSecretary.ItemsSource = memberslist;
-        }
-
-        public ScheduleCompetition()
+        public AddCompetition()
         {
             InitializeComponent();
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            CboCompetitionSecretary.ItemsSource = "";
+            memberslist.Clear();
+            foreach (var member in db.Members.Where(t => t.club_id > 0))
+            {
+                memberslist.Add(member);
+            }
+            // CboCompetitionSecretary.ItemsSource = memberslist;
+        }
+
+
+
+
         string CompetitionDiscipline = "";
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {   
             Competition competition = new Competition();
 
             competition.venue = tbxCompetitionVenue.Text.Trim();
+            competition.competition_name = tbxCompetitionName.Text;
             competition.competition_date =Convert.ToDateTime(dpkCompetitionDate.ToString());
             competition.competition_type = CompetitionDiscipline;
             competition.competition_status = "S";
@@ -60,7 +65,7 @@ namespace CA2_due4NOV2018
             this.Close();
         }
 
-        private void btnOpenCompetition_Click(object sender, RoutedEventArgs e)
+        private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
             
         }
@@ -72,10 +77,10 @@ namespace CA2_due4NOV2018
             CompetitionDiscipline = item.Content.ToString();
         }
 
-        private void cboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBox)sender;
-            string airc_id_str = cboCompetitionSecretary.SelectedValue.ToString();             
+            string airc_id_str = CboCompetitionSecretary.SelectedValue.ToString();             
             airc_id = Convert.ToInt32(airc_id_str);
         }
 
@@ -85,6 +90,5 @@ namespace CA2_due4NOV2018
             db.Entry(competition).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
         }
-
     }
 }

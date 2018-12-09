@@ -51,7 +51,7 @@
                 <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left" HorizontalContentAlignment="Right" Grid.Row="5" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
                 <Label Name="lblRidingClub" Content= "Riding Club : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible"  />
 <!-- Riding Club -->
-        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboRidingClub_SelectionChanged"  
+        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboRidingClub_SelectionChanged"  
             SelectedValue="{Binding Club, Mode=TwoWay}" ItemsSource="{Binding Club,Mode=OneTime}" SelectedValuePath="club_id"  DisplayMemberPath="clubname" >
             <!--<ComboBox.ItemTemplate  >
             <DataTemplate>
@@ -74,7 +74,7 @@
             <ComboBoxItem Content= "O"   />
             <ComboBoxItem Content= "AO"   />
         </ComboBox>
-        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboSJ_SelectionChanged" >
+        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboSJ_SelectionChanged" >
             <ComboBoxItem Content= "P"   />
                   <ComboBoxItem Content= "AP"   />
             <ComboBoxItem Content= "I"   />

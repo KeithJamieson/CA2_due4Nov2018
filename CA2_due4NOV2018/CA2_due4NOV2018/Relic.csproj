@@ -122,8 +122,8 @@
     <Compile Include="Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleCompetition.xaml.cs">
-      <DependentUpon>ScheduleCompetition.xaml</DependentUpon>
+    <Compile Include="AddCompetition.xaml.cs">
+      <DependentUpon>AddCompetition.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
@@ -181,7 +181,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScheduleCompetition.xaml">
+    <Page Include="AddCompetition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

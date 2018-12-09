@@ -23,7 +23,7 @@ namespace CA2_due4NOV2018
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             string clubname = tbxClubName.Text.Trim();
             airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
@@ -113,7 +113,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void cboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             var comboBoxItem = (ComboBox)sender;
@@ -132,7 +132,7 @@ namespace CA2_due4NOV2018
 
 
 
-        private void cboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboXC.SelectedItem;

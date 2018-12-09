@@ -1,4 +1,4 @@
-﻿<Window x:Class="CA2_due4NOV2018.ScheduleCompetition"
+﻿<Window x:Class="CA2_due4NOV2018.AddCompetition"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="ScheduleCompetition" Height="450" Width="400">
+        Title="AddCompetition" Height="450" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -34,17 +34,13 @@
 
         <TextBox Name="tbxCompetitionName"   Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left"  />
         <TextBox Name="tbxCompetitionVenue" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left"  Grid.ColumnSpan="3"/>
-        <ComboBox Name="cboCompetitionSecretary" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center" SelectionChanged="cboCompetitionSecretary_SelectionChanged" SelectedValuePath="airc_id" >
+        <ComboBox Name="CboCompetitionSecretary" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center" SelectionChanged="CboCompetitionSecretary_SelectionChanged" SelectedValuePath="airc_id" >
             <ComboBox.ItemTemplate>
-            <DataTemplate>
-                    <TextBlock Text="{Binding secretary}"   />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-            <!--<ComboBox.ItemTemplate>                        
                 <DataTemplate>
-                    <TextBlock Text="{Binding Member}"> </TextBlock>  </DataTemplate>
-            </ComboBox.ItemTemplate>-->
-        </ComboBox> 
+                    <TextBlock Text="{Binding Secretary}"   />
+                </DataTemplate>
+            </ComboBox.ItemTemplate> />
+        </ComboBox>
         <ComboBox Name="cboCompetitionType"    Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  SelectionChanged="cboCompetitionType_SelectionChanged" >
             <ComboBoxItem Content= "DR"   />
             <ComboBoxItem Content= "SJ"   />
@@ -53,6 +49,6 @@
         <DatePicker Name="dpkCompetitionDate" Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Center"  />
 
         <Button Name="btnCancel"     HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="1" Width="auto" Content="Cancel" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnCancel_Click" />
-        <Button Name="btnSave"       HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="0" Width="auto" Content="Save" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnSave_Click" />
+        <Button Name="btnSave"       HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="0" Width="auto" Content="Save" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnSave_Click" />
     </Grid>
 </Window>

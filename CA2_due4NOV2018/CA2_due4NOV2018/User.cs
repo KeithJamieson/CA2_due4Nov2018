@@ -14,14 +14,10 @@ namespace CA2_due4NOV2018
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-
         public string username { get; set; }
         public string userpassword { get; set; }
         public int airc_id { get; set; }
     
         public virtual Member Member { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Competition> Competitions { get; set; }
     }
 }

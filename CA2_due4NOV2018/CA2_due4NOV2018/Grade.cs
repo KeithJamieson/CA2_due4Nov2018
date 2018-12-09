@@ -17,18 +17,16 @@ namespace CA2_due4NOV2018
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Grade()
         {
-            this.Entries = new HashSet<Entry>();
             this.Leaderboards = new HashSet<Leaderboard>();
             this.Members = new HashSet<Member>();
             this.Members1 = new HashSet<Member>();
             this.Members2 = new HashSet<Member>();
+            this.Entries = new HashSet<Entry>();
         }
     
         public string Grade1 { get; set; }
         public string Grade_Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entry> Entries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leaderboard> Leaderboards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -37,13 +35,7 @@ namespace CA2_due4NOV2018
         public virtual ICollection<Member> Members1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members2 { get; set; }
-
-        //public string GradeandDescription
-        //{
-        //    get
-        //    {
-        //        return $"{ Grade1} , { Grade_Description}";
-        //    }
-        //}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Entry> Entries { get; set; }
     }
 }
