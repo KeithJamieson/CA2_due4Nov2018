@@ -80,9 +80,6 @@
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Competition.xaml.cs">
-      <DependentUpon>Competition.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddRiderEntry.xaml.cs">
       <DependentUpon>AddRiderEntry.xaml</DependentUpon>
     </Compile>
@@ -137,6 +134,9 @@
     <Compile Include="AmendMemberDetails.xaml.cs">
       <DependentUpon>AmendMemberDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Competition.xaml.cs">
+      <DependentUpon>Competition.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddClub.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,10 +165,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Competition.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddRiderEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AmendMemberDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Competition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

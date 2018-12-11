@@ -25,13 +25,13 @@ namespace CA2_due4NOV2018
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CboCompetitionSecretary.ItemsSource = "";
+           // CboCompetitionSecretary.ItemsSource = "";
             memberslist.Clear();
             foreach (var member in db.Members.Where(t => t.club_id > 0))
             {
                 memberslist.Add(member);
             }
-            // CboCompetitionSecretary.ItemsSource = memberslist;
+            CboCompetitionSecretary.ItemsSource = memberslist;
         }
 
 

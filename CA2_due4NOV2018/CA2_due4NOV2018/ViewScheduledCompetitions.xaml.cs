@@ -76,8 +76,10 @@ namespace CA2_due4NOV2018
         {
             // change competition status from "S" to "O"
             // only allowed if I am competition secretary and today = competition date            
-            Competition competition = new Competition();
-            competition.ShowDialog();
+            // Competition competition = new Competition();
+            // competition.ShowDialog();
+            Competitio window = new Competitio();
+            window.ShowDialog();
         }
 
     }

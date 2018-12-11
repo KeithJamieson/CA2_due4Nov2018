@@ -309,8 +309,12 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             <End Role="Club" EntitySet="Clubs" />
             <End Role="Member" EntitySet="Members" />
           </AssociationSet>
-          <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
           <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
+          <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
           <AssociationSet Name="FK_Competition_Club_club_id" Association="RELICModel.FK_Competition_Club_club_id">
             <End Role="Club" EntitySet="Clubs" />
             <End Role="Competition" EntitySet="Competitions" />
@@ -321,10 +325,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           </AssociationSet>
           <AssociationSet Name="fk_entry_competition_competition_id" Association="RELICModel.fk_entry_competition_competition_id">
             <End Role="Competition" EntitySet="Competitions" />
-            <End Role="Entry" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
-            <End Role="Grade" EntitySet="Grades" />
             <End Role="Entry" EntitySet="Entries" />
           </AssociationSet>
         </EntityContainer>
@@ -474,6 +474,34 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="competition_id" />
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="competition_id" Type="Int32" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Entry" ToRole="Grade" />
+          <NavigationProperty Name="Competition" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Entry" ToRole="Competition" />
+        </EntityType>
+        <Association Name="FK_entry_grade_grade">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Competition">
           <Key>
             <PropertyRef Name="competition_id" />
@@ -489,22 +517,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           <NavigationProperty Name="Club" Relationship="RELICModel.FK_Competition_Club_club_id" FromRole="Competition" ToRole="Club" />
           <NavigationProperty Name="Member" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Competition" ToRole="Member" />
           <NavigationProperty Name="Entries" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Competition" ToRole="Entry" />
-        </EntityType>
-        <EntityType Name="Entry">
-          <Key>
-            <PropertyRef Name="competition_id" />
-            <PropertyRef Name="airc_id" />
-          </Key>
-          <Property Name="competition_id" Type="Int32" Nullable="false" />
-          <Property Name="airc_id" Type="Int32" Nullable="false" />
-          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Competition" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Entry" ToRole="Competition" />
-          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Entry" ToRole="Grade" />
         </EntityType>
         <Association Name="FK_Competition_Club_club_id">
           <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
@@ -539,18 +551,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             </Principal>
             <Dependent Role="Entry">
               <PropertyRef Name="competition_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_entry_grade_grade">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Entry">
-              <PropertyRef Name="grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -624,20 +624,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Competitions">
-            <EntityTypeMapping TypeName="RELICModel.Competition">
-              <MappingFragment StoreEntitySet="Competition">
-                <ScalarProperty Name="competition_status" ColumnName="competition_status" />
-                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
-                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
-                <ScalarProperty Name="competition_date" ColumnName="competition_date" />
-                <ScalarProperty Name="venue" ColumnName="venue" />
-                <ScalarProperty Name="club_id" ColumnName="club_id" />
-                <ScalarProperty Name="competition_name" ColumnName="competition_name" />
-                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Entries">
             <EntityTypeMapping TypeName="RELICModel.Entry">
               <MappingFragment StoreEntitySet="Entry">
@@ -648,6 +634,20 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
                 <ScalarProperty Name="Horse" ColumnName="Horse" />
                 <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competitions">
+            <EntityTypeMapping TypeName="RELICModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="competition_status" ColumnName="competition_status" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_date" ColumnName="competition_date" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="competition_name" ColumnName="competition_name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
               </MappingFragment>
             </EntityTypeMapping>

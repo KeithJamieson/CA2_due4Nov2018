@@ -39,14 +39,5 @@ namespace CA2_due4NOV2018
         public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competition> Competitions { get; set; }
-
-        public string Secretary
-        {
-            get
-            {
-                return $"{airc_id} | {first_name} { last_name}";
-            }
-
-        }
     }
 }

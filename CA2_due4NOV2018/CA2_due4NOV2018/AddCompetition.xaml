@@ -39,7 +39,7 @@
                 <DataTemplate>
                     <TextBlock Text="{Binding Secretary}"   />
                 </DataTemplate>
-            </ComboBox.ItemTemplate> />
+            </ComboBox.ItemTemplate> 
         </ComboBox>
         <ComboBox Name="cboCompetitionType"    Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  SelectionChanged="cboCompetitionType_SelectionChanged" >
             <ComboBoxItem Content= "DR"   />

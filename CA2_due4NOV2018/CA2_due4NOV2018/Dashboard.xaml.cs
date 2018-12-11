@@ -29,6 +29,8 @@ namespace CA2_due4NOV2018
         //string currentyear = DateTime.Now.ToString("yyyy");
         DateTime currentDate = DateTime.Now;
         int currentyear = DateTime.Now.Year;
+        public int competition_id;
+        public string competition_type;
         public MainDashboard()
         {
             InitializeComponent();
@@ -49,7 +51,9 @@ namespace CA2_due4NOV2018
                                             select new
                                             {
                                                 next_competition_date = c.competition_date,
+                                                c.competition_id,
                                                 c.competition_name,
+                                                c.competition_type,
                                                 competition_venue     = c.venue,
                                                 Secretary = c.Member.first_name + " " + c.Member.last_name,
                                                 hosting_club=c.Club.clubname
@@ -62,6 +66,8 @@ namespace CA2_due4NOV2018
                 tbxCompetitionVenue.Text = record.competition_venue;
                 tbxCompetitionSecretary.Text = record.Secretary;
                 tbxHostingClub.Text = record.hosting_club;
+                competition_id = record.competition_id;
+                competition_type = record.competition_type;
 
 
                 
@@ -124,8 +130,18 @@ namespace CA2_due4NOV2018
              
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
-            Competition competition = new Competition();
-            competition.ShowDialog();
+            //Competition competition = new Competition();
+            //maindashboard.tbxUsername.Text = currentUser;
+            //maindashboard.airc_id = User.airc_id;
+            //maindashboard.ShowDialog();
+        
+            Competitio window = new Competitio();
+
+            window.tbxCompetitionName.Text = tbxCompetitionName.Text;
+            window.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
+            window.competition_id = competition_id;
+            window.ShowDialog();
+            //competition.ShowDialog();
         }
 
         private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
