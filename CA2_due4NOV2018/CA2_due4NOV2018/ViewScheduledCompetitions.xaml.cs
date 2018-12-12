@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System;
+using System.ComponentModel;
+//using System.Windows.Controls;
+//using System;
+using System.Windows.Data;
 
 namespace CA2_due4NOV2018
 {
@@ -59,6 +61,10 @@ namespace CA2_due4NOV2018
 
             }
             lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstViewCompetitionSchedule.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));
+
+            
         }
 
 

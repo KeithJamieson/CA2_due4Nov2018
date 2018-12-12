@@ -18,10 +18,10 @@ namespace CA2_due4NOV2018
         public Grade()
         {
             this.Leaderboards = new HashSet<Leaderboard>();
+            this.Entries = new HashSet<Entry>();
             this.Members = new HashSet<Member>();
             this.Members1 = new HashSet<Member>();
             this.Members2 = new HashSet<Member>();
-            this.Entries = new HashSet<Entry>();
         }
     
         public string Grade1 { get; set; }
@@ -30,12 +30,12 @@ namespace CA2_due4NOV2018
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leaderboard> Leaderboards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Entry> Entries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entry> Entries { get; set; }
     }
 }

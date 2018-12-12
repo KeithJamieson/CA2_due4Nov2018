@@ -5,11 +5,11 @@ using System.Windows.Controls;
 namespace CA2_due4NOV2018
 {
     /// <summary>
-    /// Interaction logic for Window3.xaml
+    /// Interaction logic for AddRider.xaml
     /// </summary>
-    public partial class Window3 : Window
+    public partial class AddRider : Window
     {
-        public Window3()
+        public AddRider()
         {
             InitializeComponent();
         }

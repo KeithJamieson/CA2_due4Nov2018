@@ -281,43 +281,27 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
         <EntityContainer Name="RELICEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Grades" EntityType="RELICModel.Grade" />
           <EntitySet Name="Leaderboards" EntityType="RELICModel.Leaderboard" />
-          <EntitySet Name="Members" EntityType="RELICModel.Member" />
           <EntitySet Name="sysdiagrams" EntityType="RELICModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="RELICModel.User" />
           <AssociationSet Name="FK_Leaderboard_grade_grade" Association="RELICModel.FK_Leaderboard_grade_grade">
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Leaderboard" EntitySet="Leaderboards" />
           </AssociationSet>
-          <AssociationSet Name="FK_member_grade_dr" Association="RELICModel.FK_member_grade_dr">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_member_grade_sj" Association="RELICModel.FK_member_grade_sj">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_member_grade_xc" Association="RELICModel.FK_member_grade_xc">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_member_user_airc_id" Association="RELICModel.FK_member_user_airc_id">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
           <EntitySet Name="Clubs" EntityType="RELICModel.Club" />
-          <AssociationSet Name="FK_Member_Club_club_id" Association="RELICModel.FK_Member_Club_club_id">
-            <End Role="Club" EntitySet="Clubs" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
           <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
           <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Entry" EntitySet="Entries" />
           </AssociationSet>
           <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
+          <EntitySet Name="Members" EntityType="RELICModel.Member" />
           <AssociationSet Name="FK_Competition_Club_club_id" Association="RELICModel.FK_Competition_Club_club_id">
             <End Role="Club" EntitySet="Clubs" />
             <End Role="Competition" EntitySet="Competitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Club_club_id" Association="RELICModel.FK_Member_Club_club_id">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Member" EntitySet="Members" />
           </AssociationSet>
           <AssociationSet Name="FK_Competition_Member_airc_id" Association="RELICModel.FK_Competition_Member_airc_id">
             <End Role="Member" EntitySet="Members" />
@@ -327,6 +311,22 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             <End Role="Competition" EntitySet="Competitions" />
             <End Role="Entry" EntitySet="Entries" />
           </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_dr" Association="RELICModel.FK_Member_Grade_dr">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_sj" Association="RELICModel.FK_Member_Grade_sj">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_xc" Association="RELICModel.FK_Member_Grade_xc">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_User_airc_id" Association="RELICModel.FK_Member_User_airc_id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grade">
           <Key>
@@ -335,10 +335,10 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           <Property Name="Grade1" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Grade_Description" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_grade_grade" FromRole="Grade" ToRole="Leaderboard" />
-          <NavigationProperty Name="Members" Relationship="RELICModel.FK_member_grade_dr" FromRole="Grade" ToRole="Member" />
-          <NavigationProperty Name="Members1" Relationship="RELICModel.FK_member_grade_sj" FromRole="Grade" ToRole="Member" />
-          <NavigationProperty Name="Members2" Relationship="RELICModel.FK_member_grade_xc" FromRole="Grade" ToRole="Member" />
           <NavigationProperty Name="Entries" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Grade" ToRole="Entry" />
+          <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Grade" ToRole="Member" />
+          <NavigationProperty Name="Members1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Grade" ToRole="Member" />
+          <NavigationProperty Name="Members2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Grade" ToRole="Member" />
         </EntityType>
         <EntityType Name="Leaderboard">
           <Key>
@@ -351,28 +351,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Leaderboard_grade_grade" FromRole="Leaderboard" ToRole="Grade" />
-        </EntityType>
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="airc_id" />
-          </Key>
-          <Property Name="airc_id" Type="Int32" Nullable="false" />
-          <Property Name="club_id" Type="Int32" Nullable="false" />
-          <Property Name="first_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="last_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="member_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="role" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="DR" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="SJ" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="XC" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Grade" Relationship="RELICModel.FK_member_grade_dr" FromRole="Member" ToRole="Grade" />
-          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_member_grade_sj" FromRole="Member" ToRole="Grade" />
-          <NavigationProperty Name="Grade2" Relationship="RELICModel.FK_member_grade_xc" FromRole="Member" ToRole="Grade" />
-          <NavigationProperty Name="User" Relationship="RELICModel.FK_member_user_airc_id" FromRole="Member" ToRole="User" />
-          <NavigationProperty Name="Club" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Member" ToRole="Club" />
-          <NavigationProperty Name="Competitions" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Member" ToRole="Competition" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -391,7 +369,7 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           <Property Name="username" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="userpassword" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="airc_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="RELICModel.FK_member_user_airc_id" FromRole="User" ToRole="Member" />
+          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Member_User_airc_id" FromRole="User" ToRole="Member" />
         </EntityType>
         <Association Name="FK_Leaderboard_grade_grade">
           <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
@@ -405,75 +383,15 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_member_grade_dr">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="DR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_member_grade_sj">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="SJ" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_member_grade_xc">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="XC" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_member_user_airc_id">
-          <End Type="RELICModel.User" Role="User" Multiplicity="1" />
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="airc_id" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="airc_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Club">
           <Key>
             <PropertyRef Name="club_id" />
           </Key>
           <Property Name="club_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="clubname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Club" ToRole="Member" />
           <NavigationProperty Name="Competitions" Relationship="RELICModel.FK_Competition_Club_club_id" FromRole="Club" ToRole="Competition" />
+          <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Club" ToRole="Member" />
         </EntityType>
-        <Association Name="FK_Member_Club_club_id">
-          <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Club">
-              <PropertyRef Name="club_id" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="club_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Entry">
           <Key>
             <PropertyRef Name="competition_id" />
@@ -518,6 +436,28 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
           <NavigationProperty Name="Member" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Competition" ToRole="Member" />
           <NavigationProperty Name="Entries" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Competition" ToRole="Entry" />
         </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="club_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="member_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="DR" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SJ" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="XC" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Member" ToRole="Club" />
+          <NavigationProperty Name="Competitions" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Member" ToRole="Competition" />
+          <NavigationProperty Name="Grade" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="Grade2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="User" Relationship="RELICModel.FK_Member_User_airc_id" FromRole="Member" ToRole="User" />
+        </EntityType>
         <Association Name="FK_Competition_Club_club_id">
           <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
           <End Type="RELICModel.Competition" Role="Competition" Multiplicity="*" />
@@ -526,6 +466,18 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
               <PropertyRef Name="club_id" />
             </Principal>
             <Dependent Role="Competition">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Club_club_id">
+          <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Member">
               <PropertyRef Name="club_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -554,6 +506,54 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Member_Grade_dr">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="DR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_sj">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="SJ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_xc">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="XC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_User_airc_id">
+          <End Type="RELICModel.User" Role="User" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -576,23 +576,6 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
                 <ScalarProperty Name="airc_id" ColumnName="airc_id" />
                 <ScalarProperty Name="competition_type" ColumnName="competition_type" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Members">
-            <EntityTypeMapping TypeName="RELICModel.Member">
-              <MappingFragment StoreEntitySet="Member">
-                <ScalarProperty Name="XC" ColumnName="XC" />
-                <ScalarProperty Name="SJ" ColumnName="SJ" />
-                <ScalarProperty Name="DR" ColumnName="DR" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="role" ColumnName="role" />
-                <ScalarProperty Name="member_status" ColumnName="member_status" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="club_id" ColumnName="club_id" />
-                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -649,6 +632,23 @@ warning 6002: The table/view 'RELIC.dbo.Leaderboard' does not have a primary key
                 <ScalarProperty Name="club_id" ColumnName="club_id" />
                 <ScalarProperty Name="competition_name" ColumnName="competition_name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="RELICModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="XC" ColumnName="XC" />
+                <ScalarProperty Name="SJ" ColumnName="SJ" />
+                <ScalarProperty Name="DR" ColumnName="DR" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="member_status" ColumnName="member_status" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
