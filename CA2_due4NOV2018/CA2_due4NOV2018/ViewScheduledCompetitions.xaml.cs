@@ -63,8 +63,9 @@ namespace CA2_due4NOV2018
             lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstViewCompetitionSchedule.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));
+            lstViewCompetitionSchedule.Items.Refresh();
+            //lstRiders.Items.Refresh();
 
-            
         }
 
 

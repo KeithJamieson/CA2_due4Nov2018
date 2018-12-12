@@ -137,6 +137,9 @@
     <Compile Include="Competition.xaml.cs">
       <DependentUpon>Competition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RunCompetition.xaml.cs">
+      <DependentUpon>RunCompetition.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddClub.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Competition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RunCompetition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

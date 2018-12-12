@@ -43,9 +43,9 @@
             <Button Name="btnAddCompetition"       HorizontalAlignment = "Center"  Grid.Row="9" Grid.Column="0" Width="200"  Height="26" Content="Add Competition" BorderBrush="DarkOrange" BorderThickness="3"  Click="btnAddCompetition_Click"  Visibility="Visible" />
         </StackPanel>
 
-        <TextBox Name = "tbxDate"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26"/>
+        <TextBox Name = "tbxDate"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26" IsReadOnly="True"/>
         <Label Content= "Logged in as : "      HorizontalContentAlignment = "Right"   Grid.Row="0" Grid.Column="1" MinWidth="200" MinHeight="26"/>
-        <TextBox   Name="tbxUsername"   HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="2" MinWidth="200" MinHeight="26"/>
+        <TextBox   Name="tbxUsername"   HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="2" MinWidth="200" MinHeight="26" IsReadOnly="True"/>
         
         <!--<Button Name="btnChangeMyPassword"          HorizontalAlignment = "Center"  Grid.Row="1" Grid.Column="0" Width="200"  Height="26" Content="Change My Password" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnChangeMyPassword_Click" />
         <Button Name="btnModifyMyDetails"           HorizontalAlignment = "Center"  Grid.Row="2" Grid.Column="0" Width="200"  Height="26" Content="Modify My Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMyDetails_Click" Visibility="Collapsed" />
@@ -57,19 +57,19 @@
         <Button Name="btnModifyMemberDetails"   HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnModifyMemberDetails_Click" />-->
 
         <StackPanel Grid.Row="1" Grid.Column="1" >
-        <Label Content= "Next Scheduled Competition : "     HorizontalContentAlignment = "Right"   Grid.Row="1" Grid.Column="1" MinWidth="200" MinHeight="26"/>
-        <Label Content= "Venue : "                          HorizontalContentAlignment = "Right"   Grid.Row="2" Grid.Column="1" MinWidth="200" MinHeight="26"/>
-        <Label Content= "Date : "                           HorizontalContentAlignment = "Right"   Grid.Row="3" Grid.Column="1" MinWidth="200" MinHeight="26"/>
-        <Label Content= "Hosting Club : "                   HorizontalContentAlignment = "Right"   Grid.Row="4" Grid.Column="1" MinWidth="200" MinHeight="26"/>
-        <Label Content= "Competition Secretary : "          HorizontalContentAlignment = "Right"   Grid.Row="5" Grid.Column="1" MinWidth="200" MinHeight="26"/>
+        <Label Content= "Next Scheduled Competition : "     HorizontalContentAlignment = "Right"   Grid.Row="1" Grid.Column="1" MinWidth="200" MinHeight="26"   />
+        <Label Content= "Venue : "                          HorizontalContentAlignment = "Right"   Grid.Row="2" Grid.Column="1" MinWidth="200" MinHeight="26" />
+        <Label Content= "Date : "                           HorizontalContentAlignment = "Right"   Grid.Row="3" Grid.Column="1" MinWidth="200" MinHeight="26" />
+        <Label Content= "Hosting Club : "                   HorizontalContentAlignment = "Right"   Grid.Row="4" Grid.Column="1" MinWidth="200" MinHeight="26" />
+        <Label Content= "Competition Secretary : "          HorizontalContentAlignment = "Right"   Grid.Row="5" Grid.Column="1" MinWidth="200" MinHeight="26" />
 
         </StackPanel>
          <StackPanel Grid.Row="1" Grid.Column="2" >
-                <TextBox Name="tbxCompetitionName"          HorizontalAlignment = "Left"   Grid.Row="1" Grid.Column="2" MinWidth="200" MinHeight="26"/>
-        <TextBox Name="tbxCompetitionVenue"                 HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="2" MinWidth="200" MinHeight="26"/>
-        <TextBox Name="tbxCompetitionDate"                  HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="2" MinWidth="200" MinHeight="26"/>
-        <TextBox Name="tbxHostingClub"                      HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="2" MinWidth="200" MinHeight="26"/>
-        <TextBox Name="tbxCompetitionSecretary"             HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="2" MinWidth="200" MinHeight="26"/>
+                <TextBox Name="tbxCompetitionName"          HorizontalAlignment = "Left"   Grid.Row="1" Grid.Column="2" MinWidth="200" MinHeight="26"  IsReadOnly="True" />
+        <TextBox Name="tbxCompetitionVenue"                 HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="2" MinWidth="200" MinHeight="26" IsReadOnly="True"/>
+            <TextBox Name="tbxCompetitionDate"                  HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="2" MinWidth="200" MinHeight="26" IsReadOnly="True"/>
+            <TextBox Name="tbxHostingClub"                      HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="2" MinWidth="200" MinHeight="26" IsReadOnly="True"/>
+            <TextBox Name="tbxCompetitionSecretary"             HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="2" MinWidth="200" MinHeight="26" IsReadOnly="True"/>
        
 
 

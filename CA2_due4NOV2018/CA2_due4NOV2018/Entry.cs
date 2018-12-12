@@ -23,7 +23,7 @@ namespace CA2_due4NOV2018
         public string grade { get; set; }
         public int points { get; set; }
     
-        public virtual Grade Grade1 { get; set; }
         public virtual Competition Competition { get; set; }
+        public virtual Grade Grade1 { get; set; }
     }
 }

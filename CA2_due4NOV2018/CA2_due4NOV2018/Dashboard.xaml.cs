@@ -135,12 +135,12 @@ namespace CA2_due4NOV2018
             //maindashboard.airc_id = User.airc_id;
             //maindashboard.ShowDialog();
         
-            Competitio window = new Competitio();
+            RunCompetition runcompetition = new RunCompetition();
 
-            window.tbxCompetitionName.Text = tbxCompetitionName.Text;
-            window.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
-            window.competition_id = competition_id;
-            window.ShowDialog();
+            runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
+            runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
+            runcompetition.competition_id = competition_id;
+            runcompetition.ShowDialog();
             //competition.ShowDialog();
         }
 

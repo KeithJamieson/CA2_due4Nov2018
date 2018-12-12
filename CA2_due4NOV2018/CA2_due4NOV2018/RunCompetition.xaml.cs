@@ -1,24 +1,30 @@
-﻿using System.Windows;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace CA2_due4NOV2018
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Competitio : Window
+    public partial class RunCompetition : Window
     {
-        public Competitio()
+        public RunCompetition()
         {
             InitializeComponent();
         }
-
-        RELICEntities db = new RELICEntities();        
-        List<Entry> lstEntries = new List<Entry>();
-        List<Competition> lstScheduledCompetitions = new List<Competition>();
+        RELICEntities db = new RELICEntities();
+        List<Entry> lstEntries = new List<Entry>();       
 
         public int competition_id;
         string Ridergrade;
@@ -78,7 +84,7 @@ namespace CA2_due4NOV2018
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
         {
             AddRider addRider = new AddRider();
-            addRider.competition_id = competition_id;           
+            addRider.competition_id = competition_id;
             addRider.ShowDialog();
         }
 
@@ -90,9 +96,9 @@ namespace CA2_due4NOV2018
 
         private void RefreshList(string Ridergrade)
         {
-           
+
             lstEntries.Clear();
-            
+
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
                 lstEntries.Add(record);
@@ -100,7 +106,7 @@ namespace CA2_due4NOV2018
             lstCompetitors.ItemsSource = lstEntries;
             lstCompetitors.Items.Refresh();
             //lstRiders.Items.Refresh();
-                     
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -108,17 +114,5 @@ namespace CA2_due4NOV2018
             Ridergrade = "P";
             RefreshList(Ridergrade);
         }
-
-      
-
-        //private void OnTabSelected(object sender, RoutedEventArgs e)
-        //{
-        //    if (sender is TabItem tab)
-        //    {
-        //        //RefreshList("P");
-        //        e.Handled = true;
-
-        //    }
-        //}
     }
 }

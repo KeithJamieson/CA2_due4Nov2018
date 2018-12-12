@@ -1,12 +1,11 @@
-﻿<Window x:Class="CA2_due4NOV2018.Competitio"
+﻿<Window x:Class="CA2_due4NOV2018.RunCompetition"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
-        Loaded="Window_Loaded"
-        Title="Competition" Height="450" Width="800">
+        Title="RunCompetition" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -82,29 +81,29 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="First Name" Width="150">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Firstname}" FontWeight="Bold" />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Firstname}" FontWeight="Bold" />
                                 <!--<TextBlock Text="Help me"> </TextBlock>-->
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Last Name" Width="150">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Lastname}" FontWeight="Bold" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Last Name" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Lastname}" FontWeight="Bold" />
                                 <!--<TextBlock Text="please"></TextBlock>-->
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Horse" Width="150">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Horse" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
                                 <TextBlock Text = "{Binding Horse}" FontWeight="Bold" />
                                 <!--<TextBlock Text="Rhonda"></TextBlock>-->
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Riding Club" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -123,4 +122,3 @@
         <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnUpdateLeaderBoard_Click"  Visibility="Visible" />
     </Grid>
 </Window>
-
