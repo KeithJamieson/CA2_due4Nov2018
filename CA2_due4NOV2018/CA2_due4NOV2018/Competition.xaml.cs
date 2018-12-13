@@ -99,7 +99,7 @@ namespace CA2_due4NOV2018
             }
             lstCompetitors.ItemsSource = lstEntries;
             lstCompetitors.Items.Refresh();
-            //lstRiders.Items.Refresh();
+
                      
         }
 
@@ -109,16 +109,14 @@ namespace CA2_due4NOV2018
             RefreshList(Ridergrade);
         }
 
-      
 
-        //private void OnTabSelected(object sender, RoutedEventArgs e)
-        //{
-        //    if (sender is TabItem tab)
-        //    {
-        //        //RefreshList("P");
-        //        e.Handled = true;
 
-        //    }
-        //}
+        private void OnTabSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is System.Windows.Controls.TabItem tab)
+            {                
+                e.Handled = true;
+            }
+        }
     }
 }

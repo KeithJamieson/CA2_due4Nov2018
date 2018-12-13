@@ -18,6 +18,7 @@ namespace CA2_due4NOV2018
         string XCgrade;
         int airc_id = 0;
         int club_id = 0;
+        string member_role;
         //string conneectionString = "metadata=res://*/RelicModel.csdl|res://*/RelicModel.ssdl|res://*/RelicModel.msl;provider=System.Data.SqlClient;provider connection string='data source=localhost;initial catalog=RELIC;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
         RELICEntities db = new RELICEntities();
 
@@ -92,15 +93,44 @@ namespace CA2_due4NOV2018
 
             if (activeTab == "Logon")
             {
+                //var query = (from c in db.Competitions
+                //             join m in db.Members on c.airc_id equals m.airc_id
+                //             join rc in db.Clubs on c.club_id equals rc.club_id
+                //             where c.competition_status == "S" && c.competition_date >= currentDate
+                //             && c.competition_date.Year == currentyear
+                //             orderby c.competition_date ascending
+                //             select new
+                //             {
+                //                 next_competition_date = c.competition_date,
+                //                 c.competition_id,
+                //                 c.competition_name,
+                //                 c.competition_type,
+                //                 competition_venue = c.venue,
+                //                 Secretary = c.Member.first_name + " " + c.Member.last_name,
+                //                 hosting_club = c.Club.clubname
+                //             }).Take(1);
 
-                foreach (var User in db.Users.Where(t => t.username == currentUser && t.username == currentPassword))
+                var query = (from u in db.Users 
+                             join m in db.Members on u.airc_id equals m.airc_id
+                             where u.username == tbxUsername.Text 
+                             && u.userpassword  == tbxPassword.Password
+                             select new
+                             {
+                                 m.role,
+                                 u.username,
+                                 u.userpassword,
+                                 u.airc_id
+                             });
+
+                foreach (var record in query )
                 {
                     //LoggedInUser = User.airc_id;
                     MainDashboard maindashboard = new MainDashboard();
                     this.Hide();
                     close = true;
-                    maindashboard.tbxUsername.Text = currentUser;
-                    maindashboard.airc_id = User.airc_id;
+                    maindashboard.tbxUsername.Text = record.username;
+                    maindashboard.airc_id = record.airc_id;
+                    maindashboard.member_role = record.role;
                     maindashboard.ShowDialog();                    
 
                 }
@@ -114,8 +144,7 @@ namespace CA2_due4NOV2018
             else if (activeTab == "Register")
             {
                 // call Register user Class                
-                airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
-                int club_id = 1;
+                airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());                
                 string role = "M";  //Role is Member 
                 string memberStatus = "N"; //Member status is "N" for new Membe
 

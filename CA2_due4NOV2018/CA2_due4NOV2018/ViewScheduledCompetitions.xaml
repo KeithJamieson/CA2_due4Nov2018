@@ -24,7 +24,7 @@
             <ColumnDefinition MinWidth = "50" Width="auto" />-->
             <ColumnDefinition MinWidth = "50" Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBox Name="tbxScheduleYear"   Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left"  />
+        <TextBox Name="tbxScheduleYear"   Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" IsReadOnly="True" />
         <ListView Name= "lstViewCompetitionSchedule" Grid.Row="2" Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>

@@ -24,13 +24,15 @@ namespace CA2_due4NOV2018
         RELICEntities db = new RELICEntities();
         //Member member = new Member();
         public int airc_id;
+        int secretary_airc_id;
         public string competitionSecretary;
-        public string hostingClub;
-        //string currentyear = DateTime.Now.ToString("yyyy");
-        DateTime currentDate = DateTime.Now;
+        public string hostingClub;   
+        DateTime currentDate = DateTime.Today;
         int currentyear = DateTime.Now.Year;
         public int competition_id;
         public string competition_type;
+        public string member_role;
+        public string member_status;
         public MainDashboard()
         {
             InitializeComponent();
@@ -42,10 +44,10 @@ namespace CA2_due4NOV2018
 
             User user = new User();
 
-                          var query = (from c in db.Competitions
-                                            join m in db.Members on c.airc_id equals m.airc_id
-                                            join rc in db.Clubs on c.club_id equals rc.club_id
-                                            where c.competition_status == "S" && c.competition_date >= currentDate
+            var query = (from c in db.Competitions
+                         join m in db.Members on c.airc_id equals m.airc_id
+                         join rc in db.Clubs on c.club_id equals rc.club_id
+                         where c.competition_status == "S" && c.competition_date >= currentDate
                                             && c.competition_date.Year == currentyear
                                             orderby c.competition_date ascending
                                             select new
@@ -56,22 +58,74 @@ namespace CA2_due4NOV2018
                                                 c.competition_type,
                                                 competition_venue     = c.venue,
                                                 Secretary = c.Member.first_name + " " + c.Member.last_name,
-                                                hosting_club=c.Club.clubname
+                                                hosting_club=c.Club.clubname,
+                                                secretary_airc_id = m.airc_id 
                                             }).Take(1);
 
             foreach (var record in query  )
             {
-                tbxCompetitionDate.Text = record.next_competition_date.ToShortDateString();
+                tbxCompetitionDate.Text = record.next_competition_date.ToString();
                 tbxCompetitionName.Text = record.competition_name;
                 tbxCompetitionVenue.Text = record.competition_venue;
                 tbxCompetitionSecretary.Text = record.Secretary;
                 tbxHostingClub.Text = record.hosting_club;
                 competition_id = record.competition_id;
                 competition_type = record.competition_type;
-
-
-                
+                secretary_airc_id = record.secretary_airc_id;
             }
+
+
+            if (member_role == "M") 
+            {
+                btnAddClub.Visibility = Visibility.Collapsed;
+                btnAddCompetition.Visibility = Visibility.Collapsed;
+                btnListNewMembers.Visibility = Visibility.Collapsed;
+                btnModifyMemberDetails.Visibility = Visibility.Collapsed;
+                btnModifyMyDetails.Visibility = Visibility.Visible;
+                btnOpenCompetition.Visibility = Visibility.Collapsed;
+                btnViewLeaderboard.Visibility = Visibility.Visible;
+                btnViewReports.Visibility = Visibility.Visible;
+                btnViewScheduledCompetitions.Visibility = Visibility.Visible;
+                btnOpenCompetition.Visibility = Visibility.Collapsed;
+            }
+
+            if (member_role == "S")
+            {
+                btnAddClub.Visibility = Visibility.Collapsed;
+                btnAddCompetition.Visibility = Visibility.Visible;
+                btnListNewMembers.Visibility = Visibility.Visible;
+                btnModifyMemberDetails.Visibility = Visibility.Visible;
+                btnModifyMyDetails.Visibility = Visibility.Visible;
+                btnOpenCompetition.Visibility = Visibility.Collapsed;
+                btnViewLeaderboard.Visibility = Visibility.Visible;
+                btnViewReports.Visibility = Visibility.Visible;
+                btnViewScheduledCompetitions.Visibility = Visibility.Visible;
+                btnOpenCompetition.Visibility = Visibility.Collapsed;
+            }
+
+            if (member_role == "A")
+            {
+                btnAddClub.Visibility = Visibility.Visible;
+                btnAddCompetition.Visibility = Visibility.Visible;
+                btnListNewMembers.Visibility = Visibility.Visible;
+                btnModifyMemberDetails.Visibility = Visibility.Visible;
+                btnModifyMyDetails.Visibility = Visibility.Visible;
+                btnViewLeaderboard.Visibility = Visibility.Visible;
+                btnViewReports.Visibility = Visibility.Visible;
+                btnViewScheduledCompetitions.Visibility = Visibility.Visible;
+                btnOpenCompetition.Visibility = Visibility.Collapsed;
+            }
+
+            //if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
+            //{
+                if (secretary_airc_id == airc_id)
+                {
+                    btnOpenCompetition.Visibility = Visibility.Visible;
+                }
+            //}
+          
+
+
             MainDashboard maindashboard = new MainDashboard();
 
         }
@@ -130,10 +184,6 @@ namespace CA2_due4NOV2018
              
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
-            //Competition competition = new Competition();
-            //maindashboard.tbxUsername.Text = currentUser;
-            //maindashboard.airc_id = User.airc_id;
-            //maindashboard.ShowDialog();
         
             RunCompetition runcompetition = new RunCompetition();
 

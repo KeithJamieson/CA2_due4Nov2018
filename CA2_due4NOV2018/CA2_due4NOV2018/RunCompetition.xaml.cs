@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.ComponentModel;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CA2_due4NOV2018
 {
@@ -24,11 +16,10 @@ namespace CA2_due4NOV2018
             InitializeComponent();
         }
         RELICEntities db = new RELICEntities();
-        List<Entry> lstEntries = new List<Entry>();       
-
+        List<Entry> lstEntries = new List<Entry>();
+        string activeTab;
         public int competition_id;
         string Ridergrade;
-        string activeTab;
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
             activeTab = "tabP";
@@ -98,16 +89,17 @@ namespace CA2_due4NOV2018
         {
 
             lstEntries.Clear();
-
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
                 lstEntries.Add(record);
             }
-            lstCompetitors.ItemsSource = lstEntries;
-            lstCompetitors.Items.Refresh();
-            //lstRiders.Items.Refresh();
-
+            lvwRiders.ItemsSource = lstEntries;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvwRiders.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("Horse", ListSortDirection.Ascending));
+            lvwRiders.Items.Refresh();
         }
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
