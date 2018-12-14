@@ -24,7 +24,7 @@
             <ColumnDefinition MinWidth = "100" Width="150" />
             <ColumnDefinition MinWidth = "100" Width="*" />
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="3">
+        <!--<TabControl Grid.ColumnSpan="3">
             <TabItem Name="tabP" Selector.Selected="TabP_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -67,46 +67,18 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-        </TabControl>
+        </TabControl>-->
         <TextBox Name="tbxCompetitionName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" TextWrapping="WrapWithOverflow" FontWeight="Bold" IsReadOnly="True" />
         <TextBox Name="tbxCompetitionDate" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" FontWeight="Bold"  IsReadOnly="True" />
 
 
-        <ListView Name="lvwRiders"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5">
+        <ListView Name="lvwRiders"  Grid.Row="4"  Grid.ColumnSpan="5">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50" Header="AIRC ID"  >
+                <GridViewColumn Header="airc_id" Width="70"  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding airc_id}" ></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="150" Header="First Name" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="{Binding Firstname}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="150" Header="Last Name" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="{Binding Lastname}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="150" Header="Horse" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="{Binding Horse}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="150" Header="Club" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="{Binding clubname}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding airc_id }"  />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -114,16 +86,6 @@
             </ListView.View>
         </ListView>
 
-        <!--<ListView Name= "lstViewCompetitionSchedule" Grid.Row="2" Grid.ColumnSpan="3">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Date" Width="70"  >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding competition_date }"  />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
         <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
         <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddRiderEntry_Click" />
         <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAssignFinishingPositions_Click"  Visibility="Visible" />

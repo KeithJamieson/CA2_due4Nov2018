@@ -26,21 +26,17 @@
             <ColumnDefinition MinWidth = "100" Width="auto" />
             <ColumnDefinition MinWidth = "100" Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBox Name="tbxCompetitionName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center"  TextWrapping="WrapWithOverflow" />
-        <Label Content= "Competition Date : "      HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26"/>
-       
-
+        <TextBox Name="tbxCompetitionName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center"  TextWrapping="WrapWithOverflow" IsReadOnly="True"/>
+        <Label Content= "Competition Date : "      HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26" />
         <Label Content= "Competition Type : "   HorizontalAlignment = "Right"   Grid.Row="1" Grid.Column="2" MinWidth="100" MinHeight="26" />
-        
         <Label Content= "First Name : "      HorizontalAlignment = "Right"   Grid.Row="2" Grid.Column="0" MinWidth="100" MinHeight="26"/>
         <Label Content= "Last Name : "      HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="100" MinHeight="26"/>
         <Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="100" MinHeight="26"/>
         <Label Content= "CLUB : "      HorizontalAlignment = "Right"   Grid.Row="5" Grid.Column="0" MinWidth="100" MinHeight="26"/>
         <Label Content= "Grade : "      HorizontalAlignment = "Right"   Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26"/>
-
         <Label Content= "Horse : "      HorizontalAlignment = "Right"   Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26"/>
-        <TextBox Name="tbxCompetitionDate" Grid.Row="0" Grid.Column="3"  MinWidth="100" MinHeight="26" />
-        <TextBox Name="tbxCompetitionType" Grid.Row="1" Grid.Column="3"  MinWidth="100" MinHeight="26" />
+        <TextBox Name="tbxCompetitionDate" Grid.Row="0" Grid.Column="3"  MinWidth="100" MinHeight="26" IsReadOnly="True" />
+        <TextBox Name="tbxCompetitionType" Grid.Row="1" Grid.Column="3"  MinWidth="100" MinHeight="26" IsReadOnly="True" />
         <TextBox Name="tbxRiderFirstName"   Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center"  />
         <TextBox Name="tbxRiderLastName"   Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  />
         <TextBox Name="tbx_AIRC_ID"    Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Center"  />

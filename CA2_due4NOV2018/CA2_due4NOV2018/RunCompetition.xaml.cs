@@ -9,6 +9,8 @@ namespace CA2_due4NOV2018
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
+    ///         
+
     public partial class RunCompetition : Window
     {
         public RunCompetition()
@@ -20,47 +22,50 @@ namespace CA2_due4NOV2018
         string activeTab;
         public int competition_id;
         string Ridergrade;
-        private void TabP_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabP";
-            Ridergrade = "P";
-            RefreshList(Ridergrade);
-        }
+        string competitionDate;
+        string CompetitionName;
+        string CompetitionType;
+        //private void TabP_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabP";
+        //    Ridergrade = "P";
+        //    RefreshList(Ridergrade);
+        //}
 
 
-        private void TabAP_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabAP";
-            RefreshList(Ridergrade);
-        }
+        //private void TabAP_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabAP";
+        //    RefreshList(Ridergrade);
+        //}
 
-        private void TabI_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabI";
-            RefreshList(Ridergrade);
-        }
+        //private void TabI_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabI";
+        //    RefreshList(Ridergrade);
+        //}
 
-        private void TabAI_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabAI";
-            RefreshList(Ridergrade);
-        }
+        //private void TabAI_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabAI";
+        //    RefreshList(Ridergrade);
+        //}
 
-        private void TabO_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabO";
-            RefreshList(Ridergrade);
-        }
+        //private void TabO_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabO";
+        //    RefreshList(Ridergrade);
+        //}
 
-        private void TabAO_Selected(object sender, RoutedEventArgs e)
-        {
-            activeTab = "tabAO";
-            RefreshList(Ridergrade);
-        }
+        //private void TabAO_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    activeTab = "tabAO";
+        //    RefreshList(Ridergrade);
+        //}
 
         private void BtnCloseCompetition_Click(object sender, RoutedEventArgs e)
         {
-
+            RefreshList("P");
         }
         private void BtnUpdateLeaderBoard_Click(object sender, RoutedEventArgs e)
         {
@@ -76,6 +81,9 @@ namespace CA2_due4NOV2018
         {
             AddRider addRider = new AddRider();
             addRider.competition_id = competition_id;
+            addRider.tbxCompetitionDate.Text = competitionDate;
+            addRider.tbxCompetitionName.Text = CompetitionName;
+            addRider.tbxCompetitionType.Text = CompetitionType;
             addRider.ShowDialog();
         }
 
@@ -94,8 +102,6 @@ namespace CA2_due4NOV2018
                 lstEntries.Add(record);
             }
             lvwRiders.ItemsSource = lstEntries;
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvwRiders.ItemsSource);
-            view.SortDescriptions.Add(new SortDescription("Horse", ListSortDirection.Ascending));
             lvwRiders.Items.Refresh();
         }
 
