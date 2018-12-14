@@ -1,4 +1,4 @@
-﻿<Window x:Class="CA2_due4NOV2018.Competitio"
+﻿<Window x:Class="CA2_due4NOV2018.RunCompetition"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -70,49 +70,48 @@
         <TextBox Name="tbxCompetitionName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" TextWrapping="WrapWithOverflow" FontWeight="Bold" IsReadOnly="True" />
         <TextBox Name="tbxCompetitionDate" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" FontWeight="Bold"  IsReadOnly="True" />
 
-        <ListView Name="lstCompetitors"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" MinHeight="26" MinWidth="200" >
+        <ListView Name="lstCompetitors"  Grid.Row="3"  Grid.ColumnSpan="5" MinHeight="26" MinWidth="200" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50" Header="AIRC_ID"  >
+                    <GridViewColumn Width="100" Header="AIRC ID"  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding airc_id}" FontWeight="Bold" Height="26" Width="100"  Visibility="Visible" />
-                                <!--TextBlock Text="Help"></TextBlock>-->
+                                <TextBlock Text="{Binding }" FontWeight="Bold" Height="26" Width="100"  Visibility="Visible" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="First Name" Width="150">
+                    <!--<GridViewColumn Header="First Name" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Firstname}" FontWeight="Bold" />
-                                <!--<TextBlock Text="Help me"> </TextBlock>-->
+                                    <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                --><!--<TextBlock Text="Help me"> </TextBlock>--><!--
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Last Name" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Lastname}" FontWeight="Bold" />
-                                <!--<TextBlock Text="please"></TextBlock>-->
+                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                --><!--<TextBlock Text="please"></TextBlock>--><!--
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Horse" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                <TextBlock Text = "{Binding Horse}" FontWeight="Bold" />
-                                <!--<TextBlock Text="Rhonda"></TextBlock>-->
+                                <TextBlock Text = "{Binding FirstName}" FontWeight="Bold" />
+                                --><!--<TextBlock Text="Rhonda"></TextBlock>--><!--
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     <GridViewColumn Header="Riding Club" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding clubname}" FontWeight="Bold" />
-                                <!--<TextBlock Text="Rhonda" > </TextBlock>-->
+                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                --><!--<TextBlock Text="Rhonda" > </TextBlock>--><!--
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>

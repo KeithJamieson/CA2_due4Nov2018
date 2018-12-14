@@ -9,16 +9,15 @@ namespace CA2_due4NOV2018
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Competitio : Window
+    public partial class RunCompetition : Window
     {
-        public Competitio()
+        public RunCompetition()
         {
             InitializeComponent();
         }
 
-        RELICEntities db = new RELICEntities();        
-        List<Entry> lstEntries = new List<Entry>();
-        List<Competition> lstScheduledCompetitions = new List<Competition>();
+        RELICEntities db = new RELICEntities();
+        List<Entry> Entries = new List<Entry>();
 
         public int competition_id;
         string Ridergrade;
@@ -90,14 +89,14 @@ namespace CA2_due4NOV2018
 
         private void RefreshList(string Ridergrade)
         {
-           
-            lstEntries.Clear();
+
+            Entries.Clear();
             
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
-                lstEntries.Add(record);
+                Entries.Add(record);
             }
-            lstCompetitors.ItemsSource = lstEntries;
+            lstCompetitors.ItemsSource = Entries;
             lstCompetitors.Items.Refresh();
 
                      

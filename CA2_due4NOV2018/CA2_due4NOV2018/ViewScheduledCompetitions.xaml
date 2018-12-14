@@ -45,7 +45,7 @@
                     <GridViewColumn Header="Competition Name" Width="150" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding venue }"> </TextBlock>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_name }"> </TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

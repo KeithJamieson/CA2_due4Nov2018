@@ -23,6 +23,7 @@ namespace CA2_due4NOV2018
 
         RELICEntities db = new RELICEntities();
         //Member member = new Member();
+        public int club_id;
         public int airc_id;
         int secretary_airc_id;
         public string competitionSecretary;
@@ -59,7 +60,8 @@ namespace CA2_due4NOV2018
                                                 competition_venue     = c.venue,
                                                 Secretary = c.Member.first_name + " " + c.Member.last_name,
                                                 hosting_club=c.Club.clubname,
-                                                secretary_airc_id = m.airc_id 
+                                                secretary_airc_id = m.airc_id,
+                                                c.club_id
                                             }).Take(1);
 
             foreach (var record in query  )

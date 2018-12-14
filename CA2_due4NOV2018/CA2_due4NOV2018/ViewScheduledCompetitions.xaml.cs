@@ -16,10 +16,10 @@ namespace CA2_due4NOV2018
         System.DateTime currentDate = System.DateTime.Today;
         int currentyear = System.DateTime.Now.Year;
 
-       
-        //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
-        List<Competition> lstScheduledCompetitions = new List<Competition>();
 
+        //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
+        //List<Competition> lstScheduledCompetitions = new List<Competition>();
+        List<Competition> lstScheduledCompetitions = new List<Competition>();
         public ViewScheduledCompetition()
         {
             InitializeComponent();
@@ -79,11 +79,12 @@ namespace CA2_due4NOV2018
         private void btnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
             // change competition status from "S" to "O"
+            
             // only allowed if I am competition secretary and today = competition date            
             // Competition competition = new Competition();
             // competition.ShowDialog();
-            Competitio window = new Competitio();
-            window.ShowDialog();
+            RunCompetition runcompetition = new RunCompetition();
+            runcompetition.ShowDialog();
         }
 
     }
