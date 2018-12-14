@@ -125,6 +125,9 @@
     <Compile Include="AddCompetition.xaml.cs">
       <DependentUpon>AddCompetition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RiderEntry.cs">
+      <DependentUpon>RelicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
@@ -136,9 +139,6 @@
     </Compile>
     <Compile Include="AmendMemberDetails.xaml.cs">
       <DependentUpon>AmendMemberDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Competition.xaml.cs">
-      <DependentUpon>Competition.xaml</DependentUpon>
     </Compile>
     <Compile Include="RunCompetition.xaml.cs">
       <DependentUpon>RunCompetition.xaml</DependentUpon>
@@ -196,10 +196,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AmendMemberDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Competition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

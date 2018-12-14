@@ -1,31 +1,32 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
+using System.Windows;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace CA2_due4NOV2018
+
+namespace RegionalCompApp
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for RunCompetition.xaml
     /// </summary>
-    public partial class Competitio : Window
+    public partial class RunCompetition : Window
     {
-        public Competitio()
-        {
-            InitializeComponent();
-        }
 
-        RELICEntities db = new RELICEntities();        
-        List<Entry> lstEntries = new List<Entry>();
-        List<Competition> lstScheduledCompetitions = new List<Competition>();
+
+        RELICEntities db = new RELICEntities();
+        List<Entry> lstEntries = new List<Entry>();       
 
         public int competition_id;
         string Ridergrade;
-        string activeTab;
+        public RunCompetition()
+        {
+            InitializeComponent();
+        }
+ 
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabP";
+            
             Ridergrade = "P";
             RefreshList(Ridergrade);
         }
@@ -33,31 +34,31 @@ namespace CA2_due4NOV2018
 
         private void TabAP_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAP";
+            
             RefreshList(Ridergrade);
         }
 
         private void TabI_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabI";
+            
             RefreshList(Ridergrade);
         }
 
         private void TabAI_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAI";
+            
             RefreshList(Ridergrade);
         }
 
         private void TabO_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabO";
+            
             RefreshList(Ridergrade);
         }
 
         private void TabAO_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAO";
+            
             RefreshList(Ridergrade);
         }
 
@@ -78,7 +79,7 @@ namespace CA2_due4NOV2018
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
         {
             AddRider addRider = new AddRider();
-            addRider.competition_id = competition_id;           
+            addRider.competition_id = competition_id;
             addRider.ShowDialog();
         }
 
@@ -87,20 +88,24 @@ namespace CA2_due4NOV2018
             this.Close();
         }
 
-
         private void RefreshList(string Ridergrade)
         {
-           
+
             lstEntries.Clear();
-            
+
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
                 lstEntries.Add(record);
             }
-            lstCompetitors.ItemsSource = lstEntries;
-            lstCompetitors.Items.Refresh();
+            lvwRiders.ItemsSource = lstEntries;
+            lvwRiders.Items.Refresh();
 
-                     
+      
+            //items.Add(new User() { Name = "John Doe", Age = 42 });
+            //items.Add(new User() { Name = "Jane Doe", Age = 39 });
+            //items.Add(new User() { Name = "Sammy Doe", Age = 13 });
+            //lvDataBinding.ItemsSource = items;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -114,7 +119,7 @@ namespace CA2_due4NOV2018
         private void OnTabSelected(object sender, RoutedEventArgs e)
         {
             if (sender is System.Windows.Controls.TabItem tab)
-            {                
+            {
                 e.Handled = true;
             }
         }

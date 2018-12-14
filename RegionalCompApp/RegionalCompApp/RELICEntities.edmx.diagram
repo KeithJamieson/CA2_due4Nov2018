@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e363f1b0282741a4b31dfe8d6235f6ab" Name="Diagram1">
+        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Competition" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Entry" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Grade" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Member" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.User" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Leaderboard" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.RiderEntry" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Club_club_id" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Member_Club_club_id" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Member_airc_id" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.fk_entry_competition_competition_id" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_entry_grade_grade" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_grade_grade" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_dr" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_sj" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_xc" ManuallyRouted="false" />
+        <AssociationConnector Association="RELICModel.FK_Member_User_airc_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

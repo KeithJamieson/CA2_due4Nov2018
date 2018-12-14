@@ -24,13 +24,62 @@
                 <ColumnDefinition MinWidth = "100" Width="*" />
             </Grid.ColumnDefinitions>
         <Button Name="btnRefresh" Content="Refresh"  Click="BtnRefresh_Click" Grid.Row="1" Grid.Column="1"></Button>
-        <ListView Name="lstCompRiders" Grid.Row="2" Grid.ColumnSpan="3">
+        <Button Name="btnClose" Content="Dashboard" Click="BtnClose_Click" Grid.Row="1" Grid.Column="2"></Button> 
+        <ListView Name="lstMyRiders" Grid.Row="2"  Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="First Name" Width="70"  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding Firstname }"  />
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding FirstName }"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Name= "lstViewCompetitionSchedule" Grid.Row="3" Grid.ColumnSpan="3">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" Width="70"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding competition_date }"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Venue" Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding venue}"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Competition Name" Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_name }"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Hosting Club" Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Club.clubname}"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Competition Type" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_type}"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Competition Secretary" Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Member.Secretary}"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

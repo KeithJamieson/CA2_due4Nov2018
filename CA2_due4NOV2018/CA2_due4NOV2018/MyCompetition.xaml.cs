@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.ComponentModel;
+using System.Windows.Data;
 namespace CA2_due4NOV2018
 {
     /// <summary>
@@ -23,26 +24,49 @@ namespace CA2_due4NOV2018
         {
             InitializeComponent();
         }
-
+        System.DateTime currentDate = System.DateTime.Today;
+        int currentyear = System.DateTime.Now.Year;
         RELICEntities db = new RELICEntities();
         List<Entry> lstEntries = new List<Entry>();
-
+        List<RiderEntry> riderEntries = new List<RiderEntry>();
+        List<Competition> lstScheduledCompetitions = new List<Competition>();
         private void RefreshList()
         {
 
             lstEntries.Clear();
-            foreach (var record in db.Entries.Where(t => t.competition_id == 1 ))
+            foreach (var record in db.RiderEntries.Where(t => t.competition_id == 1 ))
             {
-                lstEntries.Add(record);
+                riderEntries.Add(record);
             }
 
-            lstCompRiders.ItemsSource = lstEntries; 
-            lstCompRiders.Items.Refresh();
+            lstMyRiders.ItemsSource = riderEntries;
+            lstMyRiders.Items.Refresh();
         }
+
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshList();
+            RefreshCompetitionList();
+        }
+
+        private void RefreshCompetitionList()
+        {
+            lstScheduledCompetitions.Clear();
+
+            foreach (var record in db.Competitions.Where(t => t.competition_status == "S" && t.competition_date >= currentDate && t.competition_date.Year == currentyear))
+            {
+
+                lstScheduledCompetitions.Add(record);
+
+            }
+            lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
+            lstViewCompetitionSchedule.Items.Refresh();
+
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -1,0 +1,147 @@
+﻿<Window x:Class="RegionalCompApp.LoginRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegionalCompApp"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Login/Register" Height="450" Width="600" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*"  />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!-- StackPanel for Login Details -->
+
+        <!--<StackPanel Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="2">-->
+        <Label          Content= "Username : " HorizontalAlignment="Right" HorizontalContentAlignment="Right"  Grid.Row="1" Grid.Column="0"   MinHeight="26"/>
+        <TextBox        Name="tbxUsername"    HorizontalAlignment="Left"  HorizontalContentAlignment="Center"   Grid.Row="1" Grid.Column="1" Width="100"  MinHeight="26" />
+        <Label          Content= "Password : " HorizontalAlignment="Right"  HorizontalContentAlignment="Right" Grid.Row="2" Grid.Column="0"  MinHeight="26"/>
+        <PasswordBox    Name="tbxPassword"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="2" Grid.Column="1"  Width="100"  MinHeight="26"/>
+        <!--</StackPanel>-->
+
+
+        <!--StackPanel for Registration Details-->
+        <Label   Name="lblFirstName"        Content= "First Name : " HorizontalAlignment="Right" HorizontalContentAlignment="Right"  Grid.Row="3" Grid.Column="0"   MinHeight="26"/>
+        <TextBox Name="tbxFirstname"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="3" Grid.Column="1"  Width="100"  MinHeight="26" />
+        <Label   Name="lblLastName"        Content= "Last Name : " HorizontalAlignment="Right"  HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="0"  MinHeight="26"/>
+        <TextBox Name="tbxLastName"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="4" Grid.Column="1"  Width="100"  MinHeight="26"/>
+        <Label Name="lblAIRC_ID" Content= "AIRC ID : "      HorizontalAlignment = "Right"  HorizontalContentAlignment="Right"  Grid.Row="5" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <TextBox Name="tbxAIRC_ID"      HorizontalAlignment = "Left" HorizontalContentAlignment="Right" Grid.Row="5" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
+        <Label Name="lblRidingClub" Content= "Riding Club : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="6" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible"  />
+        <!-- Riding Club -->
+        <ComboBox Name="cboRidingClub"  HorizontalAlignment = "Left"  HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboRidingClub_SelectionChanged"  
+            SelectedValue="{Binding Club, Mode=TwoWay}" ItemsSource="{Binding Club,Mode=OneTime}" SelectedValuePath="club_id"  DisplayMemberPath="clubname" >
+            <!--<ComboBox.ItemTemplate  >
+            <DataTemplate>
+                    <TextBlock Text="{Binding Club_id_and_Name}"   />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>-->
+        </ComboBox>
+        <Label Name="lblPhone" Content= "Phone : "      HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="7" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <Label Name="lblEmail" Content= "Email : "   HorizontalAlignment = "Right" HorizontalContentAlignment="Right"  Grid.Row="8" Grid.Column="0" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <TextBox Name="tbxPhone"      HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible" />
+        <TextBox Name="tbxEmail"  HorizontalAlignment = "Left"   Grid.Row="8" Grid.Column="1" MinWidth="100"  MinHeight="26"   Visibility="Visible"/>
+        <Label Name="lblDR" Content= "DR Grade : "   HorizontalContentAlignment  ="Center"   HorizontalAlignment="Right" Grid.Row="4" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <Label Name="lblSJ" Content= "SJ Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="5" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <Label Name="lblXC" Content= "XC Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="6" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+        <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="3" MinWidth="100"  MinHeight="26"    Visibility="Visible" SelectionChanged="cboDR_SelectionChanged"  >
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboSJ_SelectionChanged" >
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"   SelectionChanged="cboXC_SelectionChanged">
+            <ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />
+        </ComboBox>
+        <!--<ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Grade1}"  >
+                        
+                    </TextBlock>  </DataTemplate>
+
+            </ComboBox.ItemTemplate>
+        </ComboBox>-->
+
+
+        <!--SelectedValue="{Binding Grade, Mode=TwoWay}"   
+                  ItemsSource="{Binding Grade, Mode=OneTime}"    
+                  SelectedValuePath="Grade1"    
+                  DisplayMemberPath="Grade_Description"                   
+
+                  >-->
+
+        <!--SelectedValue="{Binding FilterService.TripLengthFrom, Mode=TwoWay}"
+    ItemsSource="{Binding TripLengthList, Mode=OneTime}"
+    SelectedValuePath="Key"
+    DisplayMemberPath="Value" />-->
+        <!--<ComboBoxItem Content= "P"   />
+            <ComboBoxItem Content= "AP"   />
+            <ComboBoxItem Content= "I"   />
+            <ComboBoxItem Content= "AI"   />
+            <ComboBoxItem Content= "O"   />
+            <ComboBoxItem Content= "AO"   />-->
+        <!--</ComboBox>-->
+
+
+
+
+        <!--</DockPanel>-->
+        <!--StackPanel for text and password box-->
+
+        <!--<Label    HorizontalAlignment = "Center"   Grid.Row="5" Grid.Column="0" MinWidth="200" Height="10" Grid.ColumnSpan="2" Background="AliceBlue"/>-->
+
+        <Button Name="btnSubmit"        HorizontalAlignment = "Right"   Grid.Row="10" Grid.Column="0" Width="100"  Height="26" Content="Submit" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnSubmit_Click" />
+        <Button Name="btnExit"          HorizontalAlignment = "Left"    Grid.Row="10" Grid.Column="1" Width="100"  Height="26" Content="Exit"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnExit_Click" />
+
+        <TabControl Name="LogonTabs" >
+            <TabItem Name = "Register" Selector.Selected = "Register_Selected" >
+                <TabItem.Header>
+                    <TextBlock Text="REGISTER" Foreground="Red" />
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name = "Logon" Selector.Selected ="Logon_Selected" >
+                <TabItem.Header>
+                    <TextBlock Text="LOGON" Foreground="Blue" />
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+

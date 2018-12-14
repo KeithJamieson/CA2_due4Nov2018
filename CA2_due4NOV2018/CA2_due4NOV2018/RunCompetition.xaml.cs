@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Windows;
 using System.Linq;
-using System.Windows;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
 
@@ -9,63 +9,61 @@ namespace CA2_due4NOV2018
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    ///         
-
-    public partial class RunCompetition : Window
+    public partial class Competitio : Window
     {
-        public RunCompetition()
+        public Competitio()
         {
             InitializeComponent();
         }
-        RELICEntities db = new RELICEntities();
+
+        RELICEntities db = new RELICEntities();        
         List<Entry> lstEntries = new List<Entry>();
-        string activeTab;
+        List<Competition> lstScheduledCompetitions = new List<Competition>();
+
         public int competition_id;
         string Ridergrade;
-        string competitionDate;
-        string CompetitionName;
-        string CompetitionType;
-        //private void TabP_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabP";
-        //    Ridergrade = "P";
-        //    RefreshList(Ridergrade);
-        //}
+        string activeTab;
+        private void TabP_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabP";
+            Ridergrade = "P";
+            RefreshList(Ridergrade);
+        }
 
 
-        //private void TabAP_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabAP";
-        //    RefreshList(Ridergrade);
-        //}
+        private void TabAP_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabAP";
+            RefreshList(Ridergrade);
+        }
 
-        //private void TabI_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabI";
-        //    RefreshList(Ridergrade);
-        //}
+        private void TabI_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabI";
+            RefreshList(Ridergrade);
+        }
 
-        //private void TabAI_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabAI";
-        //    RefreshList(Ridergrade);
-        //}
+        private void TabAI_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabAI";
+            RefreshList(Ridergrade);
+        }
 
-        //private void TabO_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabO";
-        //    RefreshList(Ridergrade);
-        //}
+        private void TabO_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabO";
+            RefreshList(Ridergrade);
+        }
 
-        //private void TabAO_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    activeTab = "tabAO";
-        //    RefreshList(Ridergrade);
-        //}
+        private void TabAO_Selected(object sender, RoutedEventArgs e)
+        {
+            activeTab = "tabAO";
+            RefreshList(Ridergrade);
+        }
 
         private void BtnCloseCompetition_Click(object sender, RoutedEventArgs e)
         {
-            RefreshList("P");
+
         }
         private void BtnUpdateLeaderBoard_Click(object sender, RoutedEventArgs e)
         {
@@ -80,10 +78,7 @@ namespace CA2_due4NOV2018
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
         {
             AddRider addRider = new AddRider();
-            addRider.competition_id = competition_id;
-            addRider.tbxCompetitionDate.Text = competitionDate;
-            addRider.tbxCompetitionName.Text = CompetitionName;
-            addRider.tbxCompetitionType.Text = CompetitionType;
+            addRider.competition_id = competition_id;           
             addRider.ShowDialog();
         }
 
@@ -95,22 +90,33 @@ namespace CA2_due4NOV2018
 
         private void RefreshList(string Ridergrade)
         {
-
+           
             lstEntries.Clear();
+            
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
                 lstEntries.Add(record);
             }
-            lvwRiders.ItemsSource = lstEntries;
-            lvwRiders.Items.Refresh();
+            lstCompetitors.ItemsSource = lstEntries;
+            lstCompetitors.Items.Refresh();
+
+                     
         }
-
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Ridergrade = "P";
             RefreshList(Ridergrade);
+        }
+
+
+
+        private void OnTabSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is System.Windows.Controls.TabItem tab)
+            {                
+                e.Handled = true;
+            }
         }
     }
 }

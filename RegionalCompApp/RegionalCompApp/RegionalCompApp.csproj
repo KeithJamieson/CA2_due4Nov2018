@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,18 +64,101 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Compile Include="AddClub.xaml.cs">
+      <DependentUpon>AddClub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddCompetition.xaml.cs">
+      <DependentUpon>AddCompetition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRider.xaml.cs">
+      <DependentUpon>AddRider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Club.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Competition.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entry.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Grade.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Leaderboard.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MainDashboard.xaml.cs">
+      <DependentUpon>MainDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RELICEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RELICEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RELICEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RELICEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RELICEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RiderEntry.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RunCompetition.xaml.cs">
+      <DependentUpon>RunCompetition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>RELICEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewScheduledCompetition.xaml.cs">
+      <DependentUpon>ViewScheduledCompetition.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddClub.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddCompetition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="LoginRegister.xaml.cs">
+      <DependentUpon>LoginRegister.xaml</DependentUpon>
     </Compile>
+    <Page Include="RunCompetition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewScheduledCompetition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,13 +178,36 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="RELICEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RELICEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="RELICEntities.edmx.diagram">
+      <DependentUpon>RELICEntities.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RELICEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RELICEntities.edmx</DependentUpon>
+      <LastGenOutput>RELICEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="RELICEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RELICEntities.edmx</DependentUpon>
+      <LastGenOutput>RELICEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
