@@ -70,13 +70,13 @@
         <TextBox Name="tbxCompetitionName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" TextWrapping="WrapWithOverflow" FontWeight="Bold" IsReadOnly="True" />
         <TextBox Name="tbxCompetitionDate" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" FontWeight="Bold"  IsReadOnly="True" />
 
-        <ListView Name="lstCompetitors"  Grid.Row="3"  Grid.ColumnSpan="5" MinHeight="26" MinWidth="200" >
+        <ListView Name="lstRiders"  Grid.Row="3"  Grid.ColumnSpan="5" MinHeight="26" MinWidth="200" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="AIRC ID"  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding }" FontWeight="Bold" Height="26" Width="100"  Visibility="Visible" />
+                                <TextBlock Text="{Binding Horse}" FontWeight="Bold" Height="26" Width="100"  Visibility="Visible" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

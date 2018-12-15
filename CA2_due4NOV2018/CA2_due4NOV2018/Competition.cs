@@ -18,6 +18,7 @@ namespace CA2_due4NOV2018
         public Competition()
         {
             this.Entries = new HashSet<Entry>();
+            this.Leaderboards = new HashSet<Leaderboard>();
         }
     
         public int competition_id { get; set; }
@@ -33,5 +34,7 @@ namespace CA2_due4NOV2018
         public virtual Member Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Entry> Entries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Leaderboard> Leaderboards { get; set; }
     }
 }

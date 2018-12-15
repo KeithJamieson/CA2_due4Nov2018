@@ -96,8 +96,8 @@ namespace CA2_due4NOV2018
             {
                 Entries.Add(record);
             }
-            lstCompetitors.ItemsSource = Entries;
-            lstCompetitors.Items.Refresh();
+            lstRiders.ItemsSource = Entries;
+            lstRiders.Items.Refresh();
 
                      
         }

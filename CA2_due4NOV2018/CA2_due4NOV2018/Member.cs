@@ -18,6 +18,7 @@ namespace CA2_due4NOV2018
         public Member()
         {
             this.Competitions = new HashSet<Competition>();
+            this.Leaderboards = new HashSet<Leaderboard>();
         }
     
         public int airc_id { get; set; }
@@ -39,5 +40,7 @@ namespace CA2_due4NOV2018
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competition> Competitions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Leaderboard> Leaderboards { get; set; }
     }
 }

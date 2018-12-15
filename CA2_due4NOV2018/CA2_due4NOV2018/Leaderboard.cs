@@ -14,12 +14,19 @@ namespace CA2_due4NOV2018
     
     public partial class Leaderboard
     {
+        public int leaderboard_id { get; set; }
         public int competition_id { get; set; }
-        public string competition_type { get; set; }
         public int airc_id { get; set; }
+        public string competition_type { get; set; }
         public string grade { get; set; }
         public int points { get; set; }
     
+        public virtual Competition Competition { get; set; }
         public virtual Grade Grade1 { get; set; }
+        public virtual Leaderboard Leaderboard1 { get; set; }
+        public virtual Leaderboard Leaderboard2 { get; set; }
+        public virtual Leaderboard Leaderboard11 { get; set; }
+        public virtual Leaderboard Leaderboard3 { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

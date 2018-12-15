@@ -162,8 +162,8 @@ namespace CA2_due4NOV2018
 
     private void BtnViewReports_Click(object sender, RoutedEventArgs e)
         {
-            MyCompetition mycompetition = new MyCompetition();
-            mycompetition.ShowDialog();
+            RunCompetition runcompetition = new RunCompetition();
+            runcompetition.ShowDialog();
         }
 
         private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
