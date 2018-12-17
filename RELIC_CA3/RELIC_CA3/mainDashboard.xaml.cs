@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RELICDBLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,38 +12,36 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Linq;
-namespace CA2_due4NOV2018
+
+namespace RELIC_CA3
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for mainDashboard.xaml
     /// </summary>
-    public partial class MainDashboard : Window
-    {
-       
+    /// 
 
+    public partial class mainDashboard : Window
+    {
         RELICEntities db = new RELICEntities();
         //Member member = new Member();
         public int club_id;
         public int airc_id;
         int secretary_airc_id;
         public string competitionSecretary;
-        public string hostingClub;   
+        public string hostingClub;
         DateTime currentDate = DateTime.Today;
         int currentyear = DateTime.Now.Year;
         public int competition_id;
         public string competition_type;
         public string member_role;
         public string member_status;
-        public MainDashboard()
+        public mainDashboard()
         {
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-
             User user = new User();
 
             var query = (from c in db.Competitions
@@ -50,21 +49,21 @@ namespace CA2_due4NOV2018
                          join rc in db.Clubs on c.club_id equals rc.club_id
                          where c.competition_status == "S" && c.competition_date >= currentDate
                                             && c.competition_date.Year == currentyear
-                                            orderby c.competition_date ascending
-                                            select new
-                                            {
-                                                next_competition_date = c.competition_date,
-                                                c.competition_id,
-                                                c.competition_name,
-                                                c.competition_type,
-                                                competition_venue     = c.venue,
-                                                Secretary = c.Member.first_name + " " + c.Member.last_name,
-                                                hosting_club=c.Club.clubname,
-                                                secretary_airc_id = m.airc_id,
-                                                c.club_id
-                                            }).Take(1);
+                         orderby c.competition_date ascending
+                         select new
+                         {
+                             next_competition_date = c.competition_date,
+                             c.competition_id,
+                             c.competition_name,
+                             c.competition_type,
+                             competition_venue = c.venue,
+                             Secretary = c.Member.first_name + " " + c.Member.last_name,
+                             hosting_club = c.Club.clubname,
+                             secretary_airc_id = m.airc_id,
+                             c.club_id
+                         }).Take(1);
 
-            foreach (var record in query  )
+            foreach (var record in query)
             {
                 tbxCompetitionDate.Text = record.next_competition_date.ToString();
                 tbxCompetitionName.Text = record.competition_name;
@@ -77,7 +76,7 @@ namespace CA2_due4NOV2018
             }
 
 
-            if (member_role == "M") 
+            if (member_role == "M")
             {
                 btnAddClub.Visibility = Visibility.Collapsed;
                 btnAddCompetition.Visibility = Visibility.Collapsed;
@@ -120,29 +119,50 @@ namespace CA2_due4NOV2018
 
             //if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
             //{
-                if (secretary_airc_id == airc_id)
-                {
-                    btnOpenCompetition.Visibility = Visibility.Visible;
-                }
+            if (secretary_airc_id == airc_id)
+            {
+                btnOpenCompetition.Visibility = Visibility.Visible;
+            }
             //}
-          
 
 
-           // MainDashboard maindashboard = new MainDashboard();
 
+            //mainDashboard maindashboard = new mainDashboard();
         }
 
- 
         private void BtnChangeMyPassword_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
- 
-
-
-
         private void BtnModifyMyDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnViewLeaderboard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
+        {
+            ViewCompetitions viewCompetitions = new ViewCompetitions();
+
+            viewCompetitions.ShowDialog();
+        }
+
+        private void BtnViewReports_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddClub_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -152,22 +172,7 @@ namespace CA2_due4NOV2018
 
         }
 
-
-
-        private void BtnViewLeaderboard_Click(object sender, RoutedEventArgs e)
-        {
-            Window1 showlistview = new Window1();
-            showlistview.ShowDialog();
-        }
-    
-
-    private void BtnViewReports_Click(object sender, RoutedEventArgs e)
-        {
-            RunCompetition runcompetition = new RunCompetition();
-            runcompetition.ShowDialog();
-        }
-
-        private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
+        private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -176,309 +181,15 @@ namespace CA2_due4NOV2018
         {
             this.Close();
         }
-   
-            
 
-        private void BtnAddClub_Click(object sender, RoutedEventArgs e)
-        {
-            AddClub addclub = new AddClub();                        
-            addclub.ShowDialog();
-        }
-
-             
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
-        
             RunCompetition runcompetition = new RunCompetition();
 
             runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
             runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
             runcompetition.competition_id = competition_id;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             runcompetition.ShowDialog();
-            //competition.ShowDialog();
         }
-
-        private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
-        {
-            AddCompetition addCompetition = new AddCompetition();
-            addCompetition.ShowDialog();
-
-        }
-
-        private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
-        {
-            ViewScheduledCompetition viewCompetitions = new ViewScheduledCompetition();
-
-            viewCompetitions.ShowDialog();
-        }
-
-
-
     }
-
-  
 }

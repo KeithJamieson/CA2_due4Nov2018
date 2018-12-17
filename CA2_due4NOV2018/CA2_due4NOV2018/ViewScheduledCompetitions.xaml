@@ -18,10 +18,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth = "50"  Width="auto" />
-            <!--<ColumnDefinition MinWidth = "50" Width="auto" />
             <ColumnDefinition MinWidth = "50" Width="auto" />
             <ColumnDefinition MinWidth = "50" Width="auto" />
-            <ColumnDefinition MinWidth = "50" Width="auto" />-->
+            <ColumnDefinition MinWidth = "50" Width="auto" />
+            <ColumnDefinition MinWidth = "50" Width="auto" />
             <ColumnDefinition MinWidth = "50" Width="*" />
         </Grid.ColumnDefinitions>
         <TextBox Name="tbxScheduleYear"   Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" IsReadOnly="True" />
@@ -45,7 +45,7 @@
                     <GridViewColumn Header="Competition Name" Width="150" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_name }"> </TextBlock>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_name }"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -72,7 +72,6 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-
         </ListView>
         <!--<TextBox tbxName="tbxCompetitionName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Spruce Acre" HorizontalContentAlignment="Center" Text="EH ShowjumpingLeague Week 1" TextWrapping="WrapWithOverflow" />-->
 

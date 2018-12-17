@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7434866ac27e43af8b336bff475584c0" Name="Diagram1">
+        <EntityTypeShape EntityType="RELICModel.User" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="5.625" PointY="15.25" />
+        <EntityTypeShape EntityType="RELICModel.Competition" Width="1.5" PointX="7.875" PointY="10.5" />
+        <EntityTypeShape EntityType="RELICModel.Entry" Width="1.5" PointX="5.625" PointY="6.25" />
+        <EntityTypeShape EntityType="RELICModel.Grade" Width="1.5" PointX="3.375" PointY="6.5" />
+        <EntityTypeShape EntityType="RELICModel.Leaderboard" Width="1.5" PointX="8.625" PointY="5.875" />
+        <EntityTypeShape EntityType="RELICModel.Member" Width="1.5" PointX="5.625" PointY="10" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Club_club_id" />
+        <AssociationConnector Association="RELICModel.FK_Member_Club_club_id" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Member_airc_id" />
+        <AssociationConnector Association="RELICModel.fk_entry_competition_competition_id" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_competition_competition_id" />
+        <AssociationConnector Association="RELICModel.FK_entry_grade_grade" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_Grade_grade" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_dr" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_sj" />
+        <AssociationConnector Association="RELICModel.FK_Member_Grade_xc" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_Leaderboard" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_Leaderboard1" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_Member_airc_id" />
+        <AssociationConnector Association="RELICModel.FK_Member_User_airc_id" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

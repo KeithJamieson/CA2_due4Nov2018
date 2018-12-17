@@ -11,13 +11,22 @@ namespace CA2_due4NOV2018
     /// </summary>
     public partial class RunCompetition : Window
     {
+
+
         public RunCompetition()
         {
             InitializeComponent();
         }
 
         RELICEntities db = new RELICEntities();
-        List<Entry> Entries = new List<Entry>();
+        List<Entry> CompetitionEntries = new List<Entry>();
+        System.DateTime currentDate = System.DateTime.Today;
+        int currentyear = System.DateTime.Now.Year;
+
+
+        //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
+        //List<Competition> lstScheduledCompetitions = new List<Competition>();
+        List<Competition> lstScheduledCompetitions = new List<Competition>();
 
         public int competition_id;
         string Ridergrade;
@@ -90,13 +99,13 @@ namespace CA2_due4NOV2018
         private void RefreshList(string Ridergrade)
         {
 
-            Entries.Clear();
+            CompetitionEntries.Clear();
             
             foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
             {
-                Entries.Add(record);
+                CompetitionEntries.Add(record);
             }
-            lstRiders.ItemsSource = Entries;
+            lstRiders.ItemsSource = CompetitionEntries;
             lstRiders.Items.Refresh();
 
                      
@@ -106,6 +115,7 @@ namespace CA2_due4NOV2018
         {
             Ridergrade = "P";
             RefreshList(Ridergrade);
+            RefreshCompetitionList();
         }
 
 
@@ -116,6 +126,23 @@ namespace CA2_due4NOV2018
             {                
                 e.Handled = true;
             }
+        }
+
+        private void RefreshCompetitionList()
+        {
+            lstScheduledCompetitions.Clear();
+
+            foreach (var record in db.Competitions.Where(t => t.competition_status == "S" && t.competition_date >= currentDate && t.competition_date.Year == currentyear))
+            {
+
+                lstScheduledCompetitions.Add(record);
+
+            }
+            lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstViewCompetitionSchedule.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));
+            lstViewCompetitionSchedule.Items.Refresh();
+
         }
     }
 }

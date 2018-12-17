@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RELICModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="club_id" />
+          </Key>
+          <Property Name="club_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clubname" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="competition_id" />
+          </Key>
+          <Property Name="competition_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="competition_name" Type="varchar" MaxLength="30" />
+          <Property Name="club_id" Type="int" Nullable="false" />
+          <Property Name="venue" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="competition_date" Type="date" Nullable="false" />
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="competition_type" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="competition_status" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="competition_id" />
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="competition_id" Type="int" Nullable="false" />
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="Horse" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="clubname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Grade" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Grade_Description" Type="varchar" MaxLength="21" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Leaderboard">
+          <Key>
+            <PropertyRef Name="leaderboard_id" />
+          </Key>
+          <Property Name="leaderboard_id" Type="int" Nullable="false" />
+          <Property Name="competition_id" Type="int" Nullable="false" />
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="competition_type" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="club_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="member_status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="40" />
+          <Property Name="DR" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="SJ" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="XC" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="userpassword" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="airc_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Competition_Club_club_id">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Member_airc_id">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_entry_competition_competition_id">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="competition_id" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="competition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entry_grade_grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_competition_competition_id">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="Leaderboard" Type="Self.Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="competition_id" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="competition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Grade_grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Leaderboard" Type="Self.Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Leaderboard">
+          <End Role="Leaderboard" Type="Self.Leaderboard" Multiplicity="1" />
+          <End Role="Leaderboard1" Type="Self.Leaderboard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Leaderboard">
+              <PropertyRef Name="leaderboard_id" />
+            </Principal>
+            <Dependent Role="Leaderboard1">
+              <PropertyRef Name="leaderboard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Leaderboard1">
+          <End Role="Leaderboard" Type="Self.Leaderboard" Multiplicity="1" />
+          <End Role="Leaderboard1" Type="Self.Leaderboard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Leaderboard">
+              <PropertyRef Name="leaderboard_id" />
+            </Principal>
+            <Dependent Role="Leaderboard1">
+              <PropertyRef Name="leaderboard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Member_airc_id">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Leaderboard" Type="Self.Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Club_club_id">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_dr">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="DR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_sj">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="SJ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_xc">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="XC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_User_airc_id">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RELICModelStoreContainer">
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entry" EntityType="Self.Entry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leaderboard" EntityType="Self.Leaderboard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Competition_Club_club_id" Association="Self.FK_Competition_Club_club_id">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Member_airc_id" Association="Self.FK_Competition_Member_airc_id">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="fk_entry_competition_competition_id" Association="Self.fk_entry_competition_competition_id">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entry_grade_grade" Association="Self.FK_entry_grade_grade">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_competition_competition_id" Association="Self.FK_Leaderboard_competition_competition_id">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="Leaderboard" EntitySet="Leaderboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Grade_grade" Association="Self.FK_Leaderboard_Grade_grade">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Leaderboard" EntitySet="Leaderboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Leaderboard" Association="Self.FK_Leaderboard_Leaderboard">
+            <End Role="Leaderboard" EntitySet="Leaderboard" />
+            <End Role="Leaderboard1" EntitySet="Leaderboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Leaderboard1" Association="Self.FK_Leaderboard_Leaderboard1">
+            <End Role="Leaderboard" EntitySet="Leaderboard" />
+            <End Role="Leaderboard1" EntitySet="Leaderboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Member_airc_id" Association="Self.FK_Leaderboard_Member_airc_id">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Leaderboard" EntitySet="Leaderboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Club_club_id" Association="Self.FK_Member_Club_club_id">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_dr" Association="Self.FK_Member_Grade_dr">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_sj" Association="Self.FK_Member_Grade_sj">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_xc" Association="Self.FK_Member_Grade_xc">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_User_airc_id" Association="Self.FK_Member_User_airc_id">
+            <End Role="User" EntitySet="User" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RELICModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userpassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Member_User_airc_id" FromRole="User" ToRole="Member" />
+        </EntityType>
+        <EntityContainer Name="RELICEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Clubs" EntityType="RELICModel.Club" />
+          <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
+          <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
+          <EntitySet Name="Grades" EntityType="RELICModel.Grade" />
+          <EntitySet Name="Leaderboards" EntityType="RELICModel.Leaderboard" />
+          <EntitySet Name="Members" EntityType="RELICModel.Member" />
+          <AssociationSet Name="FK_Competition_Club_club_id" Association="RELICModel.FK_Competition_Club_club_id">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Competition" EntitySet="Competitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Club_club_id" Association="RELICModel.FK_Member_Club_club_id">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Member_airc_id" Association="RELICModel.FK_Competition_Member_airc_id">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Competition" EntitySet="Competitions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_entry_competition_competition_id" Association="RELICModel.fk_entry_competition_competition_id">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_competition_competition_id" Association="RELICModel.FK_Leaderboard_competition_competition_id">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Grade_grade" Association="RELICModel.FK_Leaderboard_Grade_grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_dr" Association="RELICModel.FK_Member_Grade_dr">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_sj" Association="RELICModel.FK_Member_Grade_sj">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Grade_xc" Association="RELICModel.FK_Member_Grade_xc">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Leaderboard" Association="RELICModel.FK_Leaderboard_Leaderboard">
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+            <End Role="Leaderboard1" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Leaderboard1" Association="RELICModel.FK_Leaderboard_Leaderboard1">
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+            <End Role="Leaderboard1" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Member_airc_id" Association="RELICModel.FK_Leaderboard_Member_airc_id">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_User_airc_id" Association="RELICModel.FK_Member_User_airc_id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="club_id" />
+          </Key>
+          <Property Name="club_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Competitions" Relationship="RELICModel.FK_Competition_Club_club_id" FromRole="Club" ToRole="Competition" />
+          <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Club" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="competition_id" />
+          </Key>
+          <Property Name="competition_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="competition_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="club_id" Type="Int32" Nullable="false" />
+          <Property Name="venue" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="competition_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="competition_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="RELICModel.FK_Competition_Club_club_id" FromRole="Competition" ToRole="Club" />
+          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Competition" ToRole="Member" />
+          <NavigationProperty Name="Entries" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Competition" ToRole="Entry" />
+          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_competition_competition_id" FromRole="Competition" ToRole="Leaderboard" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="competition_id" />
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="competition_id" Type="Int32" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competition" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Entry" ToRole="Competition" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Entry" ToRole="Grade" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Grade1" />
+          </Key>
+          <Property Name="Grade1" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Grade_Description" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Entries" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Grade" ToRole="Entry" />
+          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Grade" ToRole="Leaderboard" />
+          <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Grade" ToRole="Member" />
+          <NavigationProperty Name="Members1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Grade" ToRole="Member" />
+          <NavigationProperty Name="Members2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Grade" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Leaderboard">
+          <Key>
+            <PropertyRef Name="leaderboard_id" />
+          </Key>
+          <Property Name="leaderboard_id" Type="Int32" Nullable="false" />
+          <Property Name="competition_id" Type="Int32" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competition" Relationship="RELICModel.FK_Leaderboard_competition_competition_id" FromRole="Leaderboard" ToRole="Competition" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Leaderboard" ToRole="Grade" />
+          <NavigationProperty Name="Leaderboard1" Relationship="RELICModel.FK_Leaderboard_Leaderboard" FromRole="Leaderboard" ToRole="Leaderboard1" />
+          <NavigationProperty Name="Leaderboard2" Relationship="RELICModel.FK_Leaderboard_Leaderboard" FromRole="Leaderboard1" ToRole="Leaderboard" />
+          <NavigationProperty Name="Leaderboard11" Relationship="RELICModel.FK_Leaderboard_Leaderboard1" FromRole="Leaderboard" ToRole="Leaderboard1" />
+          <NavigationProperty Name="Leaderboard3" Relationship="RELICModel.FK_Leaderboard_Leaderboard1" FromRole="Leaderboard1" ToRole="Leaderboard" />
+          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Leaderboard" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="club_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="member_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="DR" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SJ" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="XC" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="RELICModel.FK_Member_Club_club_id" FromRole="Member" ToRole="Club" />
+          <NavigationProperty Name="Competitions" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Member" ToRole="Competition" />
+          <NavigationProperty Name="Grade" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="Grade2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Member" ToRole="Grade" />
+          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Member" ToRole="Leaderboard" />
+          <NavigationProperty Name="User" Relationship="RELICModel.FK_Member_User_airc_id" FromRole="Member" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Competition_Club_club_id">
+          <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Club_club_id">
+          <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Member_airc_id">
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_entry_competition_competition_id">
+          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="competition_id" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="competition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_competition_competition_id">
+          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="competition_id" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="competition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entry_grade_grade">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Grade_grade">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_dr">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="DR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_sj">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="SJ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Grade_xc">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="XC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Leaderboard">
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Leaderboard">
+              <PropertyRef Name="leaderboard_id" />
+            </Principal>
+            <Dependent Role="Leaderboard1">
+              <PropertyRef Name="leaderboard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Leaderboard1">
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Leaderboard">
+              <PropertyRef Name="leaderboard_id" />
+            </Principal>
+            <Dependent Role="Leaderboard1">
+              <PropertyRef Name="leaderboard_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Member_airc_id">
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_User_airc_id">
+          <End Type="RELICModel.User" Role="User" Multiplicity="1" />
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RELICModelStoreContainer" CdmEntityContainer="RELICEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RELICModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userpassword" ColumnName="userpassword" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="RELICModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="clubname" ColumnName="clubname" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competitions">
+            <EntityTypeMapping TypeName="RELICModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="competition_status" ColumnName="competition_status" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_date" ColumnName="competition_date" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="competition_name" ColumnName="competition_name" />
+                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="RELICModel.Entry">
+              <MappingFragment StoreEntitySet="Entry">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="clubname" ColumnName="clubname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Horse" ColumnName="Horse" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="RELICModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Grade_Description" ColumnName="Grade_Description" />
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaderboards">
+            <EntityTypeMapping TypeName="RELICModel.Leaderboard">
+              <MappingFragment StoreEntitySet="Leaderboard">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="RELICModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="XC" ColumnName="XC" />
+                <ScalarProperty Name="SJ" ColumnName="SJ" />
+                <ScalarProperty Name="DR" ColumnName="DR" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="member_status" ColumnName="member_status" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,9 +1,9 @@
-﻿<Window x:Class="CA2_due4NOV2018.RunCompetition"
+﻿<Window x:Class="RELIC_CA3.RunCompetition"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CA2_due4NOV2018"
+        xmlns:local="clr-namespace:RELIC_CA3"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="RunCompetition" Height="450" Width="800">
@@ -38,7 +38,7 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem Name="tabI" Selector.Selected ="TabI_Selected">
+            <TabItem Name="tabI" Selector.Selected="TabI_Selected">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Intermediate" Foreground="Black" TextWrapping="Wrap" />
@@ -69,101 +69,60 @@
         </TabControl>
         <TextBox Name="tbxCompetitionName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" TextWrapping="WrapWithOverflow" FontWeight="Bold" IsReadOnly="True" />
         <TextBox Name="tbxCompetitionDate" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" FontWeight="Bold"  IsReadOnly="True" />
-        <StackPanel Name="mylist" Grid.Row="4" Grid.ColumnSpan="5" >
-            
-        <ListView Name="lstRiders"  Grid.Row="2"  Grid.ColumnSpan="5"  >
-            <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="AIRC_ID" Width="100" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding airc_id }" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>                        
-                        <GridViewColumn Header="First Name" Width="70"  >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding Firstname }"  />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                        <GridViewColumn Header="Last Name" Width="70"  >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding Lastname }"  />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Horse" Width="100" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Horse }" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Club" Width="100" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding clubname }" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
 
-                    </GridView>
-            </ListView.View>
-        </ListView>
-   </StackPanel>
-
-        <ListView Name= "lstViewCompetitionSchedule" Grid.Row="4" Grid.ColumnSpan="5" Visibility="Collapsed">
+        <ListView Name="lvwRiders"  Grid.Row="3"  Grid.ColumnSpan="5" MinHeight="26" MinWidth="200" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" Width="70"  >
+                    <GridViewColumn Width="100" Header="AIRC ID"  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Text="{Binding competition_date }"  />
+                                <TextBlock Text="{Binding airc_id}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Venue" Width="150" >
+                    <!--<GridViewColumn Header="First Name" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                -->
+                    <!--<TextBlock Text="Help me"> </TextBlock>-->
+                    <!--
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Last Name" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                -->
+                    <!--<TextBlock Text="please"></TextBlock>-->
+                    <!--
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Horse" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                <TextBlock Text = "{Binding FirstName}" FontWeight="Bold" />
+                                -->
+                    <!--<TextBlock Text="Rhonda"></TextBlock>-->
+                    <!--
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    <GridViewColumn Header="Riding Club" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding venue}"></TextBlock>
+                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                -->
+                    <!--<TextBlock Text="Rhonda" > </TextBlock>-->
+                    <!--
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Competition Name" Width="150" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_name }"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Hosting Club" Width="150" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Club.clubname}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Competition Type" Width="100" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding competition_type}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Competition Secretary" Width="150" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Member.Secretary}"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
-
         <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
         <Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddRiderEntry_Click" />
         <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="2" Width="auto" Content="Assign Finishing Positions"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAssignFinishingPositions_Click"  Visibility="Visible" />
@@ -171,4 +130,3 @@
         <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="2" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnUpdateLeaderBoard_Click"  Visibility="Visible" />
     </Grid>
 </Window>
-
