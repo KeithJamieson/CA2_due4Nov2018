@@ -93,22 +93,7 @@ namespace CA2_due4NOV2018
 
             if (activeTab == "Logon")
             {
-                //var query = (from c in db.Competitions
-                //             join m in db.Members on c.airc_id equals m.airc_id
-                //             join rc in db.Clubs on c.club_id equals rc.club_id
-                //             where c.competition_status == "S" && c.competition_date >= currentDate
-                //             && c.competition_date.Year == currentyear
-                //             orderby c.competition_date ascending
-                //             select new
-                //             {
-                //                 next_competition_date = c.competition_date,
-                //                 c.competition_id,
-                //                 c.competition_name,
-                //                 c.competition_type,
-                //                 competition_venue = c.venue,
-                //                 Secretary = c.Member.first_name + " " + c.Member.last_name,
-                //                 hosting_club = c.Club.clubname
-                //             }).Take(1);
+
 
                 var query = (from u in db.Users 
                              join m in db.Members on u.airc_id equals m.airc_id
@@ -119,7 +104,8 @@ namespace CA2_due4NOV2018
                                  m.role,
                                  u.username,
                                  u.userpassword,
-                                 u.airc_id
+                                 u.airc_id,
+                                 m.club_id
                              });
 
                 foreach (var record in query )
@@ -131,6 +117,8 @@ namespace CA2_due4NOV2018
                     maindashboard.tbxUsername.Text = record.username;
                     maindashboard.airc_id = record.airc_id;
                     maindashboard.member_role = record.role;
+                    maindashboard.club_id = record.club_id;
+
                     maindashboard.ShowDialog();                    
 
                 }
@@ -182,11 +170,7 @@ namespace CA2_due4NOV2018
         {
             if (sender is TabItem tab)
             {
-                e.Handled = true;
-                //MessageBox.Show("Tab selected");
-                // this tab is selected!
-                // string tabname = (string) tab.Content;
-                //MessageBox.Show("Tab {tabname} is selected");
+                e.Handled = true;;
             }
         }
 

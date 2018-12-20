@@ -1,17 +1,14 @@
-﻿<Window x:Class="CA2_due4NOV2018.Leaderboard"
+﻿<Window x:Class="CA2_due4NOV2018.ShowLeaderBoard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
-        Title="Leaderboard" Height="450" Width="950">
-    <Grid Margin="0,0,-45,0">
+        Loaded="Window_Loaded"
+        Title="ShowLeaderBoard" Height="450" Width="800">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="26" />
-            <RowDefinition Height="26" />
-            <RowDefinition Height="26" />
-            <RowDefinition Height="26" />
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
@@ -82,7 +79,7 @@
             <CheckBox Name="cbxClub"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Riding Club" />
             <CheckBox Name="cbxDate"    HorizontalAlignment="Left" MinWidth="100" Width="auto" Content="Competition" />
         </StackPanel>
-        
+
         <ComboBox Name="cboCompetitionType"   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" MinWidth="100" MaxWidth="250" />
         <ComboBox Name="cboGrade"   Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" MinWidth="100" MaxWidth="250" />
         <ComboBox Name="cboRidingClub"   Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" MinWidth="100" Width="auto" />
@@ -94,21 +91,84 @@
         <Button Name="btnFindMyResults" Grid.Row="1" Grid.Column="3" HorizontalAlignment = "center"  Width="auto" Content="Find My Results"         BorderBrush="DarkOrange" BorderThickness="3" Click="btnFindMyResults_Click" />
         <Button Name="btnDowmnload"     Grid.Row="1" Grid.Column="4" HorizontalAlignment = "center"  Width="auto" Content="Download Leaderboard"    BorderBrush="DarkOrange" BorderThickness="3" Click="btnDownload_Click" Visibility="Visible"
                 
-                
-                />
-        
-        <DataGrid ItemsSource="{Binding ListPersons}" AutoGenerateColumns="False" Grid.Row ="4" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header = "Rider"                MinWidth="100"/>                
-                <DataGridTextColumn Header = "Riding Club"          MinWidth="100"  />                
-                <DataGridTextColumn Header = "Horse"                MinWidth="100" />
-                <DataGridTextColumn Header = "Date"                 MinWidth="100"  />
-                <DataGridTextColumn Header = "Competition"          MinWidth="100" />
-                <DataGridTextColumn Header = "Points"           MinWidth="100"  />
+    />
 
-                <DataGridTextColumn Header = "Total"         MinWidth="100" />
-                <!--<DataGridTextColumn Header = "Sort order"           MinWidth="100" />-->
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView Name="lvwLeaderBoard" Grid.Row="4" Grid.ColumnSpan="4">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Competition  Type"  Width="100"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Competition.competition_type }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Competition" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Competition.competition_name }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Competition Date" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Competition.competition_date }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="AIRC ID" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding airc_id }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="First Name" Width="100" >
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Member.first_name }" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                    <GridViewColumn Header="Last Name" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Member.last_name }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Club" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Club.clubname }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Horse" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Entry.Horse}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Points" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Competition.points }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Total" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=points }" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>

@@ -23,7 +23,8 @@ namespace CA2_due4NOV2018
 
         RELICEntities db = new RELICEntities();
         //Member member = new Member();
-        public int club_id;
+        public int club_id;  //Club_id of logged in member
+        public int hosting_club_id; //Club_id of club hosting next competition
         public int airc_id;
         int secretary_airc_id;
         public string competitionSecretary;
@@ -59,9 +60,9 @@ namespace CA2_due4NOV2018
                                                 c.competition_type,
                                                 competition_venue     = c.venue,
                                                 Secretary = c.Member.first_name + " " + c.Member.last_name,
-                                                hosting_club=c.Club.clubname,
+                                                hosting_club=rc.clubname,
                                                 secretary_airc_id = m.airc_id,
-                                                c.club_id
+                                                hosting_club_id = c.club_id
                                             }).Take(1);
 
             foreach (var record in query  )
@@ -74,6 +75,7 @@ namespace CA2_due4NOV2018
                 competition_id = record.competition_id;
                 competition_type = record.competition_type;
                 secretary_airc_id = record.secretary_airc_id;
+                hosting_club_id = record.hosting_club_id;
             }
 
 
@@ -120,22 +122,19 @@ namespace CA2_due4NOV2018
 
             //if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
             //{
-                if (secretary_airc_id == airc_id)
-                {
-                    btnOpenCompetition.Visibility = Visibility.Visible;
-                }
+                //if (secretary_airc_id == airc_id)
+                //{
+                //    btnOpenCompetition.Visibility = Visibility.Visible;
+                //}
             //}
-          
 
-
-           // MainDashboard maindashboard = new MainDashboard();
-
+            btnOpenCompetition.Visibility = Visibility.Visible;  //temporary
         }
 
  
         private void BtnChangeMyPassword_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Functionality has not been implemented", "nChangeMyPassword", MessageBoxButton.OK );
         }
 
  
@@ -144,20 +143,21 @@ namespace CA2_due4NOV2018
 
         private void BtnModifyMyDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Functionality has not been implemented");
         }
 
         private void BtnModifyMemberDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Functionality has not been implemented");
         }
 
 
 
         private void BtnViewLeaderboard_Click(object sender, RoutedEventArgs e)
         {
-            Window1 showlistview = new Window1();
-            showlistview.ShowDialog();
+            
+            ShowLeaderBoard leaderboard = new ShowLeaderBoard();
+            leaderboard.ShowDialog();
         }
     
 
@@ -169,7 +169,7 @@ namespace CA2_due4NOV2018
 
         private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Functionality has not been implemented");
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -188,283 +188,24 @@ namespace CA2_due4NOV2018
              
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
-        
-            RunCompetition runcompetition = new RunCompetition();
-
-            runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
-            runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
-            runcompetition.competition_id = competition_id;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            runcompetition.ShowDialog();
-            //competition.ShowDialog();
+            if ((airc_id == secretary_airc_id))
+            {
+
+                RunCompetition runcompetition = new RunCompetition();
+                runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
+                runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
+                runcompetition.competition_id = competition_id;
+                runcompetition.ShowDialog();
+
+            }
+            else
+                MessageBox.Show("You must be competition Secretary to open competition");
         }
 
         private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
             AddCompetition addCompetition = new AddCompetition();
+            addCompetition.hosting_club_id = club_id;
             addCompetition.ShowDialog();
 
         }
@@ -472,7 +213,8 @@ namespace CA2_due4NOV2018
         private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
         {
             ViewScheduledCompetition viewCompetitions = new ViewScheduledCompetition();
-
+            viewCompetitions.hosting_club_id = hosting_club_id;
+            viewCompetitions.club_id = club_id;
             viewCompetitions.ShowDialog();
         }
 

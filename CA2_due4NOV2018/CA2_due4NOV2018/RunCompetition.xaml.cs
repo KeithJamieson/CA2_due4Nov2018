@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
+using System;
 
 namespace CA2_due4NOV2018
 {
@@ -11,7 +12,6 @@ namespace CA2_due4NOV2018
     /// </summary>
     public partial class RunCompetition : Window
     {
-
 
         public RunCompetition()
         {
@@ -23,17 +23,15 @@ namespace CA2_due4NOV2018
         System.DateTime currentDate = System.DateTime.Today;
         int currentyear = System.DateTime.Now.Year;
 
-
-        //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
-        //List<Competition> lstScheduledCompetitions = new List<Competition>();
         List<Competition> lstScheduledCompetitions = new List<Competition>();
 
         public int competition_id;
         string Ridergrade;
         string activeTab;
+
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabP";
+            
             Ridergrade = "P";
             RefreshList(Ridergrade);
         }
@@ -41,33 +39,42 @@ namespace CA2_due4NOV2018
 
         private void TabAP_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAP";
+            
+            Ridergrade = "AP";
             RefreshList(Ridergrade);
         }
 
         private void TabI_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabI";
+            
+            Ridergrade = "I";
             RefreshList(Ridergrade);
         }
 
         private void TabAI_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAI";
+            
+            Ridergrade = "AI";
             RefreshList(Ridergrade);
         }
 
         private void TabO_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabO";
+            
+            Ridergrade = "O";
             RefreshList(Ridergrade);
         }
 
         private void TabAO_Selected(object sender, RoutedEventArgs e)
         {
-            activeTab = "tabAO";
+            
+            Ridergrade = "AO";
             RefreshList(Ridergrade);
         }
+
+
+
+
 
         private void BtnCloseCompetition_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +87,7 @@ namespace CA2_due4NOV2018
 
         private void BtnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
         {
-
+            stkAssignFinishingPosition.Visibility = Visibility.Visible;
         }
 
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
@@ -88,6 +95,8 @@ namespace CA2_due4NOV2018
             AddRider addRider = new AddRider();
             addRider.competition_id = competition_id;           
             addRider.ShowDialog();
+            lstRiders.Items.Refresh();
+
         }
 
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
@@ -113,9 +122,20 @@ namespace CA2_due4NOV2018
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            foreach (var competition in db.Competitions.Where (t => t.competition_id == competition_id))
+            {
+                competition.competition_status = "O";
+            }
+
+            stkAssignFinishingPosition.Visibility = Visibility.Collapsed;
+
+            //    = System.Data.Entity.EntityState.Modified;
+            //db.SaveChanges();
+
             Ridergrade = "P";
             RefreshList(Ridergrade);
-            RefreshCompetitionList();
+
         }
 
 
@@ -128,21 +148,62 @@ namespace CA2_due4NOV2018
             }
         }
 
-        private void RefreshCompetitionList()
+  
+
+        private void LstRiders_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            lstScheduledCompetitions.Clear();
-
-            foreach (var record in db.Competitions.Where(t => t.competition_status == "S" && t.competition_date >= currentDate && t.competition_date.Year == currentyear))
+            try
             {
+                //NB Ridergrade holds current grade
+                Entry SelectedRider = CompetitionEntries.ElementAt(lstRiders.SelectedIndex);
+                if (SelectedRider.airc_id > 0)   // ensure we have a record
+                {
+                    tbxAIRC_ID.Text = SelectedRider.airc_id.ToString();
+                    tbxLastName.Text = SelectedRider.Lastname.Trim();
+                    tbxFirstName.Text = SelectedRider.Firstname.Trim();
+                    tbxHorse.Text = SelectedRider.Horse.Trim();
+                    tbxClub.Text = SelectedRider.clubname.Trim();
+                    tbxPlace.Text = SelectedRider.points.ToString();
 
-                lstScheduledCompetitions.Add(record);
-
+                }
             }
-            lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstViewCompetitionSchedule.ItemsSource);
-            view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));
-            lstViewCompetitionSchedule.Items.Refresh();
+            catch (System.Exception)
+            {
+               
+                //throw;
+            }
+            //Entry CompetitionEntries = new List<Entry>();
 
+        
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+            Entry entry = new Entry();
+            entry.airc_id = Convert.ToInt32(tbxAIRC_ID.Text);
+            entry.clubname = tbxClub.Text;
+            entry.Firstname = tbxFirstName.Text;
+            entry.Lastname = tbxLastName.Text;
+            entry.Horse = tbxHorse.Text;
+            entry.competition_id = competition_id;
+            entry.points = Convert.ToInt32(tbxPlace.Text);
+            entry.grade = Ridergrade;
+            SaveEntry(entry);            
+            
+        }
+
+        public void SaveEntry(Entry entry)
+        {
+            
+            db.Entry(entry).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            RefreshList(Ridergrade);
+        }
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            stkAssignFinishingPosition.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

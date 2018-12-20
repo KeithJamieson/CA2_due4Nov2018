@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Data;
+using System;
 
 namespace CA2_due4NOV2018
 {
@@ -15,8 +16,9 @@ namespace CA2_due4NOV2018
         RELICEntities db = new RELICEntities();
         System.DateTime currentDate = System.DateTime.Today;
         int currentyear = System.DateTime.Now.Year;
-
-
+        List<Member> memberslist = new List<Member>();
+        public int hosting_club_id;
+        public int club_id;
         //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
         //List<Competition> lstScheduledCompetitions = new List<Competition>();
         List<Competition> lstScheduledCompetitions = new List<Competition>();
@@ -44,6 +46,8 @@ namespace CA2_due4NOV2018
         private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
             AddCompetition addCompetition = new AddCompetition();
+            addCompetition.hosting_club_id = club_id;
+            addCompetition.club_id =  club_id;
             addCompetition.ShowDialog();
             RefreshCompetitionList();
         }
@@ -87,5 +91,56 @@ namespace CA2_due4NOV2018
             runcompetition.ShowDialog();
         }
 
+
+
+
+        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            Competition competition = new Competition();
+            //competition.club_id = Convert.ToInt32(tbxAIRC_ID.Text);
+            competition.competition_date = Convert.ToDateTime(tbxCompetitionDate.Text);
+            competition.competition_type = tbxCompetitionType.Text;
+            competition.venue = tbxCompetitionVenue.Text;
+            //competition.club_id = tbxClub.Text
+            //SaveEntry(entry);
+            RefreshCompetitionList();
+
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            stkViewCompetitions.Visibility = Visibility.Collapsed;
+        }
+
+        private void cboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+            memberslist.Clear();
+            //cboCompetitionSecretary.SelectedValue=
+            foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
+            {
+                memberslist.Add(member);
+            }
+            cboCompetitionSecretary.ItemsSource = memberslist;
+            //cboCompetitionSecretary.Text = competition.Member.airc_id;
+
+
+        }
+
+        private void LstViewCompetitionSchedule_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Competition competition = lstScheduledCompetitions.ElementAt(lstViewCompetitionSchedule.SelectedIndex);
+            tbxCompetitionDate.Text = competition.competition_date.ToShortDateString();
+            tbxCompetitionName.Text = competition.competition_name;
+            tbxCompetitionType.Text = competition.competition_type;
+            tbxCompetitionVenue.Text = competition.venue;
+            memberslist.Clear();
+            foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
+            {
+                memberslist.Add(member);
+            }
+            cboCompetitionSecretary.ItemsSource = memberslist;
+            // cboCompetitionSecretary.
+        }
     }
 }

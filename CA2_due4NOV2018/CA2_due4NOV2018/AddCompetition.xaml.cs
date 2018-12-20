@@ -15,7 +15,8 @@ namespace CA2_due4NOV2018
         RELICEntities db = new RELICEntities();
 
         List<Member> memberslist = new List<Member>();
-        int club_id=1004;
+        public int hosting_club_id;
+        public int club_id;
         int airc_id;
         //      int competitionSecretary;
 
@@ -27,7 +28,7 @@ namespace CA2_due4NOV2018
         {
            // CboCompetitionSecretary.ItemsSource = "";
             memberslist.Clear();
-            foreach (var member in db.Members.Where(t => t.club_id > 0))
+            foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
             {
                 memberslist.Add(member);
             }
@@ -48,7 +49,7 @@ namespace CA2_due4NOV2018
             competition.competition_date =Convert.ToDateTime(dpkCompetitionDate.ToString());
             competition.competition_type = CompetitionDiscipline;
             competition.competition_status = "S";
-            competition.club_id = club_id;
+            competition.club_id = hosting_club_id;
             competition.airc_id = airc_id;
             ScheduleCompetitionSave(competition);
             MessageBox.Show("Competition has been successfully scheduled");

@@ -12,8 +12,8 @@
             <RowDefinition Height="26" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />    
             <RowDefinition Height="auto" />
+            <RowDefinition Height="26" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,7 +25,7 @@
             <ColumnDefinition MinWidth = "50" Width="*" />
         </Grid.ColumnDefinitions>
         <TextBox Name="tbxScheduleYear"   Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" IsReadOnly="True" />
-        <ListView Name= "lstViewCompetitionSchedule" Grid.Row="2" Grid.ColumnSpan="3">
+        <ListView Name= "lstViewCompetitionSchedule" Grid.Row="2" Grid.ColumnSpan="3" SelectionChanged="LstViewCompetitionSchedule_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Date" Width="70"  >
@@ -73,6 +73,47 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel Name="stkViewCompetitions" Grid.Row="5" Grid.ColumnSpan="2" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth = "100"  Width="150" />
+                <ColumnDefinition MinWidth = "100" Width="150" />
+                <ColumnDefinition MinWidth = "100" Width="150" />
+            </Grid.ColumnDefinitions>
+            <!-- Row 0-->
+            <Label Content="Competition Date :" Grid.Row="0" Grid.Column="0" Width="auto" HorizontalAlignment="Left" ></Label>
+            <TextBox Name="tbxCompetitionDate" Grid.Row="0" Grid.Column="1" MinWidth="100"  Width="auto"  HorizontalAlignment="Center"></TextBox>
+                <Button Name="btnSaveChanges" Content="Save Changes"  Grid.Row="1" Grid.Column="3" Click="BtnSaveChanges_Click" ></Button>
+            <!-- Row 1-->
+            <Label Content="Competition Venue :" Grid.Row="1" Grid.Column="0" Width="auto" HorizontalAlignment="Left" ></Label>
+            <TextBox Name="tbxCompetitionVenue" Grid.Row="1" Grid.Column="1"  MinWidth="100" HorizontalAlignment="Center"></TextBox>
+                <Button Name="btnCancel" Content="Cancel"  Grid.Row="3" Grid.Column="3" Click="BtnCancel_Click" ></Button>
+                <!-- Row 2-->
+            <Label Content="Competition Name :" Grid.Row="2" Grid.Column="0" MinWidth="100" Width="auto" HorizontalAlignment="Left" ></Label>
+            <TextBox Name="tbxCompetitionName" Grid.Row="2" Grid.Column="1" MinWidth="100" HorizontalAlignment="Center"></TextBox>
+            <!-- Row 3 -->
+            <Label Content="Competition Type :" Grid.Row="3" Grid.Column="0" Width="auto" HorizontalAlignment="Left" ></Label>
+            <TextBox Name="tbxCompetitionType" Grid.Row="3" Grid.Column="1" MinWidth="100" HorizontalAlignment="Center"></TextBox>
+             <!-- Row 4 -->
+            <Label Content="Competition Secretary :" Grid.Row="4" Grid.Column="0" Width="auto" HorizontalAlignment="Left" ></Label>
+                <ComboBox Name="cboCompetitionSecretary" Grid.Row="4" Grid.Column="1"  MinWidth="100" HorizontalAlignment="Center" SelectionChanged="cboCompetitionSecretary_SelectionChanged"  SelectedValuePath="airc_id">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Secretary}"   />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+        </StackPanel>
         <!--<TextBox tbxName="tbxCompetitionName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Spruce Acre" HorizontalContentAlignment="Center" Text="EH ShowjumpingLeague Week 1" TextWrapping="WrapWithOverflow" />-->
 
         <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnDashboard_Click" />

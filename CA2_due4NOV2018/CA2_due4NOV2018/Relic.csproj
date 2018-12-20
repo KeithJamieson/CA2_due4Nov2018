@@ -92,9 +92,6 @@
     <Compile Include="Leaderboard.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Leaderboard.xaml.cs">
-      <DependentUpon>Leaderboard.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
@@ -122,6 +119,9 @@
     <Compile Include="AddCompetition.xaml.cs">
       <DependentUpon>AddCompetition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowLeaderBoard.xaml.cs">
+      <DependentUpon>ShowLeaderBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
@@ -134,18 +134,11 @@
     <Compile Include="RunCompetition.xaml.cs">
       <DependentUpon>RunCompetition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
     <Page Include="AddClub.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangePassword.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Leaderboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +174,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ShowLeaderBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewScheduledCompetitions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,10 +187,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RunCompetition.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

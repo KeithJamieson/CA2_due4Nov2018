@@ -105,6 +105,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Entry_competition_airc_id">
+          <End Role="Entry" Type="Self.Entry" Multiplicity="1" />
+          <End Role="Entry1" Type="Self.Entry" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="competition_id" />
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Entry1">
+              <PropertyRef Name="competition_id" />
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_entry_competition_competition_id">
           <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
           <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
@@ -265,6 +279,10 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Competition" EntitySet="Competition" />
           </AssociationSet>
+          <AssociationSet Name="FK_Entry_competition_airc_id" Association="Self.FK_Entry_competition_airc_id">
+            <End Role="Entry" EntitySet="Entry" />
+            <End Role="Entry1" EntitySet="Entry" />
+          </AssociationSet>
           <AssociationSet Name="fk_entry_competition_competition_id" Association="Self.fk_entry_competition_competition_id">
             <End Role="Competition" EntitySet="Competition" />
             <End Role="Entry" EntitySet="Entry" />
@@ -344,7 +362,6 @@
             <End Role="Member" EntitySet="Members" />
           </AssociationSet>
           <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
-          <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
           <AssociationSet Name="FK_Competition_Club_club_id" Association="RELICModel.FK_Competition_Club_club_id">
             <End Role="Club" EntitySet="Clubs" />
             <End Role="Competition" EntitySet="Competitions" />
@@ -352,14 +369,6 @@
           <AssociationSet Name="FK_Competition_Member_airc_id" Association="RELICModel.FK_Competition_Member_airc_id">
             <End Role="Member" EntitySet="Members" />
             <End Role="Competition" EntitySet="Competitions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_entry_competition_competition_id" Association="RELICModel.fk_entry_competition_competition_id">
-            <End Role="Competition" EntitySet="Competitions" />
-            <End Role="Entry" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="Entry" EntitySet="Entries" />
           </AssociationSet>
           <EntitySet Name="Leaderboards" EntityType="RELICModel.Leaderboard" />
           <AssociationSet Name="FK_Leaderboard_competition_competition_id" Association="RELICModel.FK_Leaderboard_competition_competition_id">
@@ -382,6 +391,19 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="Leaderboard" EntitySet="Leaderboards" />
           </AssociationSet>
+          <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
+          <AssociationSet Name="fk_entry_competition_competition_id" Association="RELICModel.fk_entry_competition_competition_id">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_competition_airc_id" Association="RELICModel.FK_Entry_competition_airc_id">
+            <End Role="Entry" EntitySet="Entries" />
+            <End Role="Entry1" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entry_grade_grade" Association="RELICModel.FK_entry_grade_grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grade">
           <Key>
@@ -392,8 +414,8 @@
           <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Grade" ToRole="Member" />
           <NavigationProperty Name="Members1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Grade" ToRole="Member" />
           <NavigationProperty Name="Members2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Grade" ToRole="Member" />
-          <NavigationProperty Name="Entries" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Grade" ToRole="Entry" />
           <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Grade" ToRole="Leaderboard" />
+          <NavigationProperty Name="Entries" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Grade" ToRole="Entry" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -510,24 +532,8 @@
           <Property Name="competition_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Club" Relationship="RELICModel.FK_Competition_Club_club_id" FromRole="Competition" ToRole="Club" />
           <NavigationProperty Name="Member" Relationship="RELICModel.FK_Competition_Member_airc_id" FromRole="Competition" ToRole="Member" />
-          <NavigationProperty Name="Entries" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Competition" ToRole="Entry" />
           <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_competition_competition_id" FromRole="Competition" ToRole="Leaderboard" />
-        </EntityType>
-        <EntityType Name="Entry">
-          <Key>
-            <PropertyRef Name="competition_id" />
-            <PropertyRef Name="airc_id" />
-          </Key>
-          <Property Name="competition_id" Type="Int32" Nullable="false" />
-          <Property Name="airc_id" Type="Int32" Nullable="false" />
-          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Competition" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Entry" ToRole="Competition" />
-          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Entry" ToRole="Grade" />
+          <NavigationProperty Name="Entries" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Competition" ToRole="Entry" />
         </EntityType>
         <Association Name="FK_Competition_Club_club_id">
           <End Type="RELICModel.Club" Role="Club" Multiplicity="1" />
@@ -550,30 +556,6 @@
             </Principal>
             <Dependent Role="Competition">
               <PropertyRef Name="airc_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_entry_competition_competition_id">
-          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="1" />
-          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Competition">
-              <PropertyRef Name="competition_id" />
-            </Principal>
-            <Dependent Role="Entry">
-              <PropertyRef Name="competition_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_entry_grade_grade">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Entry">
-              <PropertyRef Name="grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -655,6 +637,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="competition_id" />
+            <PropertyRef Name="airc_id" />
+          </Key>
+          <Property Name="competition_id" Type="Int32" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competition" Relationship="RELICModel.fk_entry_competition_competition_id" FromRole="Entry" ToRole="Competition" />
+          <NavigationProperty Name="Entry1" Relationship="RELICModel.FK_Entry_competition_airc_id" FromRole="Entry" ToRole="Entry1" />
+          <NavigationProperty Name="Entry2" Relationship="RELICModel.FK_Entry_competition_airc_id" FromRole="Entry1" ToRole="Entry" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_entry_grade_grade" FromRole="Entry" ToRole="Grade" />
+        </EntityType>
+        <Association Name="fk_entry_competition_competition_id">
+          <End Type="RELICModel.Competition" Role="Competition" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="competition_id" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="competition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_competition_airc_id">
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="competition_id" />
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Entry1">
+              <PropertyRef Name="competition_id" />
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entry_grade_grade">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -717,6 +755,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Leaderboards">
+            <EntityTypeMapping TypeName="RELICModel.Leaderboard">
+              <MappingFragment StoreEntitySet="Leaderboard">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Entries">
             <EntityTypeMapping TypeName="RELICModel.Entry">
               <MappingFragment StoreEntitySet="Entry">
@@ -728,18 +778,6 @@
                 <ScalarProperty Name="Horse" ColumnName="Horse" />
                 <ScalarProperty Name="airc_id" ColumnName="airc_id" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Leaderboards">
-            <EntityTypeMapping TypeName="RELICModel.Leaderboard">
-              <MappingFragment StoreEntitySet="Leaderboard">
-                <ScalarProperty Name="points" ColumnName="points" />
-                <ScalarProperty Name="grade" ColumnName="grade" />
-                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
-                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
-                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
