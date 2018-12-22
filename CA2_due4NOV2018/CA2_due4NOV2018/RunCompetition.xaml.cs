@@ -19,16 +19,25 @@ namespace CA2_due4NOV2018
         }
 
         RELICEntities db = new RELICEntities();
-        List<Entry> CompetitionEntries = new List<Entry>();
+
         System.DateTime currentDate = System.DateTime.Today;
         int currentyear = System.DateTime.Now.Year;
 
         List<Competition> lstScheduledCompetitions = new List<Competition>();
+        List<Entry> CompetitionEntries = new List<Entry>();
 
         public int competition_id;
         string Ridergrade;
         string activeTab;
+        int rider_entry_id;
+        enum DBOperation
+        {
+            Add,
+            Modify,
+            Delete
+        }
 
+        DBOperation dboperation = new DBOperation();
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
             
@@ -78,11 +87,96 @@ namespace CA2_due4NOV2018
 
         private void BtnCloseCompetition_Click(object sender, RoutedEventArgs e)
         {
+            Entry entry = new Entry();
+            bool place_assigned = true;
+            foreach (var record in db.Entries.Where ( t=> t.competition_id == competition_id & t.points == 0   ))
+            {
+                MessageBox.Show($"Grade {record.grade}: Rider {record.Firstname} {record.Lastname} riding {record.Horse} for {record.clubname} has not been assigned a finishing position" );
+                place_assigned = false;
+            }
 
+            if (place_assigned == true)
+            {
+                string competition_status = "C";  // Competition is Open if user gets to this screen
+                Competition competition = new Competition();
+                //check to see if competition has been closed
+                foreach (var record in db.Competitions.Where(t => t.competition_id == competition_id))
+                {
+
+                    record.competition_status =competition_status;
+                }
+                int SaveSuccess = db.SaveChanges();
+
+                if (SaveSuccess == 1)
+                {
+
+                    MessageBox.Show("Points Updated Successfully");
+                    //lstRiders.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show($"Problem Closing Competition");
+                }
+            }
         }
         private void BtnUpdateLeaderBoard_Click(object sender, RoutedEventArgs e)
         {
+            string competition_status = "O";  // Competition is Open if user gets to this screen
+            Competition competition = new Competition();
+            //check to see if competition has been closed
+            foreach (var record in db.Competitions.Where(t => t.competition_id == competition_id))
+            {
 
+                competition_status = record.competition_status;
+            }
+            if (competition_status == "C")
+            {
+                Leaderboard leaderboard = new Leaderboard();
+                foreach (var record in  db.Entries.Where (t=>t.competition_id == competition_id))
+                {
+                   // leaderboard.competition_id = competition_id;
+                    leaderboard.airc_id = record.airc_id;
+                   // leaderboard.competition_type = record.competition_type;
+                    leaderboard.grade = record.grade;
+                    //nb change points to place
+                    if ( record.place == 1 )
+                    { 
+                        leaderboard.points = leaderboard.points + 14;
+                    }
+                    if (record.place == 2)
+                    {
+                        leaderboard.points = leaderboard.points + 12;
+                    }
+                    if (record.place == 3)
+                    {
+                        leaderboard.points = leaderboard.points + 10;
+                    }
+                    if (record.place == 4)
+                    {
+                        leaderboard.points = leaderboard.points + 8;
+                    }
+                    if (record.place == 5)
+                    {
+                        leaderboard.points = leaderboard.points + 6;
+                    }
+                    if (record.place == 6)
+                    {
+                        leaderboard.points = leaderboard.points + 4;
+                    }
+                    if (record.place > 6)
+                    {
+                        leaderboard.points = leaderboard.points + 2;
+                    }
+
+
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Competition must first be closed");
+
+            }
         }
 
         private void BtnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
@@ -95,27 +189,55 @@ namespace CA2_due4NOV2018
             AddRider addRider = new AddRider();
             addRider.competition_id = competition_id;           
             addRider.ShowDialog();
-            lstRiders.Items.Refresh();
+            RefreshList(Ridergrade);
 
         }
 
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            string competition_status = "O";  // Competition is Open if user gets to this screen
+            Competition competition = new Competition();
+            //check to see if competition has been closed
+            foreach (var record in db.Competitions.Where (t => t.competition_id == competition_id))
+            {
+
+                competition_status = record.competition_status;
+            }
+            if (competition_status == "C")
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Competition must first be closed and Leaderboard Updated");
+
+            }
+
+
+
         }
 
 
         private void RefreshList(string Ridergrade)
         {
 
-            CompetitionEntries.Clear();
-            
-            foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
+            try
             {
-                CompetitionEntries.Add(record);
+                CompetitionEntries.Clear();
+
+                foreach (var record in db.Entries.Where(t => t.competition_id == competition_id && t.grade == Ridergrade))
+                {
+                    CompetitionEntries.Add(record);
+                }
+                lstRiders.ItemsSource = CompetitionEntries;
+                lstRiders.Items.Refresh();
             }
-            lstRiders.ItemsSource = CompetitionEntries;
-            lstRiders.Items.Refresh();
+            catch (IndexOutOfRangeException)
+            {
+
+               // throw;
+            }
+
 
                      
         }
@@ -123,16 +245,7 @@ namespace CA2_due4NOV2018
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            foreach (var competition in db.Competitions.Where (t => t.competition_id == competition_id))
-            {
-                competition.competition_status = "O";
-            }
-
             stkAssignFinishingPosition.Visibility = Visibility.Collapsed;
-
-            //    = System.Data.Entity.EntityState.Modified;
-            //db.SaveChanges();
-
             Ridergrade = "P";
             RefreshList(Ridergrade);
 
@@ -152,6 +265,8 @@ namespace CA2_due4NOV2018
 
         private void LstRiders_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+        
+
             try
             {
                 //NB Ridergrade holds current grade
@@ -164,15 +279,27 @@ namespace CA2_due4NOV2018
                     tbxHorse.Text = SelectedRider.Horse.Trim();
                     tbxClub.Text = SelectedRider.clubname.Trim();
                     tbxPlace.Text = SelectedRider.points.ToString();
+                    tbxEntryID.Text = SelectedRider.entry_id.ToString();
+                    rider_entry_id =  SelectedRider.entry_id;
 
                 }
             }
-            catch (System.Exception)
+
+            catch (IndexOutOfRangeException)
             {
-               
-                //throw;
+
+                // throw;
             }
-            //Entry CompetitionEntries = new List<Entry>();
+            catch ( ArgumentOutOfRangeException)
+            {
+
+                // throw;
+            }
+            catch
+            {
+                throw;
+            }
+            
 
         
         }
@@ -180,26 +307,70 @@ namespace CA2_due4NOV2018
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
 
-            Entry entry = new Entry();
-            entry.airc_id = Convert.ToInt32(tbxAIRC_ID.Text);
-            entry.clubname = tbxClub.Text;
-            entry.Firstname = tbxFirstName.Text;
-            entry.Lastname = tbxLastName.Text;
-            entry.Horse = tbxHorse.Text;
-            entry.competition_id = competition_id;
-            entry.points = Convert.ToInt32(tbxPlace.Text);
-            entry.grade = Ridergrade;
-            SaveEntry(entry);            
-            
+            Entry entry= new Entry();
+            int points = Convert.ToInt32(tbxPlace.Text.Trim());
+            rider_entry_id = Convert.ToInt32(tbxEntryID.Text);
+            dboperation = DBOperation.Modify;
+            if (dboperation == DBOperation.Modify )
+            {
+                foreach (var rider in db.Entries.Where(t => t.entry_id == rider_entry_id))
+                {
+                    rider.airc_id = Convert.ToInt32(tbxAIRC_ID.Text.Trim());
+                    rider.clubname = tbxClub.Text.Trim();
+                    rider.Firstname = tbxFirstName.Text.Trim();
+                    rider.Lastname = tbxLastName.Text.Trim();
+                    rider.Horse = tbxHorse.Text.Trim();
+                    rider.competition_id = competition_id;                    
+                    rider.place = Convert.ToInt32(tbxPlace.Text);                
+                    rider.grade = Ridergrade;
+                    if (rider.place == 1)
+                    {
+                        rider.points = 14;
+                    }
+                    if (rider.place == 2)
+                    {
+                        rider.points = 12;
+                    }
+
+                    if (rider.place == 3)
+                    {
+                        rider.points = 10;
+                    }
+                    if (rider.place == 4)
+                    {
+                        rider.points = 8;
+                    }
+                    if (rider.place == 5)
+                    {
+                        rider.points = 6;
+                    }
+                    if (rider.place == 6)
+                    {
+                        rider.points = 4;
+                    }
+                    if (rider.place > 6)
+                    {
+                        rider.points = 2;
+                    }
+
+                }
+
+                int SaveSuccess = db.SaveChanges();
+
+                if (SaveSuccess == 1)
+                {
+                    
+                    //MessageBox.Show("Points Updated Successfully");
+                    lstRiders.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show($"Problem Saving Points");
+                }            
+            }
+
         }
 
-        public void SaveEntry(Entry entry)
-        {
-            
-            db.Entry(entry).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            RefreshList(Ridergrade);
-        }
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             stkAssignFinishingPosition.Visibility = Visibility.Collapsed;

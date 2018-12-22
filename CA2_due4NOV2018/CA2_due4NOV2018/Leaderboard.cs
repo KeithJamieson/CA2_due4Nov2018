@@ -21,12 +21,7 @@ namespace CA2_due4NOV2018
         public string grade { get; set; }
         public int points { get; set; }
     
-        public virtual Competition Competition { get; set; }
         public virtual Grade Grade1 { get; set; }
-        public virtual Leaderboard Leaderboard1 { get; set; }
-        public virtual Leaderboard Leaderboard2 { get; set; }
-        public virtual Leaderboard Leaderboard11 { get; set; }
-        public virtual Leaderboard Leaderboard3 { get; set; }
         public virtual Member Member { get; set; }
     }
 }

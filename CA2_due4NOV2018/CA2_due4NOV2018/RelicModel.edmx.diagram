@@ -5,28 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5e72dde0b5144533ad3993394eea7d32" Name="Diagram1">
-        <EntityTypeShape EntityType="RELICModel.Grade" Width="1.5" PointX="0.5" PointY="2.25" />
-        <EntityTypeShape EntityType="RELICModel.User" Width="1.5" PointX="3.75" PointY="9.875" />
-        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="7.125" PointY="7.875" />
-        <EntityTypeShape EntityType="RELICModel.Member" Width="1.5" PointX="0.625" PointY="7.25" />
+        <EntityTypeShape EntityType="RELICModel.Club" Width="1.5" PointX="3.75" PointY="9.625" />
+        <EntityTypeShape EntityType="RELICModel.Competition" Width="1.5" PointX="11.25" PointY="5.625" />
+        <EntityTypeShape EntityType="RELICModel.Grade" Width="1.5" PointX="0.75" PointY="6" />
+        <EntityTypeShape EntityType="RELICModel.Leaderboard" Width="1.5" PointX="8.25" PointY="6" />
+        <EntityTypeShape EntityType="RELICModel.Member" Width="1.5" PointX="6" PointY="5" />
+        <EntityTypeShape EntityType="RELICModel.User" Width="1.5" PointX="3.75" PointY="3.125" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Club_club_id" />
         <AssociationConnector Association="RELICModel.FK_Member_Club_club_id" />
+        <AssociationConnector Association="RELICModel.FK_Competition_Member_airc_id" />
+        <AssociationConnector Association="RELICModel.FK_Leaderboard_Grade_grade" />
         <AssociationConnector Association="RELICModel.FK_Member_Grade_dr" />
         <AssociationConnector Association="RELICModel.FK_Member_Grade_sj" />
         <AssociationConnector Association="RELICModel.FK_Member_Grade_xc" />
-        <AssociationConnector Association="RELICModel.FK_Member_User_airc_id" />
-        <EntityTypeShape EntityType="RELICModel.Competition" Width="1.5" PointX="6.5" PointY="3.25" />
-        <AssociationConnector Association="RELICModel.FK_Competition_Club_club_id" />
-        <AssociationConnector Association="RELICModel.FK_Competition_Member_airc_id" />
-        <EntityTypeShape EntityType="RELICModel.Leaderboard" Width="1.5" PointX="3.375" PointY="3.25" />
-        <AssociationConnector Association="RELICModel.FK_Leaderboard_competition_competition_id" />
-        <AssociationConnector Association="RELICModel.FK_Leaderboard_Grade_grade" />
-        <AssociationConnector Association="RELICModel.FK_Leaderboard_Leaderboard" />
-        <AssociationConnector Association="RELICModel.FK_Leaderboard_Leaderboard1" />
         <AssociationConnector Association="RELICModel.FK_Leaderboard_Member_airc_id" />
-        <EntityTypeShape EntityType="RELICModel.Entry" Width="1.5" PointX="8.75" PointY="2.75" />
-        <AssociationConnector Association="RELICModel.fk_entry_competition_competition_id" />
-        <AssociationConnector Association="RELICModel.FK_Entry_competition_airc_id" />
-        <AssociationConnector Association="RELICModel.FK_entry_grade_grade" />
+        <AssociationConnector Association="RELICModel.FK_Member_User_airc_id" />
+        <EntityTypeShape EntityType="RELICModel.Entry" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

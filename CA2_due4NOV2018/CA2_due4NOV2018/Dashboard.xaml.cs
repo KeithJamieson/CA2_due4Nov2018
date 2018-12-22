@@ -43,40 +43,40 @@ namespace CA2_due4NOV2018
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
+            refreshDashboard();
+            //User user = new User();
 
-            User user = new User();
+            //var query = (from c in db.Competitions
+            //             join m in db.Members on c.airc_id equals m.airc_id
+            //             join rc in db.Clubs on c.club_id equals rc.club_id
+            //             where c.competition_status == "S" && c.competition_date >= currentDate
+            //                                && c.competition_date.Year == currentyear
+            //                                orderby c.competition_date ascending
+            //                                select new
+            //                                {
+            //                                    next_competition_date = c.competition_date,
+            //                                    c.competition_id,
+            //                                    c.competition_name,
+            //                                    c.competition_type,
+            //                                    competition_venue     = c.venue,
+            //                                    Secretary = c.Member.first_name + " " + c.Member.last_name,
+            //                                    hosting_club=rc.clubname,
+            //                                    secretary_airc_id = m.airc_id,
+            //                                    hosting_club_id = c.club_id
+            //                                }).Take(1);
 
-            var query = (from c in db.Competitions
-                         join m in db.Members on c.airc_id equals m.airc_id
-                         join rc in db.Clubs on c.club_id equals rc.club_id
-                         where c.competition_status == "S" && c.competition_date >= currentDate
-                                            && c.competition_date.Year == currentyear
-                                            orderby c.competition_date ascending
-                                            select new
-                                            {
-                                                next_competition_date = c.competition_date,
-                                                c.competition_id,
-                                                c.competition_name,
-                                                c.competition_type,
-                                                competition_venue     = c.venue,
-                                                Secretary = c.Member.first_name + " " + c.Member.last_name,
-                                                hosting_club=rc.clubname,
-                                                secretary_airc_id = m.airc_id,
-                                                hosting_club_id = c.club_id
-                                            }).Take(1);
-
-            foreach (var record in query  )
-            {
-                tbxCompetitionDate.Text = record.next_competition_date.ToString();
-                tbxCompetitionName.Text = record.competition_name;
-                tbxCompetitionVenue.Text = record.competition_venue;
-                tbxCompetitionSecretary.Text = record.Secretary;
-                tbxHostingClub.Text = record.hosting_club;
-                competition_id = record.competition_id;
-                competition_type = record.competition_type;
-                secretary_airc_id = record.secretary_airc_id;
-                hosting_club_id = record.hosting_club_id;
-            }
+            //foreach (var record in query  )
+            //{
+            //    tbxCompetitionDate.Text = record.next_competition_date.ToString();
+            //    tbxCompetitionName.Text = record.competition_name;
+            //    tbxCompetitionVenue.Text = record.competition_venue;
+            //    tbxCompetitionSecretary.Text = record.Secretary;
+            //    tbxHostingClub.Text = record.hosting_club;
+            //    competition_id = record.competition_id;
+            //    competition_type = record.competition_type;
+            //    secretary_airc_id = record.secretary_airc_id;
+            //    hosting_club_id = record.hosting_club_id;
+            //}
 
 
             if (member_role == "M") 
@@ -120,15 +120,15 @@ namespace CA2_due4NOV2018
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
             }
 
-            //if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
-            //{
-                //if (secretary_airc_id == airc_id)
-                //{
-                //    btnOpenCompetition.Visibility = Visibility.Visible;
-                //}
-            //}
+            if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
+            {
+                if (secretary_airc_id == airc_id)
+                {
+                    btnOpenCompetition.Visibility = Visibility.Visible;
+                }
+            }
 
-            btnOpenCompetition.Visibility = Visibility.Visible;  //temporary
+           // btnOpenCompetition.Visibility = Visibility.Visible;  //temporary
         }
 
  
@@ -195,7 +195,26 @@ namespace CA2_due4NOV2018
                 runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
                 runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
                 runcompetition.competition_id = competition_id;
-                runcompetition.ShowDialog();
+
+                Competition  competition = new Competition();
+               foreach (var thiscompetition in db.Competitions.Where( t => t.competition_id == competition_id))
+                    {
+                       thiscompetition.competition_status = "O";
+                    }
+
+                    int SaveSuccess = db.SaveChanges();
+
+                if (SaveSuccess == 1)
+                {
+                    runcompetition.ShowDialog();
+                    refreshDashboard();
+                }
+                else
+                {
+
+                        MessageBox.Show("Unable to Open Competition ");
+                }
+               // db.SaveChanges();
 
             }
             else
@@ -207,7 +226,7 @@ namespace CA2_due4NOV2018
             AddCompetition addCompetition = new AddCompetition();
             addCompetition.hosting_club_id = club_id;
             addCompetition.ShowDialog();
-
+            refreshDashboard();
         }
 
         private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
@@ -216,9 +235,46 @@ namespace CA2_due4NOV2018
             viewCompetitions.hosting_club_id = hosting_club_id;
             viewCompetitions.club_id = club_id;
             viewCompetitions.ShowDialog();
+
         }
 
+        private void refreshDashboard()
+        {
+            User user = new User();
 
+            var query = (from c in db.Competitions
+                         join m in db.Members on c.airc_id equals m.airc_id
+                         join rc in db.Clubs on c.club_id equals rc.club_id
+                         where c.competition_status == "S" && c.competition_date >= currentDate
+                                            && c.competition_date.Year == currentyear
+                         orderby c.competition_date ascending
+                         select new
+                         {
+                             next_competition_date = c.competition_date,
+                             c.competition_id,
+                             c.competition_name,
+                             c.competition_type,
+                             competition_venue = c.venue,
+                             Secretary = c.Member.first_name + " " + c.Member.last_name,
+                             hosting_club = rc.clubname,
+                             secretary_airc_id = m.airc_id,
+                             hosting_club_id = c.club_id
+                         }).Take(1);
+
+            foreach (var record in query)
+            {
+                tbxCompetitionDate.Text = record.next_competition_date.ToString();
+                tbxCompetitionName.Text = record.competition_name;
+                tbxCompetitionVenue.Text = record.competition_venue;
+                tbxCompetitionSecretary.Text = record.Secretary;
+                tbxHostingClub.Text = record.hosting_club;
+                competition_id = record.competition_id;
+                competition_type = record.competition_type;
+                secretary_airc_id = record.secretary_airc_id;
+                hosting_club_id = record.hosting_club_id;
+            }
+
+        }
 
     }
 

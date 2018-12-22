@@ -34,22 +34,13 @@ namespace CA2_due4NOV2018
         public string XC { get; set; }
     
         public virtual Club Club { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Competition> Competitions { get; set; }
         public virtual Grade Grade { get; set; }
         public virtual Grade Grade1 { get; set; }
         public virtual Grade Grade2 { get; set; }
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Competition> Competitions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leaderboard> Leaderboards { get; set; }
-
-        public string Secretary {
-            get
-            {
-               // MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
-                return $"{first_name} {last_name}";
-
-            }        
-        }
+        public virtual User User { get; set; }
     }
 }

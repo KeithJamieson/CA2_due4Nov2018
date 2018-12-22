@@ -88,8 +88,8 @@ namespace CA2_due4NOV2018
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
 
-            string currentUser = tbxUsername.Text;
-            string currentPassword = tbxPassword.Password;
+            string currentUser = tbxUsername.Text.Trim();
+            string currentPassword = tbxPassword.Password.Trim();
 
             if (activeTab == "Logon")
             {
@@ -97,8 +97,8 @@ namespace CA2_due4NOV2018
 
                 var query = (from u in db.Users 
                              join m in db.Members on u.airc_id equals m.airc_id
-                             where u.username == tbxUsername.Text 
-                             && u.userpassword  == tbxPassword.Password
+                             where u.username == currentUser
+                             && u.userpassword  == currentPassword
                              select new
                              {
                                  m.role,
@@ -128,6 +128,8 @@ namespace CA2_due4NOV2018
                     MessageBox.Show($"Incorrect username or Password");
 
                 }
+                // We need to ensure that application is executed gracefully
+                this.Close();
             }
             else if (activeTab == "Register")
             {
@@ -157,7 +159,7 @@ namespace CA2_due4NOV2018
                  tbxPhone.Text,
                  tbxEmail.Text);
 
-                //     SaveRegistration();
+                 SaveRegistration();
 
                 MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
                 this.Close();

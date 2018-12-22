@@ -14,6 +14,7 @@ namespace CA2_due4NOV2018
     
     public partial class Entry
     {
+        public int entry_id { get; set; }
         public int competition_id { get; set; }
         public int airc_id { get; set; }
         public string Horse { get; set; }
@@ -22,10 +23,6 @@ namespace CA2_due4NOV2018
         public string clubname { get; set; }
         public string grade { get; set; }
         public int points { get; set; }
-    
-        public virtual Competition Competition { get; set; }
-        public virtual Entry Entry1 { get; set; }
-        public virtual Entry Entry2 { get; set; }
-        public virtual Grade Grade1 { get; set; }
+        public Nullable<int> place { get; set; }
     }
 }

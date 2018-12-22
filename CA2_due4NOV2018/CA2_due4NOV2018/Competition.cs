@@ -14,13 +14,6 @@ namespace CA2_due4NOV2018
     
     public partial class Competition
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Competition()
-        {
-            this.Leaderboards = new HashSet<Leaderboard>();
-            this.Entries = new HashSet<Entry>();
-        }
-    
         public int competition_id { get; set; }
         public string competition_name { get; set; }
         public int club_id { get; set; }
@@ -32,9 +25,5 @@ namespace CA2_due4NOV2018
     
         public virtual Club Club { get; set; }
         public virtual Member Member { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Leaderboard> Leaderboards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entry> Entries { get; set; }
     }
 }
