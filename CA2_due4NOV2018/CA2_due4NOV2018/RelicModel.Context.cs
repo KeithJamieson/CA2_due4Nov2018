@@ -28,9 +28,9 @@ namespace CA2_due4NOV2018
         public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Competition> Competitions { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
-        public virtual DbSet<Leaderboard> Leaderboards { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Entry> Entries { get; set; }
+        public virtual DbSet<Leaderboard> Leaderboards { get; set; }
     }
 }

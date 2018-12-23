@@ -15,7 +15,6 @@ namespace CA2_due4NOV2018
     public partial class Leaderboard
     {
         public int leaderboard_id { get; set; }
-        public int competition_id { get; set; }
         public int airc_id { get; set; }
         public string competition_type { get; set; }
         public string grade { get; set; }

@@ -114,6 +114,7 @@ namespace CA2_due4NOV2018
                     MainDashboard maindashboard = new MainDashboard();
                     this.Hide();
                     close = true;
+                    maindashboard.currentPassword = currentPassword;
                     maindashboard.tbxUsername.Text = record.username;
                     maindashboard.airc_id = record.airc_id;
                     maindashboard.member_role = record.role;

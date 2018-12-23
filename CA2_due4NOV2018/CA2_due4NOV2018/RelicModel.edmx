@@ -51,8 +51,7 @@
           <Key>
             <PropertyRef Name="leaderboard_id" />
           </Key>
-          <Property Name="leaderboard_id" Type="int" Nullable="false" />
-          <Property Name="competition_id" Type="int" Nullable="false" />
+          <Property Name="leaderboard_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="airc_id" Type="int" Nullable="false" />
           <Property Name="competition_type" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="grade" Type="varchar" MaxLength="2" Nullable="false" />
@@ -243,7 +242,6 @@
           <EntitySet Name="Clubs" EntityType="RELICModel.Club" />
           <EntitySet Name="Competitions" EntityType="RELICModel.Competition" />
           <EntitySet Name="Grades" EntityType="RELICModel.Grade" />
-          <EntitySet Name="Leaderboards" EntityType="RELICModel.Leaderboard" />
           <EntitySet Name="Members" EntityType="RELICModel.Member" />
           <EntitySet Name="Users" EntityType="RELICModel.User" />
           <AssociationSet Name="FK_Competition_Club_club_id" Association="RELICModel.FK_Competition_Club_club_id">
@@ -258,10 +256,6 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="Competition" EntitySet="Competitions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Leaderboard_Grade_grade" Association="RELICModel.FK_Leaderboard_Grade_grade">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="Leaderboard" EntitySet="Leaderboards" />
-          </AssociationSet>
           <AssociationSet Name="FK_Member_Grade_dr" Association="RELICModel.FK_Member_Grade_dr">
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Member" EntitySet="Members" />
@@ -274,15 +268,20 @@
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Member" EntitySet="Members" />
           </AssociationSet>
-          <AssociationSet Name="FK_Leaderboard_Member_airc_id" Association="RELICModel.FK_Leaderboard_Member_airc_id">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Leaderboard" EntitySet="Leaderboards" />
-          </AssociationSet>
           <AssociationSet Name="FK_Member_User_airc_id" Association="RELICModel.FK_Member_User_airc_id">
             <End Role="User" EntitySet="Users" />
             <End Role="Member" EntitySet="Members" />
           </AssociationSet>
           <EntitySet Name="Entries" EntityType="RELICModel.Entry" />
+          <EntitySet Name="Leaderboards" EntityType="RELICModel.Leaderboard" />
+          <AssociationSet Name="FK_Leaderboard_Grade_grade" Association="RELICModel.FK_Leaderboard_Grade_grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaderboard_Member_airc_id" Association="RELICModel.FK_Leaderboard_Member_airc_id">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Leaderboard" EntitySet="Leaderboards" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Club">
           <Key>
@@ -314,23 +313,10 @@
           </Key>
           <Property Name="Grade1" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Grade_Description" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Grade" ToRole="Leaderboard" />
           <NavigationProperty Name="Members" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Grade" ToRole="Member" />
           <NavigationProperty Name="Members1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Grade" ToRole="Member" />
           <NavigationProperty Name="Members2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Grade" ToRole="Member" />
-        </EntityType>
-        <EntityType Name="Leaderboard">
-          <Key>
-            <PropertyRef Name="leaderboard_id" />
-          </Key>
-          <Property Name="leaderboard_id" Type="Int32" Nullable="false" />
-          <Property Name="competition_id" Type="Int32" Nullable="false" />
-          <Property Name="airc_id" Type="Int32" Nullable="false" />
-          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Leaderboard" ToRole="Grade" />
-          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Leaderboard" ToRole="Member" />
+          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Grade" ToRole="Leaderboard" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -352,8 +338,8 @@
           <NavigationProperty Name="Grade" Relationship="RELICModel.FK_Member_Grade_dr" FromRole="Member" ToRole="Grade" />
           <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Member_Grade_sj" FromRole="Member" ToRole="Grade" />
           <NavigationProperty Name="Grade2" Relationship="RELICModel.FK_Member_Grade_xc" FromRole="Member" ToRole="Grade" />
-          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Member" ToRole="Leaderboard" />
           <NavigationProperty Name="User" Relationship="RELICModel.FK_Member_User_airc_id" FromRole="Member" ToRole="User" />
+          <NavigationProperty Name="Leaderboards" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Member" ToRole="Leaderboard" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -400,18 +386,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Leaderboard_Grade_grade">
-          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Grade1" />
-            </Principal>
-            <Dependent Role="Leaderboard">
-              <PropertyRef Name="grade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Member_Grade_dr">
           <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
           <End Type="RELICModel.Member" Role="Member" Multiplicity="*" />
@@ -448,18 +422,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Leaderboard_Member_airc_id">
-          <End Type="RELICModel.Member" Role="Member" Multiplicity="1" />
-          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="airc_id" />
-            </Principal>
-            <Dependent Role="Leaderboard">
-              <PropertyRef Name="airc_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Member_User_airc_id">
           <End Type="RELICModel.User" Role="User" Multiplicity="1" />
           <End Type="RELICModel.Member" Role="Member" Multiplicity="0..1" />
@@ -487,6 +449,42 @@
           <Property Name="points" Type="Int32" Nullable="false" />
           <Property Name="place" Type="Int32" />
         </EntityType>
+        <EntityType Name="Leaderboard">
+          <Key>
+            <PropertyRef Name="leaderboard_id" />
+          </Key>
+          <Property Name="leaderboard_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grade1" Relationship="RELICModel.FK_Leaderboard_Grade_grade" FromRole="Leaderboard" ToRole="Grade" />
+          <NavigationProperty Name="Member" Relationship="RELICModel.FK_Leaderboard_Member_airc_id" FromRole="Leaderboard" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_Leaderboard_Grade_grade">
+          <End Type="RELICModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaderboard_Member_airc_id">
+          <End Type="RELICModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="RELICModel.Leaderboard" Role="Leaderboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="airc_id" />
+            </Principal>
+            <Dependent Role="Leaderboard">
+              <PropertyRef Name="airc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -520,18 +518,6 @@
               <MappingFragment StoreEntitySet="Grade">
                 <ScalarProperty Name="Grade_Description" ColumnName="Grade_Description" />
                 <ScalarProperty Name="Grade1" ColumnName="Grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Leaderboards">
-            <EntityTypeMapping TypeName="RELICModel.Leaderboard">
-              <MappingFragment StoreEntitySet="Leaderboard">
-                <ScalarProperty Name="points" ColumnName="points" />
-                <ScalarProperty Name="grade" ColumnName="grade" />
-                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
-                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
-                <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -574,6 +560,17 @@
                 <ScalarProperty Name="airc_id" ColumnName="airc_id" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
                 <ScalarProperty Name="entry_id" ColumnName="entry_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaderboards">
+            <EntityTypeMapping TypeName="RELICModel.Leaderboard">
+              <MappingFragment StoreEntitySet="Leaderboard">
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

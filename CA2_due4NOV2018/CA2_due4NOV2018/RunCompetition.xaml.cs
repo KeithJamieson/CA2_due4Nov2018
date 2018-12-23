@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
 using System;
+using System.Data.Entity;
 
 namespace CA2_due4NOV2018
 {
@@ -119,66 +120,127 @@ namespace CA2_due4NOV2018
                 }
             }
         }
+        public class LeaderboardContext : DbContext
+        {
+            // public DbSet<Leaderboard> Orders { get; set; }
+
+            public DbSet<Leaderboard> Leaderboard { get; set; }
+            //public DbSet<Product> Products { get; set; }
+            //public DbSet<OrderLine> OrderLines { get; set; }
+
+        }
+ 
+            
+            
+            
+
         private void BtnUpdateLeaderBoard_Click(object sender, RoutedEventArgs e)
         {
-            string competition_status = "O";  // Competition is Open if user gets to this screen
+            string competition_status;
             Competition competition = new Competition();
+            Leaderboard leaderboard = new Leaderboard();
+
             //check to see if competition has been closed
             foreach (var record in db.Competitions.Where(t => t.competition_id == competition_id))
             {
 
                 competition_status = record.competition_status;
             }
-            if (competition_status == "C")
+
+
+            //var query = (from c in db.Competitions
+            //             join m in db.Members on c.airc_id equals m.airc_id
+            //             join en in db.Entries on m.airc_id equals en.airc_id                     
+            //             where c.competition_status != "Z" && c.competition_id == competition_id &
+            //             en.competition_id == c.competition_id
+            //             select new
+            //             {
+            //                 c.competition_type,
+            //                 en.grade,
+            //                 en.points,
+            //                 m.airc_id,
+            //                 c.club_id
+            //             });
+
+            var query = from en in db.Entries
+                        join c in db.Competitions on en.competition_id equals c.competition_id
+                        where c.competition_id == competition_id
+                        select new
+                        {
+                            c.competition_type,
+                            en.airc_id,
+                            en.points,
+                            en.grade
+                        };
+
+            foreach (var record in query)
             {
-                Leaderboard leaderboard = new Leaderboard();
-                foreach (var record in  db.Entries.Where (t=>t.competition_id == competition_id))
+                //attempt update for each record and if upate fails perform the insert
+                // This way we can add new records and update existing records as needed
+                Leaderboard myleaderboard = new Leaderboard();
+
+                myleaderboard.airc_id = record.airc_id;
+                myleaderboard.grade = record.grade;
+                myleaderboard.competition_type = record.competition_type;
+                myleaderboard.points = record.points;
+
+
+                //db.SaveChanges();
+                int SaveSuccess = db.SaveChanges();
+              if (SaveSuccess == 0)
                 {
-                   // leaderboard.competition_id = competition_id;
-                    leaderboard.airc_id = record.airc_id;
-                   // leaderboard.competition_type = record.competition_type;
-                    leaderboard.grade = record.grade;
-                    //nb change points to place
-                    if ( record.place == 1 )
-                    { 
-                        leaderboard.points = leaderboard.points + 14;
-                    }
-                    if (record.place == 2)
-                    {
-                        leaderboard.points = leaderboard.points + 12;
-                    }
-                    if (record.place == 3)
-                    {
-                        leaderboard.points = leaderboard.points + 10;
-                    }
-                    if (record.place == 4)
-                    {
-                        leaderboard.points = leaderboard.points + 8;
-                    }
-                    if (record.place == 5)
-                    {
-                        leaderboard.points = leaderboard.points + 6;
-                    }
-                    if (record.place == 6)
-                    {
-                        leaderboard.points = leaderboard.points + 4;
-                    }
-                    if (record.place > 6)
-                    {
-                        leaderboard.points = leaderboard.points + 2;
-                    }
-
-
-
-                }
+                    db.Entry(myleaderboard).State = System.Data.Entity.EntityState.Added;
+                    db.SaveChanges();
+                }  
             }
-            else
-            {
-                MessageBox.Show("Competition must first be closed");
 
-            }
+
+
+            //if (competition_status == "C")
+            //{
+               
+            //    foreach (var record in  db.Entries.Where (t=>t.competition_id == competition_id))
+            //    {
+            //       // leaderboard.competition_id = competition_id;
+            //        leaderboard.airc_id = record.airc_id;
+            //       // leaderboard.competition_type = record.competition_type;
+            //        leaderboard.grade = record.grade;
+            //        //nb change points to place
+                 
+            //        // insert record or update values of existing record. merge statement
+
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Competition must first be closed");
+
+            //}
         }
 
+        //public void InsertOrUpdate(Leaderboard leaderboard)
+        //{
+        //    using (var context = n())
+        //    {
+        //        context.Entry(blog).State = blog.BlogId == 0 ?
+        //                                   EntityState.Added :
+        //                                   EntityState.Modified;
+
+        //        context.SaveChanges();
+        //    }
+        //}
+        //public void Upsert(Leaderboard leaderboard)
+        //{
+        //    using (var context = new Leaderboard())
+        //    {
+        //        context.Leaderboard1(L).
+        //        context.Entry(Leaderboards).State = leaderboard.leaderboard_id == 0 ?
+        //                                   EntityState.Added :
+        //                                   EntityState.Modified;
+
+        //        context.SaveChanges();
+        //    }
+        //}
         private void BtnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
         {
             stkAssignFinishingPosition.Visibility = Visibility.Visible;

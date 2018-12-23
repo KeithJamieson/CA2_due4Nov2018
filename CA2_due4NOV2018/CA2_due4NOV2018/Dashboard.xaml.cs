@@ -35,6 +35,7 @@ namespace CA2_due4NOV2018
         public string competition_type;
         public string member_role;
         public string member_status;
+        public string currentPassword;
         public MainDashboard()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace CA2_due4NOV2018
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
             refreshDashboard();
             //User user = new User();
 
@@ -134,7 +135,13 @@ namespace CA2_due4NOV2018
  
         private void BtnChangeMyPassword_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Functionality has not been implemented", "nChangeMyPassword", MessageBoxButton.OK );
+
+            ChangePassword changepassword = new ChangePassword();
+            changepassword.username = tbxUsername.Text.Trim();
+            changepassword.currentPassword = currentPassword;
+            changepassword.ShowDialog();
+            
+
         }
 
  
