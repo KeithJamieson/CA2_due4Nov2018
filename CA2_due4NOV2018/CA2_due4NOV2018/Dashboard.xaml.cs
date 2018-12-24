@@ -140,22 +140,27 @@ namespace CA2_due4NOV2018
             changepassword.username = tbxUsername.Text.Trim();
             changepassword.currentPassword = currentPassword;
             changepassword.ShowDialog();
+            //if password is changed on password screen we need it to be reflected on dashboard screen
+            currentPassword = changepassword.currentPassword;
             
-
         }
 
  
 
 
-
         private void BtnModifyMyDetails_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Functionality has not been implemented");
+            ModifyUserDetails modifyUserDetails = new ModifyUserDetails();
+            modifyUserDetails.Username = tbxUsername.Text;
+            modifyUserDetails.ShowDialog();
         }
 
         private void BtnModifyMemberDetails_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Functionality has not been implemented");
+            ModifyUserDetails modifymydetails = new ModifyUserDetails();
+   //         ModifyUserdetails.Username = tbxUsername.Text;
+   //         ModifyUserdetails.ShowDialog();
         }
 
 

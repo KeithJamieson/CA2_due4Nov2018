@@ -95,6 +95,9 @@
     <Compile Include="Member.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModifyUserDetails.xaml.cs">
+      <DependentUpon>ModifyUserDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Relic.xaml.cs">
       <DependentUpon>Relic.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddRiderEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModifyUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
