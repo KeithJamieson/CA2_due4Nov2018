@@ -81,6 +81,32 @@
           <Property Name="userpassword" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="airc_id" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="leaderboard_v">
+          <Key>
+            <PropertyRef Name="leaderboard_id" />
+            <PropertyRef Name="airc_id" />
+            <PropertyRef Name="competition_type" />
+            <PropertyRef Name="competition_date" />
+            <PropertyRef Name="first_name" />
+            <PropertyRef Name="last_name" />
+            <PropertyRef Name="Horse" />
+            <PropertyRef Name="clubname" />
+            <PropertyRef Name="points" />
+            <PropertyRef Name="grade" />
+          </Key>
+          <Property Name="leaderboard_id" Type="int" Nullable="false" />
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="competition_type" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="competition_date" Type="date" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Horse" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="clubname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Competition_Club_club_id">
           <End Role="Club" Type="Self.Club" Multiplicity="1" />
           <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
@@ -197,6 +223,20 @@
           <EntitySet Name="Leaderboard" EntityType="Self.Leaderboard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leaderboard_v" EntityType="Self.leaderboard_v" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [leaderboard_v].[leaderboard_id] AS [leaderboard_id], 
+    [leaderboard_v].[airc_id] AS [airc_id], 
+    [leaderboard_v].[competition_type] AS [competition_type], 
+    [leaderboard_v].[competition_date] AS [competition_date], 
+    [leaderboard_v].[first_name] AS [first_name], 
+    [leaderboard_v].[last_name] AS [last_name], 
+    [leaderboard_v].[Horse] AS [Horse], 
+    [leaderboard_v].[clubname] AS [clubname], 
+    [leaderboard_v].[points] AS [points], 
+    [leaderboard_v].[grade] AS [grade]
+    FROM [dbo].[leaderboard_v] AS [leaderboard_v]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Competition_Club_club_id" Association="Self.FK_Competition_Club_club_id">
             <End Role="Club" EntitySet="Club" />
             <End Role="Competition" EntitySet="Competition" />
@@ -282,6 +322,7 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="Leaderboard" EntitySet="Leaderboards" />
           </AssociationSet>
+          <EntitySet Name="leaderboard_v" EntityType="RELICModel.leaderboard_v" />
           </EntityContainer>
         <EntityType Name="Club">
           <Key>
@@ -485,6 +526,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="leaderboard_v">
+          <Key>
+            <PropertyRef Name="leaderboard_id" />
+            <PropertyRef Name="airc_id" />
+            <PropertyRef Name="competition_type" />
+            <PropertyRef Name="competition_date" />
+            <PropertyRef Name="first_name" />
+            <PropertyRef Name="last_name" />
+            <PropertyRef Name="Horse" />
+            <PropertyRef Name="clubname" />
+            <PropertyRef Name="points" />
+            <PropertyRef Name="grade" />
+          </Key>
+          <Property Name="leaderboard_id" Type="Int32" Nullable="false" />
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="competition_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -568,6 +633,22 @@
               <MappingFragment StoreEntitySet="Leaderboard">
                 <ScalarProperty Name="points" ColumnName="points" />
                 <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+                <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaderboard_v">
+            <EntityTypeMapping TypeName="RELICModel.leaderboard_v">
+              <MappingFragment StoreEntitySet="leaderboard_v">
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="clubname" ColumnName="clubname" />
+                <ScalarProperty Name="Horse" ColumnName="Horse" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="competition_date" ColumnName="competition_date" />
                 <ScalarProperty Name="competition_type" ColumnName="competition_type" />
                 <ScalarProperty Name="airc_id" ColumnName="airc_id" />
                 <ScalarProperty Name="leaderboard_id" ColumnName="leaderboard_id" />

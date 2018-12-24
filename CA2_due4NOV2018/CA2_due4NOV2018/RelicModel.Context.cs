@@ -32,5 +32,6 @@ namespace CA2_due4NOV2018
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<Leaderboard> Leaderboards { get; set; }
+        public virtual DbSet<leaderboard_v> leaderboard_v { get; set; }
     }
 }

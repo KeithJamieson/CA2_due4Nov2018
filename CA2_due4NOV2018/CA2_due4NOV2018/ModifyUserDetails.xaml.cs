@@ -35,7 +35,7 @@ namespace CA2_due4NOV2018
               
                 member.email = tbxEmail.Text.Trim();
                 member.phone = tbxPhone.Text.Trim();
-                member.first_name = tbxPhone.Text.Trim();
+                member.first_name = tbxFirstname.Text.Trim();
                 member.last_name = tbxLastName.Text.Trim();
                 member.DR = cboDR.Text.Trim();
                 member.SJ = cboSJ.Text.Trim();

@@ -24,14 +24,19 @@ namespace CA2_due4NOV2018
             InitializeComponent();
         }
         RELICEntities db = new RELICEntities();
-        List<Leaderboard> lstleaderboard = new List<Leaderboard>();
-
-
+        //List<Leaderboard> lstleaderboard = new List<Leaderboard>();
+        List<leaderboard_v> lstleaderboard = new List<leaderboard_v>();
+       // leaderboard_v leaderboard_v = new leaderboard_v();        
+        int currentyear = DateTime.Now.Year;
+        string competition_type;
         private void RefreshLeaderboard()
         {
+            //competition_type = cboCompetitionType.SelectedValue.ToString();
+            competition_type = "DR";
             lstleaderboard.Clear();
-
-            foreach (var record in db.Leaderboards.Where(t => t.leaderboard_id >= 1))
+            //cboCompetitionType
+            foreach (var  record in db.leaderboard_v.Where(t => t.competition_type == competition_type &&
+                                                          t.competition_date.Year ==  currentyear))
             {
                 lstleaderboard.Add(record);
 

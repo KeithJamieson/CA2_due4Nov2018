@@ -92,6 +92,9 @@
     <Compile Include="Leaderboard.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="leaderboard_v.cs">
+      <DependentUpon>RelicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Member.cs">
       <DependentUpon>RelicModel.tt</DependentUpon>
     </Compile>
