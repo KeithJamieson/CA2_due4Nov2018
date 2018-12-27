@@ -1,0 +1,45 @@
+USE [RELIC]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UpdateLeaderboard]    Script Date: 27/12/2018 10:46:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[UpdateLeaderboard]
+	-- Add the parameters for the stored procedure here
+	@airc_id  int, 
+	@competition_points   int,
+	@grade varchar(2),
+	@competition_type varchar(2)
+AS
+BEGIN
+declare @RowCount  integer;
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	--SET NOCOUNT ON;
+	update leaderboard
+	set points = ISNULL(points,0) + @competition_points
+	where airc_id = @airc_id
+	and   grade   = @grade;
+    -- Insert statements for procedure here
+
+	if @@ROWCOUNT = 0 
+	  insert into leaderboard
+	  (airc_id,
+	  competition_type,
+	  grade,
+	  points
+	  )
+  values( @airc_id,
+        @competition_points,
+		@grade,
+		@competition_type
+	 );     
+
+	 return @@ROWCOUNT;
+END
+GO
+

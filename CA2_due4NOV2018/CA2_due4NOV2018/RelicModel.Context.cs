@@ -12,6 +12,8 @@ namespace CA2_due4NOV2018
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RELICEntities : DbContext
     {
@@ -33,5 +35,26 @@ namespace CA2_due4NOV2018
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<Leaderboard> Leaderboards { get; set; }
         public virtual DbSet<leaderboard_v> leaderboard_v { get; set; }
+    
+        public virtual int UpdateLeaderboard(Nullable<int> airc_id, Nullable<int> competition_points, string grade, string competition_type)
+        {
+            var airc_idParameter = airc_id.HasValue ?
+                new ObjectParameter("airc_id", airc_id) :
+                new ObjectParameter("airc_id", typeof(int));
+    
+            var competition_pointsParameter = competition_points.HasValue ?
+                new ObjectParameter("competition_points", competition_points) :
+                new ObjectParameter("competition_points", typeof(int));
+    
+            var gradeParameter = grade != null ?
+                new ObjectParameter("grade", grade) :
+                new ObjectParameter("grade", typeof(string));
+    
+            var competition_typeParameter = competition_type != null ?
+                new ObjectParameter("competition_type", competition_type) :
+                new ObjectParameter("competition_type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateLeaderboard", airc_idParameter, competition_pointsParameter, gradeParameter, competition_typeParameter);
+        }
     }
 }

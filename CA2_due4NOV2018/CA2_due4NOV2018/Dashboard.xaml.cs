@@ -45,39 +45,7 @@ namespace CA2_due4NOV2018
         {
            
             refreshDashboard();
-            //User user = new User();
 
-            //var query = (from c in db.Competitions
-            //             join m in db.Members on c.airc_id equals m.airc_id
-            //             join rc in db.Clubs on c.club_id equals rc.club_id
-            //             where c.competition_status == "S" && c.competition_date >= currentDate
-            //                                && c.competition_date.Year == currentyear
-            //                                orderby c.competition_date ascending
-            //                                select new
-            //                                {
-            //                                    next_competition_date = c.competition_date,
-            //                                    c.competition_id,
-            //                                    c.competition_name,
-            //                                    c.competition_type,
-            //                                    competition_venue     = c.venue,
-            //                                    Secretary = c.Member.first_name + " " + c.Member.last_name,
-            //                                    hosting_club=rc.clubname,
-            //                                    secretary_airc_id = m.airc_id,
-            //                                    hosting_club_id = c.club_id
-            //                                }).Take(1);
-
-            //foreach (var record in query  )
-            //{
-            //    tbxCompetitionDate.Text = record.next_competition_date.ToString();
-            //    tbxCompetitionName.Text = record.competition_name;
-            //    tbxCompetitionVenue.Text = record.competition_venue;
-            //    tbxCompetitionSecretary.Text = record.Secretary;
-            //    tbxHostingClub.Text = record.hosting_club;
-            //    competition_id = record.competition_id;
-            //    competition_type = record.competition_type;
-            //    secretary_airc_id = record.secretary_airc_id;
-            //    hosting_club_id = record.hosting_club_id;
-            //}
 
 
             if (member_role == "M") 

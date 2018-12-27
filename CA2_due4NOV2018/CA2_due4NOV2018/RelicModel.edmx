@@ -215,6 +215,43 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateLeaderboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="airc_id" Type="int" Mode="In" />
+          <Parameter Name="competition_points" Type="int" Mode="In" />
+          <Parameter Name="grade" Type="varchar" Mode="In" />
+          <Parameter Name="competition_type" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="RELICModelStoreContainer">
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
@@ -323,6 +360,12 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
             <End Role="Leaderboard" EntitySet="Leaderboards" />
           </AssociationSet>
           <EntitySet Name="leaderboard_v" EntityType="RELICModel.leaderboard_v" />
+          <FunctionImport Name="UpdateLeaderboard">
+            <Parameter Name="airc_id" Mode="In" Type="Int32" />
+            <Parameter Name="competition_points" Mode="In" Type="Int32" />
+            <Parameter Name="grade" Mode="In" Type="String" />
+            <Parameter Name="competition_type" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Club">
           <Key>
@@ -655,6 +698,7 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateLeaderboard" FunctionName="RELICModel.Store.UpdateLeaderboard" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
