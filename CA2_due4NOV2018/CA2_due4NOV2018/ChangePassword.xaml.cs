@@ -9,7 +9,7 @@ namespace CA2_due4NOV2018
     public partial class ChangePassword : Window
     {
         RELICEntities db = new RELICEntities();
-       // ChangePassword changepassword = new ChangePassword();
+   
         public string currentPassword;
         public string username;
         public ChangePassword()
@@ -22,14 +22,14 @@ namespace CA2_due4NOV2018
             User user = new User();
 
             user.userpassword = currentPassword;
-         //   db.Entry(user).State = System.Data.Entity.EntityState.Added;
-
+        
+            // detrmine that the oldPassword entered is valid
             if (tbxOldPassword.Password == currentPassword) 
             {
+                // confirm new passowrd is confirmed corretcly
                 if (tbxNewPassword.Password == tbxConfirmPassword.Password)
                 {
-                    //foreach (var record in db.Competitions.Where(t => t.competition_id == competition_id))
-                        //   db.Entry(user).State = System.Data.EntityState.Modified;
+                    
                     foreach (var record in db.Users.Where (t=>t.username == username) )
                     {
                         record.userpassword = tbxConfirmPassword.Password.Trim();
@@ -37,6 +37,7 @@ namespace CA2_due4NOV2018
                     int Success = db.SaveChanges();
                     if (Success == 1)
                     {
+                        // after we change password we set the currentPassword to the modified password.
                         currentPassword = tbxConfirmPassword.Password.Trim();
                         MessageBox.Show("Password has been successfully updated.  ");                       
                         this.Close();

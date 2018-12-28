@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
-        Title="AddClub" Height="450" Width="800">
+        Title="AddClub" Height="350" Width="750">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -27,25 +27,38 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <!-- StackPanel for labels -->
+        <!-- Row 0 -->
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="9">
             <Label Content= "Riding Club : "   HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
-            
+            <!-- Row 1 -->
             <Label Content= "Club Secretary Details"   HorizontalAlignment = "Right"   Grid.Row="1" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" FontWeight="Bold"/>
+            <!-- Row 2 -->            
             <Label Content= "Username : "   HorizontalAlignment = "Right"   Grid.Row="2" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+            <!-- Row 3 -->
             <Label Content= "Password : "   HorizontalAlignment = "Right"   Grid.Row="3" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+            <!-- Row 4 -->
             <Label Content= "First Name : "      HorizontalAlignment = "Right"   Grid.Row="4" Grid.Column="0" MinWidth="200" MinHeight="26"/>
+            <!-- Row 5 -->
             <Label Content= "Last Name : "      HorizontalAlignment = "Right"   Grid.Row="5" Grid.Column="0" MinWidth="200" MinHeight="26"/>
+            <!-- Row 6 -->
             <Label Content= "AIRC ID : "      HorizontalAlignment = "Right"   Grid.Row="6" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
-            
+            <!-- Row 7 -->
             <Label Content= "Phone : "      HorizontalAlignment = "Right"   Grid.Row="7" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
+            <!-- Row 8 -->
             <Label Content= "Email : "   HorizontalAlignment = "Right"   Grid.Row="8" Grid.Column="0" MinWidth="200" MinHeight="26" Visibility="Visible" />
         </StackPanel>
+        <!--  Statckpanel for Grade Selection Started on Row 2 spanning 3 columns-->
         <StackPanel Grid.Row="2" Grid.Column="2" Grid.RowSpan="3" >
+            <!--  Row 0 of StackPanel -->
             <Label Content= "DR Grade : "  HorizontalContentAlignment="Right"   HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible"  />
+            <!--  Row 1 of StackPanel -->
             <Label Content= "SJ Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
+            <!--  Row 2 of StackPanel -->
             <Label Content= "XC Grade : "   HorizontalContentAlignment = "Right"  HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
         </StackPanel>
+        <!-- Stackpanel for ComboBoxes started on Row 2 column 3 -->
         <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" >
+            <!-- Row 0 of StackPanel. Used to assign rider Grades for Dressage -->
             <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboDR_SelectionChanged" >
                 <ComboBoxItem Content= "P"   />
                 <ComboBoxItem Content= "AP"   />
@@ -54,6 +67,7 @@
                 <ComboBoxItem Content= "O"   />
                 <ComboBoxItem Content= "AO"   />
             </ComboBox>
+            <!-- Row 1 of StackPanel. Used to assign rider Grades for SJ-->
             <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="cboSJ_SelectionChanged">
                 <ComboBoxItem Content= "P"   />
                 <ComboBoxItem Content= "AP"   />
@@ -62,6 +76,7 @@
                 <ComboBoxItem Content= "O"   />
                 <ComboBoxItem Content= "AO"   />
             </ComboBox>
+            <!-- Row 2 of StackPanel. Used to assign rider Grades for XC -->
             <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboXC_SelectionChanged">
                 <ComboBoxItem Content= "P"   />
                 <ComboBoxItem Content= "AP"   />
@@ -71,14 +86,24 @@
                 <ComboBoxItem Content= "AO"   />
             </ComboBox>
         </StackPanel>
+        <!-- ROW 0 Name of New Riding Club-->
         <TextBox   Name="tbxClubName"   HorizontalAlignment = "Left"   Grid.Row="0" Grid.Column="1" MinWidth="200" MinHeight="26"/>
+        <!-- StackPanel for Club Secretary Details  -->
+        <!-- Row 2 to match  label -->
         <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="7" >
-            <TextBox  Name="tbxUsername" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
-            <PasswordBox  Name="tbxPassword" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <!-- Row 2 to match  label -->
+            <TextBox  Name="tbxUsername" HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <!-- Row 3 to match  label -->
+            <PasswordBox  Name="tbxPassword" HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <!-- Row 4 to match  label -->
             <TextBox Name="tbxFirstName" HorizontalAlignment = "Left"   Grid.Row="4" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <!-- Row 5 to match  label -->
             <TextBox Name="tbxLastName" HorizontalAlignment = "Left"   Grid.Row="5" Grid.Column="1" MinWidth="200"  MinHeight="26"/>
+            <!-- Row 6 to match  label -->
             <TextBox Name="tbxAIRC_ID"   HorizontalAlignment = "Left"   Grid.Row="6" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <!-- Row 7 to match  label -->
             <TextBox Name="tbxPhone"    HorizontalAlignment = "Left"   Grid.Row="7" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible" />
+            <!-- Row 8 to match  label -->
             <TextBox Name="tbxEmail"   HorizontalAlignment = "Left"   Grid.Row="8" Grid.Column="1" MinWidth="200"  MinHeight="26"   Visibility="Visible"/>
         </StackPanel>
 

@@ -9,13 +9,15 @@ namespace CA2_due4NOV2018
     /// </summary>
     public partial class AddClub : Window
     {
-
+        //set up access to database
         RELICEntities db = new RELICEntities();
+        // declare variables for use with combobox grades 
         string DRgrade;
         string SJgrade;
         string XCgrade;
-        int airc_id;
-        int club_id;
+        
+        int airc_id;  //riding club id 
+        int club_id;  // id of newly created club 
         string member_status = "A"; //Club Secretaries automatically approved
         string role = "S"; //Role sceretary is assigned
         public AddClub()
@@ -25,12 +27,15 @@ namespace CA2_due4NOV2018
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            // populate clubname from textbox
             string clubname = tbxClubName.Text.Trim();
-            airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
+            // convert value form textbox to a 32 bit inetger
+            airc_id = Convert.ToInt32(tbxAIRC_ID.Text.Trim());
 
      
-            RegisterClub(clubname);
-            RegisterUser(airc_id,tbxUsername.Text.Trim(),tbxPassword.Password.Trim());
+            RegisterClub(clubname); // create the club entry in the club table
+            RegisterUser(airc_id,tbxUsername.Text.Trim(),tbxPassword.Password.Trim());    //create the logon information 
+            // Create the memnber entry
             RegisterMember(
                 airc_id,
                 club_id,
@@ -44,6 +49,7 @@ namespace CA2_due4NOV2018
                 tbxPhone.Text.Trim(),
                 tbxEmail.Text.Trim()
                 );
+
             int result = db.SaveChanges();
             if (result > 0)
             {
@@ -51,7 +57,7 @@ namespace CA2_due4NOV2018
             }
             else
             {
-               // db.Entry(newclub).State = System.Data.Entity.EntityState.Deleted;
+                // We should really delete the club record if there is an error. ignore it for now
                 MessageBox.Show($"There was an error in Saving the Data. Please Contact Support ");
             }
             this.Close();
@@ -59,21 +65,24 @@ namespace CA2_due4NOV2018
         
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            //abort opertaion and return to Dashboard
             this.Close();
         }
 
         private void RegisterClub(string clubname)
         {
+            // create database entry for clubname
             Club newclub = new Club();
             newclub.clubname = clubname;
             db.Entry(newclub).State = System.Data.Entity.EntityState.Added;
-            db.SaveChanges();
-            club_id = db.Entry(newclub).Entity.club_id;
+            db.SaveChanges();  // in order to get the club_id returned from identity column, we need to save the changes to the database.  Using a sequence wouldprobably be better.
+            club_id = db.Entry(newclub).Entity.club_id;  // obtain the club_id from the newly created club. 
           
         }
 
         private void DeleteClub(int club_id)
         {
+            // was going to call this in the event of an error in registering club secretaryt after club has been created
             Club newclub = new Club();
             newclub.club_id = club_id;
             db.Entry(newclub).State = System.Data.Entity.EntityState.Deleted;
@@ -84,7 +93,7 @@ namespace CA2_due4NOV2018
         private void RegisterUser(int airc_id, string username, string password)
         {
 
-
+            // method to create login details and link to member table.  Should have just passed in the User Class
             User user = new User();
              user.airc_id = airc_id;
             user.username = username;
@@ -94,6 +103,7 @@ namespace CA2_due4NOV2018
 
         private void RegisterMember(int airc_id, int club_id, string memberStatus, string role, string firstname, string lastname, string DR, string SJ, string XC, string phone, string email)
         {
+            // create member record. Should have just passed in the Mmeber Class
 
             Member member = new Member();
             member.airc_id = airc_id;
@@ -115,7 +125,7 @@ namespace CA2_due4NOV2018
 
         private void CboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //set variable to selected vaue from ComboBox
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboDR.SelectedItem;
             DRgrade = item.Content.ToString();
@@ -124,7 +134,7 @@ namespace CA2_due4NOV2018
 
         private void cboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //set variable to selected vaue from ComboBox
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboSJ.SelectedItem;
             SJgrade = item.Content.ToString();
@@ -134,17 +144,11 @@ namespace CA2_due4NOV2018
 
         private void CboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //set variable to selected vaue from ComboBox
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboXC.SelectedItem;
             XCgrade = item.Content.ToString();
         }
 
-
-        //private void SaveClub(Club)
-        //{
-        //    db.Entry(Club).State = System.Data.Entity.EntityState.Added;
-        //    //            db.Entry(Member).State = System.Data.Entity.EntityState.Added;
-        //    db.SaveChanges();
-        //}
     }
 }

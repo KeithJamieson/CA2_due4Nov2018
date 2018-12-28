@@ -22,11 +22,12 @@ namespace CA2_due4NOV2018
         List<EntrantsPerCompetition_v> lstEntrantsPerCompetitions = new List<EntrantsPerCompetition_v>();
         private void RunReport_Click(object sender, RoutedEventArgs e)
         {
+            // get year in int a scan not use conversiuon functions in lambda expression.
             selectedYear = Convert.ToInt32( tbxYear.Text.Trim());
             stkReportEntrantsperCompetition.Visibility = Visibility.Visible;         
             if (report == "Entrants per Competition")
             {
-
+                // clear list box
             
                 lstEntrantsPerCompetitions.Clear();
                 foreach (var record in db.EntrantsPerCompetition_v.Where(t=>t.competition_date.Year == selectedYear))

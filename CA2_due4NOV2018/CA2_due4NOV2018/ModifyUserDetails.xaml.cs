@@ -75,10 +75,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private enum SelectedGrade
-        {
-            P, AP, I,AI,O,AO
-        };
+      // return index based on which grade has been highlighted. Probably a better way gto do this.
 
         int GetSelectedIndex(string grade)
         {
@@ -109,16 +106,18 @@ namespace CA2_due4NOV2018
             return -1;
         }
 
+  
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-
+            // Get Member Details
             var query = from u in db.Users
                         join m in db.Members on u.airc_id equals m.airc_id
                         where u.username == Username 
              select new { m.first_name,
                           m.last_name,
                           m.member_status,
+                          m.role,
                           m.airc_id,
                           m.phone,
                           m.email,
@@ -144,7 +143,8 @@ namespace CA2_due4NOV2018
                 cboSJ.SelectedIndex = GetSelectedIndex(record.SJ);
                 cboXC.SelectedIndex = GetSelectedIndex(record.XC);
 
-                if (record.member_status != "A" )
+                // Only a club secretary can modify a members grade
+                if (record.role != "S" )
                 {
                     cboDR.IsEnabled = false;
                     cboSJ.IsEnabled = false;

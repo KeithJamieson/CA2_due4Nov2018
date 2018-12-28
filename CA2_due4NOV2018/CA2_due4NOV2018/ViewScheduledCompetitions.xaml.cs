@@ -28,6 +28,7 @@ namespace CA2_due4NOV2018
        
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
+            // return to dashboard
             this.Close();
             
         }
@@ -43,7 +44,7 @@ namespace CA2_due4NOV2018
         }
         private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
-
+            // allows us to call the addCompetition Screen
             AddCompetition addCompetition = new AddCompetition();
             addCompetition.hosting_club_id = club_id;
             addCompetition.club_id =  club_id;
@@ -53,8 +54,10 @@ namespace CA2_due4NOV2018
 
         private void RefreshCompetitionList()
         {
+            // called after we add a new competition.  It will be fitted in the schedule in  order of next upcomimg competition
             lstScheduledCompetitions.Clear();
             
+            // We only view competitions for the current year
             foreach (var record in db.Competitions.Where(t => t.competition_status == "S" && t.competition_date >= currentDate && t.competition_date.Year == currentyear ))
             {
                
@@ -63,7 +66,7 @@ namespace CA2_due4NOV2018
             }
             lstViewCompetitionSchedule.ItemsSource = lstScheduledCompetitions;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lstViewCompetitionSchedule.ItemsSource);
-            view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("competition_date", ListSortDirection.Ascending));  // perform date sort 
             lstViewCompetitionSchedule.Items.Refresh();
 
         }
@@ -91,8 +94,10 @@ namespace CA2_due4NOV2018
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This Functionality not implemented");
+            MessageBox.Show("Functionality not implemented from this screen");
             
+            //Thsi was going to be sued to save changes including comp secretary changes. Just out of time :(
+
            // Competition competition = new Competition();
            // //competition.club_id = Convert.ToInt32(tbxAIRC_ID.Text);
            // competition.competition_date = Convert.ToDateTime(tbxCompetitionDate.Text);
@@ -111,7 +116,7 @@ namespace CA2_due4NOV2018
 
         private void CboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
+            // Display members of club hosting competition
             memberslist.Clear();            
             foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
             {
@@ -125,6 +130,7 @@ namespace CA2_due4NOV2018
 
         private void LstViewCompetitionSchedule_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // Populates stack panel with details form selected competition
             Competition competition = lstScheduledCompetitions.ElementAt(lstViewCompetitionSchedule.SelectedIndex);
             tbxCompetitionDate.Text = competition.competition_date.ToShortDateString();
             tbxCompetitionName.Text = competition.competition_name;

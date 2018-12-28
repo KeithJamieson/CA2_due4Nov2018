@@ -35,6 +35,7 @@
             <ComboBoxItem Content= "Entrants per Competition per Club"   />
             <ComboBoxItem Content= "Total Entrants"   />
         </ComboBox>
+        <!-- Used textbox because of issues using calender.  -->
         <TextBox Name="tbxYear"  Grid.Row="2" Grid.Column="1"> </TextBox>
         <Button Name="btnResetScreen" Content="Reset Screen" Grid.Row="2" Grid.Column="2"  BorderBrush="DarkOrange" BorderThickness="3" Click="BtnResetScreen_Click"></Button>
         <!-- ROW 3 -->

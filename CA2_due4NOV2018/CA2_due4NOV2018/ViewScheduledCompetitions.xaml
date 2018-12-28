@@ -50,6 +50,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Hosting Club" Width="150" >
+                        <!-- Here we refer to the linked entity Club.clubname-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Club.clubname}"></TextBlock>
@@ -64,6 +65,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Competition Secretary" Width="150" >
+                        <!-- Here we refer to the Customised property class Secretary -->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=Member.Secretary}"></TextBlock>
@@ -114,24 +116,11 @@
                 </ComboBox>
             </Grid>
         </StackPanel>
-        <!--<TextBox tbxName="tbxCompetitionName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Spruce Acre" HorizontalContentAlignment="Center" Text="EH ShowjumpingLeague Week 1" TextWrapping="WrapWithOverflow" />-->
-
+        
         <Button Name="btnDashboard"                 HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="0" Width="auto" Content="Return to Dashboard" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnDashboard_Click" />
-        <!--<Button Name="btnAddRiderEntry"             HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Rider Entry" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAddRiderEntry_Click" />
-        <Button Name="btnAssignFinishingPositions"  HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="2" Width="auto" Content="Assign Finishing Position"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnAssignFinishingPositions_Click"  Visibility="Visible" />
-        <Button Name="btnCloseCompetition"          HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="3" Width="auto" Content="Close Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnCloseCompetition_Click"  Visibility="Visible" />
-        <Button Name="btnUpdateLeaderBoard"         HorizontalAlignment = "center"  Grid.Row="1" Grid.Column="4" Width="auto" Content="Update LeaderBoard"   BorderBrush="DarkOrange" BorderThickness="3"    Click="btnUpdateLeaderBoard_Click"  Visibility="Visible" />-->
         <Button Name="btnAmend"                 HorizontalAlignment = "center"  Grid.Row="4" Grid.Column="0" Width="auto" Content="Amend highlighted Row" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAmend_Click" Visibility="Visible"/>
         <Button Name="btnAddCompetition"  HorizontalAlignment = "Left"  Grid.Row="4" Grid.Column="1" Width="auto" Content="Add Competition"   BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddCompetition_Click"  Visibility="Visible" />
         <Button Name="btnOpenCompetition"  HorizontalAlignment = "Left"  Grid.Row="1" Grid.Column="1" Width="auto" Content="Open Competition"   BorderBrush="DarkOrange" BorderThickness="3"     Visibility="Visible" Click ="BtnOpenCompetition_Click"/>
 
-        <!--<ListView Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="100" Margin="129,60,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
     </Grid>
 </Window>

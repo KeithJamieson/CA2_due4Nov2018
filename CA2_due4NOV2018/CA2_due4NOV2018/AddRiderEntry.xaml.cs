@@ -15,20 +15,22 @@ namespace CA2_due4NOV2018
         {
             InitializeComponent();
         }
-
+        // set up DB access
         RELICEntities db = new RELICEntities();
-        public int competition_id;
+        // initialise variables
+        public int competition_id;  
         public string competition_type;
         string SelectedClub;
         string SelectedGrade;
         int airc_id;
+        // List of Riding Clubs
         List<Club> RidingClub = new List<Club>();
        
         
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
              
-
+            // Populate Riding Club Box
 
             foreach (var club in db.Clubs.Where(t => t.club_id > 1))
             {
@@ -40,6 +42,7 @@ namespace CA2_due4NOV2018
         }
 
 
+        // Minimal validation
         private bool Validate()
         {
             bool validated = true;
@@ -60,6 +63,7 @@ namespace CA2_due4NOV2018
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+             // Save Rider Entry
             if (Validate() == true)
             {
                 Entry entry = new Entry();
@@ -68,18 +72,22 @@ namespace CA2_due4NOV2018
             }
             else
             {
-                MessageBox.Show("Some items need to be Entered");
+                MessageBox.Show("Please Check Horse's name  has been Entered");
             }
 
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
+            // abort entry of this rider.
             this.Close();
         }
 
         private void SaveEntry(Entry entry)
         {
+            
+            // Save entry
+           // NB: This allows us to enter riders from other regions who will not be registered on our app
             entry.airc_id = System.Convert.ToInt32(tbx_AIRC_ID.Text);
             entry.Firstname = tbxRiderFirstName.Text;
             entry.Lastname = tbxRiderLastName.Text;
@@ -95,6 +103,7 @@ namespace CA2_due4NOV2018
 
         private void CboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Used to pick riding club from a list
             var comboBoxItem = (ComboBox)sender;
             SelectedClub = CboRidingClub.SelectedValue.ToString();
             tbxRidingClub.Text = SelectedClub;
@@ -102,7 +111,7 @@ namespace CA2_due4NOV2018
 
         private void CboRiderGrade_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            // used to pcik rider grade
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)CboRiderGrade.SelectedItem;
             SelectedGrade = item.Content.ToString();
@@ -111,7 +120,7 @@ namespace CA2_due4NOV2018
         private void GetMemberDetails_Click(object sender, RoutedEventArgs e)
         {
 
-            
+            // decided it would be useful to be able to enter riding club it and pick up rider details. We have everything except the horse.  
             int club_id;
             try
             {
@@ -119,6 +128,7 @@ namespace CA2_due4NOV2018
             }
             catch (Exception)
             {
+                //note: This message only appears if we use the getMemberMethod with a non-registered rider
                 MessageBox.Show("A valid Airc id of a registered user must be entered");
             }
           
@@ -130,6 +140,7 @@ namespace CA2_due4NOV2018
                 {
                     tbxRiderFirstName.Text = record.first_name;
                     tbxRiderLastName.Text = record.last_name;
+                    // Select grade based on what tyoe of competition is being run
                     if (tbxCompetitionType.Text.Trim() == "DR")
                     {
                         SelectedGrade = record.DR;
@@ -143,10 +154,11 @@ namespace CA2_due4NOV2018
                         SelectedGrade = record.XC;
                     }
 
+                    //  Assign Selected Grade to ComboxBox.
                     CboRiderGrade.SelectedValuePath = SelectedGrade;
                     tbxGrade.Text = SelectedGrade;                 
 
-
+                    // pick up ridng club name
                     club_id = record.club_id;
                     foreach (var club in db.Clubs.Where(t=>t.club_id==club_id))
                     {

@@ -43,11 +43,12 @@ namespace CA2_due4NOV2018
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
+           // Refresh Dashboard on loading 
             RefreshDashboard();
 
+            // Make buttons visible or collapsed depending on member role
 
-
+            // Ordinary member
             if (member_role == "M") 
             {
                 btnAddClub.Visibility = Visibility.Collapsed;
@@ -62,6 +63,7 @@ namespace CA2_due4NOV2018
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
             }
 
+            // Club Secretary
             if (member_role == "S")
             {
                 btnAddClub.Visibility = Visibility.Collapsed;
@@ -76,6 +78,7 @@ namespace CA2_due4NOV2018
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
             }
 
+            // Administrator
             if (member_role == "A")
             {
                 btnAddClub.Visibility = Visibility.Visible;
@@ -89,6 +92,7 @@ namespace CA2_due4NOV2018
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
             }
 
+            // if logged in user is competition secretary and competition scheduled date is today, then mkae the OpenCompetition button visible. 
             if (tbxCompetitionDate.Text.ToString() == currentDate.ToString() )
             {
                 if (secretary_airc_id == airc_id)
@@ -97,13 +101,12 @@ namespace CA2_due4NOV2018
                 }
             }
 
-           // btnOpenCompetition.Visibility = Visibility.Visible;  //temporary
         }
 
  
         private void BtnChangeMyPassword_Click(object sender, RoutedEventArgs e)
         {
-
+            // call ChangePassword Window
             ChangePassword changepassword = new ChangePassword();
             changepassword.username = tbxUsername.Text.Trim();
             changepassword.currentPassword = currentPassword;
@@ -118,6 +121,7 @@ namespace CA2_due4NOV2018
 
         private void BtnModifyMyDetails_Click(object sender, RoutedEventArgs e)
         {
+            // Change my details 
             ModifyUserDetails modifyUserDetails = new ModifyUserDetails();
             modifyUserDetails.Username = tbxUsername.Text;
             modifyUserDetails.ShowDialog();
@@ -125,6 +129,7 @@ namespace CA2_due4NOV2018
 
         private void BtnModifyMemberDetails_Click(object sender, RoutedEventArgs e)
         {
+            // This is same screen as ModifyUserDetails except the User to be modified would be chosen by club secretary
             MessageBox.Show("Functionality has not been implemented");
             ModifyUserDetails modifymydetails = new ModifyUserDetails();
    //         ModifyUserdetails.Username = tbxUsername.Text;
@@ -135,7 +140,7 @@ namespace CA2_due4NOV2018
 
         private void BtnViewLeaderboard_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Display leaderboard
             ShowLeaderBoard leaderboard = new ShowLeaderBoard();
             leaderboard.ShowDialog();
         }
@@ -143,24 +148,29 @@ namespace CA2_due4NOV2018
 
     private void BtnViewReports_Click(object sender, RoutedEventArgs e)
         {
+            // view the reports screen
           Reports reports = new Reports();
             reports.ShowDialog();           
         }
 
         private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
         {
+            // List all members in users club  with a status of N(ew)
             MessageBox.Show("Functionality has not been implemented");
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
+            // exit dashboard and exit application
             this.Close();
+
         }
    
             
 
         private void BtnAddClub_Click(object sender, RoutedEventArgs e)
         {
+            // Add a new club (and club secretary)
             AddClub addclub = new AddClub();                        
             addclub.ShowDialog();
         }
@@ -168,16 +178,20 @@ namespace CA2_due4NOV2018
              
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
+            // validate we are club secretary
             if ((airc_id == secretary_airc_id))
             {
-
+                // call runcompetition screen
                 RunCompetition runcompetition = new RunCompetition();
+                // set variables to be used in runCompetitionscreen
                 runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
                 runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
                 runcompetition.competition_type = competition_type;
                 runcompetition.competition_id = competition_id;
 
+                // Change Competition Status from S(cheduled) to O(pen). 
                 Competition competition = new Competition();
+                
                 foreach (var thiscompetition in db.Competitions.Where(t => t.competition_id == competition_id))
                 {
                     thiscompetition.competition_status = "O";
@@ -187,8 +201,10 @@ namespace CA2_due4NOV2018
 
                 if (SaveSuccess == 1)
                 {
-                    runcompetition.ShowDialog();
-                    RefreshDashboard();
+                    // call runcompetition screen
+                    runcompetition.ShowDialog(); 
+                    // after competition finished refresh dashboard. 
+                    RefreshDashboard(); 
                 }
                 else
                 {
@@ -207,6 +223,7 @@ namespace CA2_due4NOV2018
 
         private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
+            // schedule a new competition
             AddCompetition addCompetition = new AddCompetition();
             addCompetition.hosting_club_id = club_id;
             addCompetition.ShowDialog();
@@ -215,6 +232,7 @@ namespace CA2_due4NOV2018
 
         private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
         {
+            // view a list of competitions available in current year.
             ViewScheduledCompetition viewCompetitions = new ViewScheduledCompetition();
             viewCompetitions.hosting_club_id = hosting_club_id;
             viewCompetitions.club_id = club_id;
@@ -224,8 +242,10 @@ namespace CA2_due4NOV2018
 
         public void RefreshDashboard()
         {
+            // refresh dashboard
             User user = new User();
 
+            // we get the next available competition in the current year.
             var query = (from c in db.Competitions
                          join m in db.Members on c.airc_id equals m.airc_id
                          join rc in db.Clubs on c.club_id equals rc.club_id
@@ -245,6 +265,7 @@ namespace CA2_due4NOV2018
                              hosting_club_id = c.club_id
                          }).Take(1);
 
+            // Here we populate our competition details on the dashboard screen.
             foreach (var record in query)
             {
                 tbxCompetitionDate.Text = record.next_competition_date.ToString();

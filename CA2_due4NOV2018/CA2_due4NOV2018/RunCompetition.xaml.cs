@@ -17,12 +17,17 @@ namespace CA2_due4NOV2018
             InitializeComponent();
         }
 
+        // set up DB access
         RELICEntities db = new RELICEntities();
-
+        
+        // set todays date
         System.DateTime currentDate = System.DateTime.Today;
+        // set current year
         int currentyear = System.DateTime.Now.Year;
-        public string competition_type;
-        //local Class to be used for updating leaderboad 
+        public string competition_type; // public as it is passed in.
+                                        //local Class to be used for updating leaderboad 
+
+            //call to stored procedure to update leaderboard.   We shouldhave added competition year to this procedure
         public class UpdateLeaderboard
         {
             public int airc_id;
@@ -38,7 +43,6 @@ namespace CA2_due4NOV2018
 
         public int competition_id;
         string Ridergrade;
-       // string activeTab;
         int rider_entry_id;
         enum DBOperation
         {
@@ -52,7 +56,7 @@ namespace CA2_due4NOV2018
 
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade
             Ridergrade = "P";
             RefreshList(Ridergrade);
         }
@@ -60,35 +64,35 @@ namespace CA2_due4NOV2018
 
         private void TabAP_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade
             Ridergrade = "AP";
             RefreshList(Ridergrade);
         }
 
         private void TabI_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade
             Ridergrade = "I";
             RefreshList(Ridergrade);
         }
 
         private void TabAI_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade
             Ridergrade = "AI";
             RefreshList(Ridergrade);
         }
 
         private void TabO_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade  
             Ridergrade = "O";
             RefreshList(Ridergrade);
         }
 
         private void TabAO_Selected(object sender, RoutedEventArgs e)
         {
-            
+            // we refresh the entry list for the affected grade
             Ridergrade = "AO";
             RefreshList(Ridergrade);
         }
@@ -99,6 +103,8 @@ namespace CA2_due4NOV2018
 
         private void BtnCloseCompetition_Click(object sender, RoutedEventArgs e)
         {
+            // closing entry menas we can not accept any new riders for competition.   
+            // All riders must have been assigned a finishinhg position in order for competition to be closed
             Entry entry = new Entry();
             bool place_assigned = true;
             foreach (var record in db.Entries.Where ( t=> t.competition_id == competition_id & t.points == 0   ))
@@ -157,10 +163,12 @@ namespace CA2_due4NOV2018
                 competition_status = record.competition_status;
             }
 
-
+            // check competition has been clsoed
             if (competition_status == "C")
             {
                 // For update leaderboard we can only add resuults from  members in our own region;
+                // UpdateLeaderbvoard is the entity which refers to our stored procedure. 
+                // We need to use the ToList as we can not use foreach as it throws an error. 
                 var query = (from en in db.Entries
                              join c in db.Competitions on en.competition_id equals c.competition_id
                              join me in db.Members on en.airc_id equals me.airc_id
@@ -181,15 +189,19 @@ namespace CA2_due4NOV2018
                     //Need to populate the leaderboardList so we can reference it outside the foreach loop
                     lstLeaderboard.Add(record);
                 };
-
+                // Now we have our list 
                 for (var i = 0; i < lstLeaderboard.Count; i++)
                 {
 
-                    // read each item in list . Do not use foreach
+                    // read each item in list . 
                     airc_id = lstLeaderboard[i].airc_id;
                     points = lstLeaderboard[i].points;
                     grade = lstLeaderboard[i].grade;
                     competition_type = lstLeaderboard[i].competition_type;
+                    // pass values to our stored procedure. 
+                    // stored procedure will Update entry if it exists or add it if it does not exist. 
+                    // Currnetly updates if airc_id, grade exist for competition_type, otehrwise performs an insert
+                    // We need to add year to procedure so we only update records in current year
                     success = db.UpdateLeaderboard(airc_id,
                                           points,
                                           grade,

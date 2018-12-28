@@ -137,9 +137,6 @@
     <Compile Include="ViewScheduledCompetitions.xaml.cs">
       <DependentUpon>ViewScheduledCompetitions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AmendMemberDetails.xaml.cs">
-      <DependentUpon>AmendMemberDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RunCompetition.xaml.cs">
       <DependentUpon>RunCompetition.xaml</DependentUpon>
     </Compile>
@@ -192,10 +189,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewScheduledCompetitions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AmendMemberDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
