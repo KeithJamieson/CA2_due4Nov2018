@@ -17,7 +17,7 @@ namespace CA2_due4NOV2018
         List<Member> memberslist = new List<Member>();
         public int hosting_club_id;  // Id of riding club which is holding the competition
         public int club_id;   // should be same as hosting_club_id.  
-        int airc_id;  riding club id of competitin secretary
+        int airc_id;  // riding club id of competitin secretary
         //      int competitionSecretary;
 
         public AddCompetition()

@@ -23,7 +23,6 @@
             <ColumnDefinition MinWidth = "100" Width="120" />
             <ColumnDefinition MinWidth = "100" Width="*" />
         </Grid.ColumnDefinitions>
-        <!-- Ste up a tab per grade -- 6 in all -->
         <TabControl Grid.ColumnSpan="5">
             <TabItem Name="tabP" Selector.Selected="TabP_Selected">
                 <TabItem.Header>
