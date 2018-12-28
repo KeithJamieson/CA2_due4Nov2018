@@ -44,7 +44,7 @@ namespace CA2_due4NOV2018
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
            
-            refreshDashboard();
+            RefreshDashboard();
 
 
 
@@ -57,7 +57,7 @@ namespace CA2_due4NOV2018
                 btnModifyMyDetails.Visibility = Visibility.Visible;
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
                 btnViewLeaderboard.Visibility = Visibility.Visible;
-                btnViewReports.Visibility = Visibility.Visible;
+                btnViewReports.Visibility = Visibility.Collapsed;
                 btnViewScheduledCompetitions.Visibility = Visibility.Visible;
                 btnOpenCompetition.Visibility = Visibility.Collapsed;
             }
@@ -143,8 +143,8 @@ namespace CA2_due4NOV2018
 
     private void BtnViewReports_Click(object sender, RoutedEventArgs e)
         {
-            RunCompetition runcompetition = new RunCompetition();
-            runcompetition.ShowDialog();
+          Reports reports = new Reports();
+            reports.ShowDialog();           
         }
 
         private void BtnListNewMembers_Click(object sender, RoutedEventArgs e)
@@ -174,39 +174,43 @@ namespace CA2_due4NOV2018
                 RunCompetition runcompetition = new RunCompetition();
                 runcompetition.tbxCompetitionName.Text = tbxCompetitionName.Text;
                 runcompetition.tbxCompetitionDate.Text = tbxCompetitionDate.Text;
+                runcompetition.competition_type = competition_type;
                 runcompetition.competition_id = competition_id;
 
-                Competition  competition = new Competition();
-               foreach (var thiscompetition in db.Competitions.Where( t => t.competition_id == competition_id))
-                    {
-                       thiscompetition.competition_status = "O";
-                    }
+                Competition competition = new Competition();
+                foreach (var thiscompetition in db.Competitions.Where(t => t.competition_id == competition_id))
+                {
+                    thiscompetition.competition_status = "O";
+                }
 
-                    int SaveSuccess = db.SaveChanges();
+                int SaveSuccess = db.SaveChanges();
 
                 if (SaveSuccess == 1)
                 {
                     runcompetition.ShowDialog();
-                    refreshDashboard();
+                    RefreshDashboard();
                 }
                 else
                 {
 
-                        MessageBox.Show("Unable to Open Competition ");
+                    MessageBox.Show("Unable to Open Competition ");
                 }
-               // db.SaveChanges();
+
 
             }
             else
+
+            {
                 MessageBox.Show("You must be competition Secretary to open competition");
+            }
         }
 
-        private void btnAddCompetition_Click(object sender, RoutedEventArgs e)
+        private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
             AddCompetition addCompetition = new AddCompetition();
             addCompetition.hosting_club_id = club_id;
             addCompetition.ShowDialog();
-            refreshDashboard();
+            RefreshDashboard();
         }
 
         private void BtnViewScheduledCompetitions_Click(object sender, RoutedEventArgs e)
@@ -218,7 +222,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void refreshDashboard()
+        private void RefreshDashboard()
         {
             User user = new User();
 

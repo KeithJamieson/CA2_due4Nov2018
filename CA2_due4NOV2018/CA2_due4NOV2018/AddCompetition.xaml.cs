@@ -26,13 +26,8 @@ namespace CA2_due4NOV2018
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           // CboCompetitionSecretary.ItemsSource = "";
-            memberslist.Clear();
-            foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
-            {
-                memberslist.Add(member);
-            }
-            CboCompetitionSecretary.ItemsSource = memberslist;
+            RefreshList();
+         
         }
 
 
@@ -61,24 +56,34 @@ namespace CA2_due4NOV2018
             return competition;
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        private void RefreshList()
+        {
+            CboCompetitionSecretary.ItemsSource = "";
+            memberslist.Clear();
+            foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
+            {
+                memberslist.Add(member);
+            }
+            CboCompetitionSecretary.ItemsSource = memberslist;
+        }
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
             
         }
 
-        private void cboCompetitionType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CboCompetitionType_SelectionChanged(object sender,SelectionChangedEventArgs e)
         {
             var comboBoxItem = sender;
             ComboBoxItem item = (ComboBoxItem)cboCompetitionType.SelectedItem;
             CompetitionDiscipline = item.Content.ToString();
         }
 
-        private void CboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CboCompetitionSecretary_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBox)sender;
             string airc_id_str = CboCompetitionSecretary.SelectedValue.ToString();             

@@ -41,14 +41,14 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate> 
         </ComboBox>
-        <ComboBox Name="cboCompetitionType"    Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  SelectionChanged="cboCompetitionType_SelectionChanged" >
+        <ComboBox Name="cboCompetitionType"    Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center"  SelectionChanged="CboCompetitionType_SelectionChanged" >
             <ComboBoxItem Content= "DR"   />
             <ComboBoxItem Content= "SJ"   />
             <ComboBoxItem Content= "XC"   />
         </ComboBox>
         <DatePicker Name="dpkCompetitionDate" Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Center"  />
 
-        <Button Name="btnCancel"     HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="1" Width="auto" Content="Cancel" BorderBrush="DarkOrange" BorderThickness="3"    Click="btnCancel_Click" />
+        <Button Name="btnCancel"     HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="1" Width="auto" Content="Cancel" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnCancel_Click" />
         <Button Name="btnSave"       HorizontalAlignment = "center"  Grid.Row="6" Grid.Column="0" Width="auto" Content="Save" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnSave_Click" />
     </Grid>
 </Window>

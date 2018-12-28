@@ -19,8 +19,6 @@ namespace CA2_due4NOV2018
         List<Member> memberslist = new List<Member>();
         public int hosting_club_id;
         public int club_id;
-        //List<ViewScheduledCompetition> lstScheduledCompetitions = new List<ViewScheduledCompetition>();
-        //List<Competition> lstScheduledCompetitions = new List<Competition>();
         List<Competition> lstScheduledCompetitions = new List<Competition>();
         public ViewScheduledCompetition()
         {
@@ -28,7 +26,7 @@ namespace CA2_due4NOV2018
         }
 
        
-        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             
@@ -39,7 +37,7 @@ namespace CA2_due4NOV2018
             
         }
 
-        private void btnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
+        private void BtnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -80,7 +78,7 @@ namespace CA2_due4NOV2018
 
 
 
-        private void btnOpenCompetition_Click(object sender, RoutedEventArgs e)
+        private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
             // change competition status from "S" to "O"
             
@@ -112,7 +110,7 @@ namespace CA2_due4NOV2018
             stkViewCompetitions.Visibility = Visibility.Collapsed;
         }
 
-        private void cboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
             memberslist.Clear();

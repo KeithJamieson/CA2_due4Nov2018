@@ -22,6 +22,7 @@
         <AssociationConnector Association="RELICModel.FK_Leaderboard_Grade_grade" />
         <AssociationConnector Association="RELICModel.FK_Leaderboard_Member_airc_id" />
         <EntityTypeShape EntityType="RELICModel.leaderboard_v" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RELICModel.EntrantsPerCompetition_v" Width="3.625" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

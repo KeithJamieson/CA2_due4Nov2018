@@ -40,7 +40,7 @@
             <Button Name="btnAddClub"                   HorizontalAlignment = "Center"  Grid.Row="6" Grid.Column="0" Width="200"  Height="26" Content="Add Club"    BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnAddClub_Click" Visibility="Visible" />
             <Button Name="btnListNewMembers"            HorizontalAlignment = "Center"  Grid.Row="7" Grid.Column="0" Width="200"  Height="26" Content="List New Members" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnListNewMembers_Click" Visibility="Visible" />
             <Button Name="btnModifyMemberDetails"       HorizontalAlignment = "Center"  Grid.Row="8" Grid.Column="0" Width="200"  Height="26" Content="Modify Member Details" BorderBrush="DarkOrange" BorderThickness="3"    Click="BtnModifyMemberDetails_Click" Visibility="Visible" />
-            <Button Name="btnAddCompetition"       HorizontalAlignment = "Center"  Grid.Row="9" Grid.Column="0" Width="200"  Height="26" Content="Add Competition" BorderBrush="DarkOrange" BorderThickness="3"  Click="btnAddCompetition_Click"  Visibility="Visible" />
+            <Button Name="btnAddCompetition"       HorizontalAlignment = "Center"  Grid.Row="9" Grid.Column="0" Width="200"  Height="26" Content="Add Competition" BorderBrush="DarkOrange" BorderThickness="3"  Click="BtnAddCompetition_Click"  Visibility="Visible" />
         </StackPanel>
 
         <TextBox Name = "tbxDate"  HorizontalAlignment = "Right"   Grid.Row="0" Grid.Column="0" Width="200" MinHeight="26" IsReadOnly="True"/>

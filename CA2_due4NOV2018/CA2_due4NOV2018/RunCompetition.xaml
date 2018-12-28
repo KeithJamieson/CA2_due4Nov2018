@@ -154,10 +154,10 @@
                 <!-- Row 5 -->
                 <Label Grid.Row="5" Grid.Column="0" Content="Place"></Label>
                 <TextBox Name="tbxPlace" Grid.Row="5" Grid.Column="1"></TextBox>
-                <TextBox Name="tbxPoints" Grid.Row="5" Grid.Column="2"></TextBox>
+                <TextBox Name="tbxPoints" Grid.Row="5" Grid.Column="2" Visibility="Collapsed"></TextBox>
                 <!-- Row 6 debug row -->
-                <Label Grid.Row="6" Grid.Column="0" Content="Entryid"></Label>
-                <TextBox Name="tbxEntryID" Grid.Row="6" Grid.Column="1"></TextBox>
+                <Label Grid.Row="6" Grid.Column="0" Content="Entryid" Visibility="Collapsed"></Label>
+                <TextBox Name="tbxEntryID" Grid.Row="6" Grid.Column="1" Visibility="Collapsed"></TextBox>
             </Grid>
         </StackPanel>
 

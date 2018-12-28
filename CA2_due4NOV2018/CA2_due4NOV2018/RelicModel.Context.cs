@@ -35,6 +35,7 @@ namespace CA2_due4NOV2018
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<Leaderboard> Leaderboards { get; set; }
         public virtual DbSet<leaderboard_v> leaderboard_v { get; set; }
+        public virtual DbSet<EntrantsPerCompetition_v> EntrantsPerCompetition_v { get; set; }
     
         public virtual int UpdateLeaderboard(Nullable<int> airc_id, Nullable<int> competition_points, string grade, string competition_type)
         {

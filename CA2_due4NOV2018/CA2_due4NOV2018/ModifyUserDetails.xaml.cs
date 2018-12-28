@@ -80,7 +80,7 @@ namespace CA2_due4NOV2018
             P, AP, I,AI,O,AO
         };
 
-        int getSelectedIndex(string grade)
+        int GetSelectedIndex(string grade)
         {
           if (grade == "P")
           {
@@ -140,9 +140,9 @@ namespace CA2_due4NOV2018
                 tbxAIRC_ID.Text = Convert.ToString(record.airc_id);
 
                 
-                cboDR.SelectedIndex = getSelectedIndex(record.DR);
-                cboSJ.SelectedIndex = getSelectedIndex(record.SJ);
-                cboXC.SelectedIndex = getSelectedIndex(record.XC);
+                cboDR.SelectedIndex = GetSelectedIndex(record.DR);
+                cboSJ.SelectedIndex = GetSelectedIndex(record.SJ);
+                cboXC.SelectedIndex = GetSelectedIndex(record.XC);
 
                 if (record.member_status != "A" )
                 {

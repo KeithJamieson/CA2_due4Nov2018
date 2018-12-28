@@ -13,45 +13,38 @@ namespace CA2_due4NOV2018
 
     public partial class LoginRegister : Window
     {
+        //initialise variables for later user within c# 
         string DRgrade;
         string SJgrade;
         string XCgrade;
         int airc_id = 0;
-        int club_id = 0;
-        string member_role;
-        //string conneectionString = "metadata=res://*/RelicModel.csdl|res://*/RelicModel.ssdl|res://*/RelicModel.msl;provider=System.Data.SqlClient;provider connection string='data source=localhost;initial catalog=RELIC;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
+        int club_id = 0;  //needs to be here as needed for registerMember Method.
+        //string connectionString = "metadata=res://*/RelicModel.csdl|res://*/RelicModel.ssdl|res://*/RelicModel.msl;provider=System.Data.SqlClient;provider connection string='data source=localhost;initial catalog=RELIC;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
+        // set up access to database entities
         RELICEntities db = new RELICEntities();
 
-
-      //  List<Grade> GradeList = new List<Grade>();
+        //List of riding clubs
         List<Club> RidingClub = new List<Club>();
 
         Boolean close = false;
         public string activeTab;
-        //public int LoggedInUser;
-        //public string username;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            RidingClub.Clear();
-//            foreach (var User in db.Users.Where(t => t.username == currentUser && t.username == currentPassword))
+            //populate ComboBox for Riding clubs with all existing clubs in region at start. 
 
+            RidingClub.Clear();          
             foreach (var club in db.Clubs.Where(t => t.club_id >1 ))
             {
                 RidingClub.Add(club);
-
             }
-            cboRidingClub.ItemsSource = RidingClub;
-
-            //GradeList.Clear();
-            //foreach (var grade in db.Grades)
-            //{
-            //    GradeList.Add(grade);
-            //}          
+            cboRidingClub.ItemsSource = RidingClub;        
         }
 
 
         private bool ValidateRegistrationData()
         {
+            //perform validation of fields when a user is registering data.  // TODO
             bool validated = true;
             if (tbxUsername.Text.Length == 0 || tbxUsername.Text.Length > 10)
             {
@@ -87,14 +80,14 @@ namespace CA2_due4NOV2018
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-
+            //obtain user details for passing in to the Dashboard screen
             string currentUser = tbxUsername.Text.Trim();
             string currentPassword = tbxPassword.Password.Trim();
 
             if (activeTab == "Logon")
             {
 
-
+                // For existing logged on user
                 var query = (from u in db.Users 
                              join m in db.Members on u.airc_id equals m.airc_id
                              where u.username == currentUser
@@ -110,10 +103,10 @@ namespace CA2_due4NOV2018
 
                 foreach (var record in query )
                 {
-                    //LoggedInUser = User.airc_id;
                     MainDashboard maindashboard = new MainDashboard();
                     this.Hide();
                     close = true;
+                    // set variables needed for the maindashboard. Mainly used for showing next avilable competition.
                     maindashboard.currentPassword = currentPassword;
                     maindashboard.tbxUsername.Text = record.username;
                     maindashboard.airc_id = record.airc_id;
@@ -134,19 +127,22 @@ namespace CA2_due4NOV2018
             }
             else if (activeTab == "Register")
             {
-                // call Register user Class                
+                
                 airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());                
                 string role = "M";  //Role is Member 
                 string memberStatus = "N"; //Member status is "N" for new Membe
 
-
+                // call Register user Method                
                 RegisterUser(
                     airc_id,
                    currentUser,
                    currentPassword);
-
+                // As user does not get id generated from an identity column, we are forced to save userdetails here. 
+                // ideally we should use a db sequence value. 
+                
                 SaveRegistration();
 
+                //RegisterMember  Method.   We should really have just passed in the mmeber Class. Will do so if time permits.
                 RegisterMember(
                  airc_id,
                  club_id,
@@ -160,8 +156,9 @@ namespace CA2_due4NOV2018
                  tbxPhone.Text,
                  tbxEmail.Text);
 
+                // Here we save the registration.
                  SaveRegistration();
-
+                //We force self registered users to log on with their new username and password.
                 MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
                 this.Close();
             }
@@ -171,6 +168,7 @@ namespace CA2_due4NOV2018
 
         private void OnTabSelected(object sender, RoutedEventArgs e)
         {
+            //everytime we select a tab we set e.Handled = true so that we don't get a growing list of unhandled tab selections. 
             if (sender is TabItem tab)
             {
                 e.Handled = true;;
@@ -179,6 +177,7 @@ namespace CA2_due4NOV2018
 
         private void Register_Selected(object sender, RoutedEventArgs e)
         {
+            //set the visibility of items for when register is selected
             tbxEmail.Visibility = Visibility.Visible;
             tbxPhone.Visibility = Visibility.Visible;
             tbxFirstname.Visibility = Visibility.Visible;
@@ -197,13 +196,14 @@ namespace CA2_due4NOV2018
             lblRidingClub.Visibility = Visibility.Visible;
             lblEmail.Visibility = Visibility.Visible;
             lblPhone.Visibility = Visibility.Visible;
-            // e.Handled = true;
             activeTab = "Register";
-            //MessageBox.Show("Register Tab selected");
         }
 
         private void Logon_Selected(object sender, RoutedEventArgs e)
         {
+            //set the visibility of items for when Logon is selected. 
+            // Only username ansd password are visible.  should use stackpanel, so we can just hide show items easier.
+
             tbxFirstname.Visibility = Visibility.Collapsed;
             tbxLastName.Visibility = Visibility.Collapsed;
             tbxEmail.Visibility = Visibility.Collapsed;
@@ -226,18 +226,16 @@ namespace CA2_due4NOV2018
             lblPhone.Visibility = Visibility.Collapsed;
 
             activeTab = "Logon";
-            //  e.Handled = true;
-
-            //MessageBox.Show("Logon Tab selected");
         }
 
         private void RegisterUser(int airc_id, string username, string password)
         {
 
-
+            // add user to User entity
             User user = new User();
             user.airc_id = airc_id;
             user.username = username;
+            //deliberately avoided using user and password so we do not clash with built ins.
             user.userpassword = password;
             db.Entry(user).State = System.Data.Entity.EntityState.Added;
         }
@@ -245,6 +243,7 @@ namespace CA2_due4NOV2018
         private void RegisterMember(int airc_id, int club_id, string memberStatus, string role, string firstname, string lastname, string DR, string SJ, string XC, string phone, string email)
         {
 
+            //add member details to member entity
             Member member = new Member();
             member.airc_id = airc_id;
             member.club_id = club_id;
@@ -265,12 +264,14 @@ namespace CA2_due4NOV2018
 
         private void SaveRegistration()
         {
+            //save Chanegs to DB;
+            // should check here if register fails and delete user if it does. 
             db.SaveChanges();
         }
 
-        private void cboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboDR_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //Select value from comboBox for Dressage grade selected
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboDR.SelectedItem;
             DRgrade = item.Content.ToString();
@@ -279,6 +280,7 @@ namespace CA2_due4NOV2018
 
         private void CboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Select value from comboBox for Show Jumping grade selected
 
             var comboBoxItem = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)cboSJ.SelectedItem;
@@ -287,8 +289,9 @@ namespace CA2_due4NOV2018
 
 
 
-        private void cboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboXC_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Select value from comboBox for Cross-Country grade selected
 
             var comboBoxItem = sender;
             ComboBoxItem item = (ComboBoxItem)cboXC.SelectedItem;
@@ -299,9 +302,10 @@ namespace CA2_due4NOV2018
 
 
 
-
         private void CboRidingClub_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //select riding club id asociated with riding club selected.
+            
             var comboBoxItem = (ComboBox)sender;         
             string club_id_str = cboRidingClub.SelectedValue.ToString();
             club_id = Convert.ToInt32( club_id_str);    

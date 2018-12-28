@@ -1,11 +1,8 @@
 ﻿using System.Windows;
 using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Data;
 using System;
-using System.Data.Entity;
-using System.Collections;
+
 
 namespace CA2_due4NOV2018
 {
@@ -24,13 +21,13 @@ namespace CA2_due4NOV2018
 
         System.DateTime currentDate = System.DateTime.Today;
         int currentyear = System.DateTime.Now.Year;
-
+        public string competition_type;
         //local Class to be used for updating leaderboad 
         public class UpdateLeaderboard
         {
             public int airc_id;
             public string grade;
-            public string competition_type;  // prob not needed
+            public string competition_type; 
             public int points;
 
         }
@@ -51,7 +48,7 @@ namespace CA2_due4NOV2018
         }
 
         DBOperation dboperation = new DBOperation();
-        private object leaderboard_id;
+
 
         private void TabP_Selected(object sender, RoutedEventArgs e)
         {
@@ -125,8 +122,12 @@ namespace CA2_due4NOV2018
                 if (SaveSuccess == 1)
                 {
 
-                    MessageBox.Show("All Entrants have had points Assigned.");
-                    //lstRiders.Items.Refresh();
+                    MessageBox.Show("All Entrants have had points Assigned. Please Update Leaderboard");
+                    btnAssignFinishingPositions.IsEnabled = false;
+                    btnAddRiderEntry.IsEnabled = false;
+                    btnCloseCompetition.IsEnabled = false;
+                    btnSave.IsEnabled = false;
+                    btnCancel.IsEnabled = false;
                 }
                 else
                 {
@@ -198,6 +199,8 @@ namespace CA2_due4NOV2018
                     if (success == 1)
                     {
                         db.SaveChanges();
+                        MessageBox.Show("Leaderboard has been updated.");
+                        btnUpdateLeaderBoard.IsEnabled = false;
                     }
                 }
             }
@@ -221,6 +224,9 @@ namespace CA2_due4NOV2018
         private void BtnAddRiderEntry_Click(object sender, RoutedEventArgs e)
         {
             AddRider addRider = new AddRider();
+            addRider.tbxCompetitionDate.Text = currentDate.ToShortDateString();
+            addRider.tbxCompetitionName.Text = tbxCompetitionName.Text;
+            addRider.tbxCompetitionType.Text = competition_type;
             addRider.competition_id = competition_id;           
             addRider.ShowDialog();
             RefreshList(Ridergrade);
@@ -312,9 +318,10 @@ namespace CA2_due4NOV2018
                     tbxFirstName.Text = SelectedRider.Firstname.Trim();
                     tbxHorse.Text = SelectedRider.Horse.Trim();
                     tbxClub.Text = SelectedRider.clubname.Trim();
-                    tbxPlace.Text = SelectedRider.points.ToString();
-                    tbxEntryID.Text = SelectedRider.entry_id.ToString();
-                    rider_entry_id =  SelectedRider.entry_id;
+                    tbxPlace.Text = SelectedRider.place.ToString();
+                    tbxPoints.Text = SelectedRider.points.ToString(); //used for debugging
+                    tbxEntryID.Text = SelectedRider.entry_id.ToString(); //used for debugging
+                    rider_entry_id =  SelectedRider.entry_id; 
 
                 }
             }

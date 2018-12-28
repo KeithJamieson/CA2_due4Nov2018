@@ -38,7 +38,7 @@
             <Label   Name="lblFirstName"        Content= "First Name : " HorizontalAlignment="Right" HorizontalContentAlignment="Right"  Grid.Row="1" Grid.Column="0"   MinHeight="26"/>
             <TextBox Name="tbxFirstname"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="1" Grid.Column="1"  Width="100"  MinHeight="26" />
             <Label Name="lblDR" Content= "DR Grade : "   HorizontalContentAlignment  ="Center"   HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
-        <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="1" Grid.Column="3" MinWidth="100"  MinHeight="26"    Visibility="Visible" SelectionChanged="CboDR_SelectionChanged"  >
+        <ComboBox Name="cboDR"  HorizontalAlignment = "Left"   Grid.Row="1" Grid.Column="3" MinWidth="100"  MinHeight="26"    Visibility="Visible" SelectionChanged="CboDR_SelectionChanged" IsEnabled="False" >
             <ComboBoxItem Content= "P"   />
             <ComboBoxItem Content= "AP"   />
             <ComboBoxItem Content= "I"   />
@@ -51,7 +51,7 @@
         <Label   Name="lblLastName"        Content= "Last Name : " HorizontalAlignment="Right"  HorizontalContentAlignment="Right" Grid.Row="2" Grid.Column="0"  MinHeight="26"/>
         <TextBox Name="tbxLastName"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="2" Grid.Column="1"  Width="100"  MinHeight="26"/>
         <Label Name="lblSJ" Content= "SJ Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
-        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboSJ_SelectionChanged" >
+        <ComboBox Name="cboSJ"  HorizontalAlignment = "Left"   Grid.Row="2" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible" SelectionChanged="CboSJ_SelectionChanged" IsEnabled="False">
             <ComboBoxItem Content= "P"   />
             <ComboBoxItem Content= "AP"   />
             <ComboBoxItem Content= "I"   />
@@ -63,7 +63,7 @@
         <Label   Name="lblAIRC_ID"        Content= "AIRC ID : " HorizontalAlignment="Right"  HorizontalContentAlignment="Right" Grid.Row="3" Grid.Column="0"  MinHeight="26"/>
             <TextBox Name="tbxAIRC_ID"  HorizontalAlignment="Left"   HorizontalContentAlignment="Center"  Grid.Row="3" Grid.Column="1"  Width="100"  MinHeight="26" IsReadOnly="True"/>
         <Label Name="lblXC" Content= "XC Grade : "   HorizontalContentAlignment  = "Center"  HorizontalAlignment="Right" Grid.Row="3" Grid.Column="2" MinWidth="100" MinHeight="26" Visibility="Visible" />
-        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"   SelectionChanged="CboXC_SelectionChanged" IsReadOnly="True">
+        <ComboBox Name="cboXC"  HorizontalAlignment = "Left"   Grid.Row="3" Grid.Column="3" MinWidth="100"  MinHeight="26"   Visibility="Visible"   SelectionChanged="CboXC_SelectionChanged" IsEnabled="False">
             <ComboBoxItem Content= "P"   />
             <ComboBoxItem Content= "AP"   />
             <ComboBoxItem Content= "I"   />

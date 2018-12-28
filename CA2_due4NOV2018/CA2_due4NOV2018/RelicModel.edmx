@@ -82,6 +82,31 @@
           <Property Name="airc_id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'RELIC.dbo.EntrantsPerCompetition_v' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EntrantsPerCompetition_v">
+          <Key>
+            <PropertyRef Name="airc_id" />
+            <PropertyRef Name="Firstname" />
+            <PropertyRef Name="Lastname" />
+            <PropertyRef Name="Horse" />
+            <PropertyRef Name="clubname" />
+            <PropertyRef Name="grade" />
+            <PropertyRef Name="competition_date" />
+            <PropertyRef Name="competition_type" />
+            <PropertyRef Name="venue" />
+          </Key>
+          <Property Name="airc_id" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Horse" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="clubname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="competition_date" Type="date" Nullable="false" />
+          <Property Name="competition_type" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="competition_name" Type="varchar" MaxLength="30" />
+          <Property Name="venue" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="leaderboard_v">
           <Key>
@@ -260,6 +285,20 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
           <EntitySet Name="Leaderboard" EntityType="Self.Leaderboard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntrantsPerCompetition_v" EntityType="Self.EntrantsPerCompetition_v" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EntrantsPerCompetition_v].[airc_id] AS [airc_id], 
+    [EntrantsPerCompetition_v].[Firstname] AS [Firstname], 
+    [EntrantsPerCompetition_v].[Lastname] AS [Lastname], 
+    [EntrantsPerCompetition_v].[Horse] AS [Horse], 
+    [EntrantsPerCompetition_v].[clubname] AS [clubname], 
+    [EntrantsPerCompetition_v].[grade] AS [grade], 
+    [EntrantsPerCompetition_v].[competition_date] AS [competition_date], 
+    [EntrantsPerCompetition_v].[competition_type] AS [competition_type], 
+    [EntrantsPerCompetition_v].[competition_name] AS [competition_name], 
+    [EntrantsPerCompetition_v].[venue] AS [venue]
+    FROM [dbo].[EntrantsPerCompetition_v] AS [EntrantsPerCompetition_v]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="leaderboard_v" EntityType="Self.leaderboard_v" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [leaderboard_v].[leaderboard_id] AS [leaderboard_id], 
@@ -366,6 +405,7 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
             <Parameter Name="grade" Mode="In" Type="String" />
             <Parameter Name="competition_type" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="EntrantsPerCompetition_v" EntityType="RELICModel.EntrantsPerCompetition_v" />
           </EntityContainer>
         <EntityType Name="Club">
           <Key>
@@ -593,6 +633,29 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
           <Property Name="points" Type="Int32" Nullable="false" />
           <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="EntrantsPerCompetition_v">
+          <Key>
+            <PropertyRef Name="airc_id" />
+            <PropertyRef Name="Firstname" />
+            <PropertyRef Name="Lastname" />
+            <PropertyRef Name="Horse" />
+            <PropertyRef Name="clubname" />
+            <PropertyRef Name="grade" />
+            <PropertyRef Name="competition_date" />
+            <PropertyRef Name="competition_type" />
+            <PropertyRef Name="venue" />
+          </Key>
+          <Property Name="airc_id" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Horse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clubname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="competition_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="competition_type" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="competition_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="venue" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -699,6 +762,22 @@ warning 6002: The table/view 'RELIC.dbo.leaderboard_v' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateLeaderboard" FunctionName="RELICModel.Store.UpdateLeaderboard" />
+          <EntitySetMapping Name="EntrantsPerCompetition_v">
+            <EntityTypeMapping TypeName="RELICModel.EntrantsPerCompetition_v">
+              <MappingFragment StoreEntitySet="EntrantsPerCompetition_v">
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="competition_name" ColumnName="competition_name" />
+                <ScalarProperty Name="competition_type" ColumnName="competition_type" />
+                <ScalarProperty Name="competition_date" ColumnName="competition_date" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="clubname" ColumnName="clubname" />
+                <ScalarProperty Name="Horse" ColumnName="Horse" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="airc_id" ColumnName="airc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
