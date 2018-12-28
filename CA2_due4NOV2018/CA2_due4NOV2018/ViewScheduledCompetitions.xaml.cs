@@ -34,15 +34,16 @@ namespace CA2_due4NOV2018
 
         private void BtnAmend_Click(object sender, RoutedEventArgs e)
         {
-            
+            stkViewCompetitions.Visibility = Visibility.Visible;
         }
 
         private void BtnAssignFinishingPositions_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Functionality not implemented from this screen");
         }
         private void BtnAddCompetition_Click(object sender, RoutedEventArgs e)
         {
+
             AddCompetition addCompetition = new AddCompetition();
             addCompetition.hosting_club_id = club_id;
             addCompetition.club_id =  club_id;
@@ -80,13 +81,9 @@ namespace CA2_due4NOV2018
 
         private void BtnOpenCompetition_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Functionality not implemented from this screen");
             // change competition status from "S" to "O"
-            
-            // only allowed if I am competition secretary and today = competition date            
-            // Competition competition = new Competition();
-            // competition.ShowDialog();
-            RunCompetition runcompetition = new RunCompetition();
-            runcompetition.ShowDialog();
+
         }
 
 
@@ -94,14 +91,16 @@ namespace CA2_due4NOV2018
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            Competition competition = new Competition();
-            //competition.club_id = Convert.ToInt32(tbxAIRC_ID.Text);
-            competition.competition_date = Convert.ToDateTime(tbxCompetitionDate.Text);
-            competition.competition_type = tbxCompetitionType.Text;
-            competition.venue = tbxCompetitionVenue.Text;
-            //competition.club_id = tbxClub.Text
-            //SaveEntry(entry);
-            RefreshCompetitionList();
+            MessageBox.Show("This Functionality not implemented");
+            
+           // Competition competition = new Competition();
+           // //competition.club_id = Convert.ToInt32(tbxAIRC_ID.Text);
+           // competition.competition_date = Convert.ToDateTime(tbxCompetitionDate.Text);
+           // competition.competition_type = tbxCompetitionType.Text;
+           // competition.venue = tbxCompetitionVenue.Text;
+           // //competition.club_id = tbxClub.Text
+           //// SaveEntry(entry);
+           // RefreshCompetitionList();
 
         }
 
@@ -113,8 +112,7 @@ namespace CA2_due4NOV2018
         private void CboCompetitionSecretary_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
-            memberslist.Clear();
-            //cboCompetitionSecretary.SelectedValue=
+            memberslist.Clear();            
             foreach (var member in db.Members.Where(t => t.club_id == hosting_club_id))
             {
                 memberslist.Add(member);
@@ -138,7 +136,7 @@ namespace CA2_due4NOV2018
                 memberslist.Add(member);
             }
             cboCompetitionSecretary.ItemsSource = memberslist;
-            // cboCompetitionSecretary.
+            
         }
     }
 }

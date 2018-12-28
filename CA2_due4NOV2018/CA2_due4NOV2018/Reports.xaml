@@ -36,12 +36,12 @@
             <ComboBoxItem Content= "Total Entrants"   />
         </ComboBox>
         <TextBox Name="tbxYear"  Grid.Row="2" Grid.Column="1"> </TextBox>
-        <Button Name="btnResetScreen" Content="Reset Screen" Grid.Row="2" Grid.Column="2" Click="BtnResetScreen_Click"></Button>
+        <Button Name="btnResetScreen" Content="Reset Screen" Grid.Row="2" Grid.Column="2"  BorderBrush="DarkOrange" BorderThickness="3" Click="BtnResetScreen_Click"></Button>
         <!-- ROW 3 -->
-        <Button Name="RunReport" Content="Run" Grid.Row="1" Grid.Column="2" Click="RunReport_Click"  ></Button>
-        <Button Name="btnDashboard" Content="Dashboard" Grid.Row="3" Grid.Column="2" Click="BtnDashboard_Click"></Button>
+        <Button Name="RunReport" Content="Run" Grid.Row="1" Grid.Column="2"  BorderBrush="DarkOrange" BorderThickness="3" Click="RunReport_Click"  ></Button>
+        <Button Name="btnDashboard" Content="Return to Dashboard" Grid.Row="3" Grid.Column="2" BorderBrush="DarkOrange" BorderThickness="3" Click="BtnDashboard_Click"></Button>
         <!-- ROW 4 -->
-        <StackPanel Name="stkReportEntrantsperCompetition" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Visibility="Collapsed">
+        <StackPanel Name="stkReportEntrantsperCompetition" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"   Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

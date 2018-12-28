@@ -73,7 +73,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel Name="stkViewCompetitions" Grid.Row="5" Grid.ColumnSpan="2" Visibility="Visible">
+        <StackPanel Name="stkViewCompetitions" Grid.Row="5" Grid.ColumnSpan="2" Visibility="Collapsed">
             <Grid>
                 <Grid.RowDefinitions>
                 <RowDefinition Height="26*" />

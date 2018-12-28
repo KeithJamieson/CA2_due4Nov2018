@@ -222,7 +222,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void RefreshDashboard()
+        public void RefreshDashboard()
         {
             User user = new User();
 
@@ -258,6 +258,13 @@ namespace CA2_due4NOV2018
                 hosting_club_id = record.hosting_club_id;
             }
 
+            if (tbxCompetitionDate.Text.ToString() == currentDate.ToString())
+            {
+                if (secretary_airc_id == airc_id)
+                {
+                    btnOpenCompetition.Visibility = Visibility.Visible;
+                }
+            }
         }
 
     }

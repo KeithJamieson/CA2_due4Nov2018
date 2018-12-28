@@ -31,8 +31,7 @@ namespace CA2_due4NOV2018
         string Ridergrade;
         private void RefreshLeaderboard(string Ridergrade )
         {
-            //competition_type = cboCompetitionType.SelectedValue.ToString();
-            competition_type = "SJ";
+
             lstleaderboard.Clear();
             //cboCompetitionType
             foreach (var  record in db.leaderboard_v.Where(t => t.competition_type == competition_type &&
@@ -129,6 +128,13 @@ namespace CA2_due4NOV2018
         {
             Ridergrade = "AO";
             RefreshLeaderboard(Ridergrade);
+        }
+
+        private void CboCompetitionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBoxItem = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)cboCompetitionType.SelectedItem;
+            competition_type= item.Content.ToString();
         }
 
         //private void Window_Loaded(object sender, RoutedEventArgs e)

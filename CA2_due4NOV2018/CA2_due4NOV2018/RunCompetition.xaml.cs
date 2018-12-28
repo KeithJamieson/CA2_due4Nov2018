@@ -145,6 +145,7 @@ namespace CA2_due4NOV2018
 
             int airc_id;
             int points;
+            int success=0;
             string grade;
             string competition_type="";
             Competition competition = new Competition();
@@ -189,7 +190,7 @@ namespace CA2_due4NOV2018
                     points = lstLeaderboard[i].points;
                     grade = lstLeaderboard[i].grade;
                     competition_type = lstLeaderboard[i].competition_type;
-                    int success = db.UpdateLeaderboard(airc_id,
+                    success = db.UpdateLeaderboard(airc_id,
                                           points,
                                           grade,
                                           competition_type);
@@ -199,10 +200,19 @@ namespace CA2_due4NOV2018
                     if (success == 1)
                     {
                         db.SaveChanges();
-                        MessageBox.Show("Leaderboard has been updated.");
-                        btnUpdateLeaderBoard.IsEnabled = false;
+
                     }
                 }
+                if (success == 1)
+                {
+                    MessageBox.Show("Leaderboard has been updated.");
+                    btnUpdateLeaderBoard.IsEnabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Error Updating Leaderboard.");
+                }                
+                
             }
             else
             {

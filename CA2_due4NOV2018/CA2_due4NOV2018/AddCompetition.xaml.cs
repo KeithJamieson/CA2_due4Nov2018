@@ -48,6 +48,7 @@ namespace CA2_due4NOV2018
             competition.airc_id = airc_id;
             ScheduleCompetitionSave(competition);
             MessageBox.Show("Competition has been successfully scheduled");
+
             this.Close();
         }
 
@@ -95,6 +96,7 @@ namespace CA2_due4NOV2018
         
             db.Entry(competition).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
+            
         }
     }
 }
