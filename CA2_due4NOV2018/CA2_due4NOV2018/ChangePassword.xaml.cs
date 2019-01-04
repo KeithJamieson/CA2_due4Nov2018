@@ -17,7 +17,7 @@ namespace CA2_due4NOV2018
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             User user = new User();
 
@@ -63,7 +63,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

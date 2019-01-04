@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RelicClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,6 +14,8 @@ namespace CA2_due4NOV2018
 
     public partial class LoginRegister : Window
     {
+        RegisterProcess registerProcess = new RegisterProcess();
+        LoginProcess loginProcess = new LoginProcess();
         //initialise variables for later user within c# 
         string DRgrade;
         string SJgrade;
@@ -42,24 +45,7 @@ namespace CA2_due4NOV2018
         }
 
 
-        private bool ValidateRegistrationData()
-        {
-            //perform validation of fields when a user is registering data.  // TODO
-            bool validated = true;
-            if (tbxUsername.Text.Length == 0 || tbxUsername.Text.Length > 10)
-            {
-                validated = false;
-            }
-
-            if (tbxPassword.Password.Length == 0 || tbxPassword.Password.Length > 10)
-            {
-                validated = false;
-            }
-
-            return validated;
-        }
-
-
+   
 
 
         public LoginRegister()
@@ -80,89 +66,106 @@ namespace CA2_due4NOV2018
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
+
+            bool validated;
             //obtain user details for passing in to the Dashboard screen
             string currentUser = tbxUsername.Text.Trim();
             string currentPassword = tbxPassword.Password.Trim();
 
             if (activeTab == "Logon")
             {
-
-                // For existing logged on user
-                var query = (from u in db.Users 
-                             join m in db.Members on u.airc_id equals m.airc_id
-                             where u.username == currentUser
-                             && u.userpassword  == currentPassword
-                             select new
-                             {
-                                 m.role,
-                                 u.username,
-                                 u.userpassword,
-                                 u.airc_id,
-                                 m.club_id
-                             });
-
-                foreach (var record in query )
+                validated = loginProcess.ValidateLoginData(currentUser, currentPassword);
+                if (validated == true)
                 {
-                    MainDashboard maindashboard = new MainDashboard();
-                    this.Hide();
-                    close = true;
-                    // set variables needed for the maindashboard. Mainly used for showing next avilable competition.
-                    maindashboard.currentPassword = currentPassword;
-                    maindashboard.tbxUsername.Text = record.username;
-                    maindashboard.airc_id = record.airc_id;
-                    maindashboard.member_role = record.role;
-                    maindashboard.club_id = record.club_id;
 
-                    maindashboard.ShowDialog();                    
 
+                    // For existing logged on user
+                    var query = (from u in db.Users
+                                 join m in db.Members on u.airc_id equals m.airc_id
+                                 where u.username == currentUser
+                                 && u.userpassword == currentPassword
+                                 select new
+                                 {
+                                     m.role,
+                                     u.username,
+                                     u.userpassword,
+                                     u.airc_id,
+                                     m.club_id
+                                 });
+
+                    foreach (var record in query)
+                    {
+                        MainDashboard maindashboard = new MainDashboard();
+                        this.Hide();
+                        close = true;
+                        // set variables needed for the maindashboard. Mainly used for showing next avilable competition.
+                        maindashboard.currentPassword = currentPassword;
+                        maindashboard.tbxUsername.Text = record.username;
+                        maindashboard.airc_id = record.airc_id;
+                        maindashboard.member_role = record.role;
+                        maindashboard.club_id = record.club_id;
+
+                        maindashboard.ShowDialog();
+
+                    }
+                    this.Close();
+                    // By Default if we reach here that means we have an invalid username and/or password entered
+                    if (close == false)
+                    {
+                        MessageBox.Show($"Incorrect username or Password");
+
+                    }
+                    // We need to ensure that application is executed gracefully
+
+                    else
+                    {
+                        if (close == false)
+                        {
+                            MessageBox.Show("Username or password not entered or too big");
+
+                        }
+                    }
                 }
-                // By Default if we reach here that means we have an invalid username and/or password entered
-                if (close == false)
+                else if (activeTab == "Register")
                 {
-                    MessageBox.Show($"Incorrect username or Password");
+                    airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
+                    validated = registerProcess.ValidateRegistrationData(currentUser, currentPassword,airc_id, tbxFirstname.Text.Trim(), tbxLastName.Text.Trim(), club_id,DRgrade, SJgrade,XCgrade,tbxPhone.Text,tbxEmail.Text);
 
+
+                    string role = "M";  //Role is Member 
+                    string memberStatus = "N"; //Member status is "N" for new Membe
+
+                    // call Register user Method                
+                    RegisterUser(
+                        airc_id,
+                       currentUser,
+                       currentPassword);
+                    // As user does not get id generated from an identity column, we are forced to save userdetails here. 
+                    // ideally we should use a db sequence value. 
+
+                    SaveRegistration();
+
+                    //RegisterMember  Method.   We should really have just passed in the mmeber Class. Will do so if time permits.
+                    RegisterMember(
+                     airc_id,
+                     club_id,
+                     memberStatus,
+                     role,
+                     tbxFirstname.Text.Trim(),
+                     tbxLastName.Text.Trim(),
+                     DRgrade.Trim(),
+                     SJgrade.Trim(),
+                     XCgrade.Trim(),
+                     tbxPhone.Text,
+                     tbxEmail.Text);
+
+                    // Here we save the registration.
+                    SaveRegistration();
+                    //We force self registered users to log on with their new username and password.
+                    MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
+                    this.Close();
                 }
-                // We need to ensure that application is executed gracefully
-                this.Close();
             }
-            else if (activeTab == "Register")
-            {
-                
-                airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());                
-                string role = "M";  //Role is Member 
-                string memberStatus = "N"; //Member status is "N" for new Membe
-
-                // call Register user Method                
-                RegisterUser(
-                    airc_id,
-                   currentUser,
-                   currentPassword);
-                // As user does not get id generated from an identity column, we are forced to save userdetails here. 
-                // ideally we should use a db sequence value. 
-                
-                SaveRegistration();
-
-                //RegisterMember  Method.   We should really have just passed in the mmeber Class. Will do so if time permits.
-                RegisterMember(
-                 airc_id,
-                 club_id,
-                 memberStatus,
-                 role,
-                 tbxFirstname.Text.Trim(),
-                 tbxLastName.Text.Trim(),
-                 DRgrade.Trim(),
-                 SJgrade.Trim(),
-                 XCgrade.Trim(),
-                 tbxPhone.Text,
-                 tbxEmail.Text);
-
-                // Here we save the registration.
-                 SaveRegistration();
-                //We force self registered users to log on with their new username and password.
-                MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
-                this.Close();
-            }
-
         }
 
 

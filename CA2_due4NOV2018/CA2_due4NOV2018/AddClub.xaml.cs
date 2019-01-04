@@ -63,7 +63,7 @@ namespace CA2_due4NOV2018
             this.Close();
         }
         
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             //abort opertaion and return to Dashboard
             this.Close();
@@ -72,8 +72,10 @@ namespace CA2_due4NOV2018
         private void RegisterClub(string clubname)
         {
             // create database entry for clubname
-            Club newclub = new Club();
-            newclub.clubname = clubname;
+            Club newclub = new Club
+            {
+                clubname = clubname
+            };
             db.Entry(newclub).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();  // in order to get the club_id returned from identity column, we need to save the changes to the database.  Using a sequence wouldprobably be better.
             club_id = db.Entry(newclub).Entity.club_id;  // obtain the club_id from the newly created club. 
@@ -132,7 +134,7 @@ namespace CA2_due4NOV2018
 
         }
 
-        private void cboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CboSJ_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //set variable to selected vaue from ComboBox
             var comboBoxItem = (ComboBox)sender;
