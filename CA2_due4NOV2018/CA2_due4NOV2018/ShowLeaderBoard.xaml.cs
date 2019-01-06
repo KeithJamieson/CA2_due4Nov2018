@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.ComponentModel;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace CA2_due4NOV2018
 {
@@ -36,13 +30,16 @@ namespace CA2_due4NOV2018
             // We can see values for eadch selected tab
             foreach (var  record in db.leaderboard_v.Where(t => t.competition_type == competition_type &&
                                                           t.competition_date.Year ==  currentyear && 
-                                                          t.grade == Ridergrade))
+                                                          t.grade == Ridergrade                                                           
+                                                          ))
             {
                 lstleaderboard.Add(record);
 
             }
-
+          
             lvwLeaderBoard.ItemsSource = lstleaderboard;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvwLeaderBoard.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("points", ListSortDirection.Descending));  // perform  sort 
             lvwLeaderBoard.Items.Refresh();
         }
 

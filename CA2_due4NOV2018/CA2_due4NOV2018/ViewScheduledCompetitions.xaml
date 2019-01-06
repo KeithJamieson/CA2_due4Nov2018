@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:CA2_due4NOV2018"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
         Title="ViewScheduledCompetitions" Height="450" Width="900">
     <Grid>
         <Grid.RowDefinitions>

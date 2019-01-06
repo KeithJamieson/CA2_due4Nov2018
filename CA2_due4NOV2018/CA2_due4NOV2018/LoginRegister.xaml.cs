@@ -41,7 +41,8 @@ namespace CA2_due4NOV2018
             {
                 RidingClub.Add(club);
             }
-            cboRidingClub.ItemsSource = RidingClub;        
+            cboRidingClub.ItemsSource = RidingClub;
+           
         }
 
 
@@ -126,46 +127,46 @@ namespace CA2_due4NOV2018
                         }
                     }
                 }
-                else if (activeTab == "Register")
-                {
-                    airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
-                    validated = registerProcess.ValidateRegistrationData(currentUser, currentPassword,airc_id, tbxFirstname.Text.Trim(), tbxLastName.Text.Trim(), club_id,DRgrade, SJgrade,XCgrade,tbxPhone.Text,tbxEmail.Text);
-
-
-                    string role = "M";  //Role is Member 
-                    string memberStatus = "N"; //Member status is "N" for new Membe
-
-                    // call Register user Method                
-                    RegisterUser(
-                        airc_id,
-                       currentUser,
-                       currentPassword);
-                    // As user does not get id generated from an identity column, we are forced to save userdetails here. 
-                    // ideally we should use a db sequence value. 
-
-                    SaveRegistration();
-
-                    //RegisterMember  Method.   We should really have just passed in the mmeber Class. Will do so if time permits.
-                    RegisterMember(
-                     airc_id,
-                     club_id,
-                     memberStatus,
-                     role,
-                     tbxFirstname.Text.Trim(),
-                     tbxLastName.Text.Trim(),
-                     DRgrade.Trim(),
-                     SJgrade.Trim(),
-                     XCgrade.Trim(),
-                     tbxPhone.Text,
-                     tbxEmail.Text);
-
-                    // Here we save the registration.
-                    SaveRegistration();
-                    //We force self registered users to log on with their new username and password.
-                    MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
-                    this.Close();
-                }
             }
+            else if (activeTab == "Register")
+            {
+                airc_id = Convert.ToInt16(tbxAIRC_ID.Text.Trim());
+                validated = registerProcess.ValidateRegistrationData(currentUser, currentPassword, airc_id, tbxFirstname.Text.Trim(), tbxLastName.Text.Trim(), club_id, DRgrade, SJgrade, XCgrade, tbxPhone.Text, tbxEmail.Text);
+
+
+                string role = "M";  //Role is Member 
+                string memberStatus = "N"; //Member status is "N" for new Membe
+
+                // call Register user Method                
+                RegisterUser(
+                    airc_id,
+                   currentUser,
+                   currentPassword);
+                // As user does not get id generated from an identity column, we are forced to save userdetails here. 
+                // ideally we should use a db sequence value. 
+
+                SaveRegistration();
+
+                //RegisterMember  Method.   We should really have just passed in the mmeber Class. Will do so if time permits.
+                RegisterMember(
+                 airc_id,
+                 club_id,
+                 memberStatus,
+                 role,
+                 tbxFirstname.Text.Trim(),
+                 tbxLastName.Text.Trim(),
+                 DRgrade.Trim(),
+                 SJgrade.Trim(),
+                 XCgrade.Trim(),
+                 tbxPhone.Text,
+                 tbxEmail.Text);
+
+                // Here we save the registration.
+                SaveRegistration();
+                //We force self registered users to log on with their new username and password.
+                MessageBox.Show($"Your user {currentUser} has been saved. Please login again with your username and password");
+                this.Close();
+            }            
         }
 
 
